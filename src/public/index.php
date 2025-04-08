@@ -6,14 +6,14 @@
   <title>TrashCicle Admin Panel</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles/prueva.css">
+  <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <div class="logo-container">
      <a href="prueva.php">
-      <img src="/TRASHCICLE ADMIN PANEL/src/public/assets/images/logo-trashcicle-new.png" alt="TrashCicle Logo" class="w-full trashcicle-logo">
+      <img src="assets/images/logo-trashcicle-new.png" alt="TrashCicle Logo" class="w-full trashcicle-logo">
      </a>
     </div>
     
@@ -134,7 +134,7 @@
         <!-- Action Card 1 -->
         <div class="action-card opacity-0 animate-fade-in delay-100">
           <div class="card-image bg-blue-50">
-          <img src="/TRASHCICLE ADMIN PANEL/src/public/assets/images/user-manager-page.png" alt="Usuarios">
+          <img src="assets/images/user-manager-page.png" alt="Usuarios">
           </div>
           <div class="card-content">
             <h3 class="text-lg font-semibold mb-2 text-800">Gestionar Usuarios</h3>
@@ -267,6 +267,6 @@
       submenu.style.display = 'none';
     });
   </script>
-  <script src="scripts/prueva.js"></script>
+  <script src="scripts/index.js"></script>
 </body>
 </html>
