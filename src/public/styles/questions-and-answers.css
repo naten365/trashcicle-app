@@ -1,0 +1,150 @@
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0a0a16;
+    color: #ffffff;
+}
+
+.hero {
+    background:url(../assets/images/pexels-readymade-3850481.jpg);;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 50px 20px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.596); /* Ajusta el nivel de oscuridad aquí */
+  z-index: 0;
+}
+
+/* Asegúrate de que el contenido dentro de .hero esté encima */
+.hero {
+  position: relative;
+  z-index: -1;
+}
+
+.hero h1{
+    position: relative;
+    z-index: 0;
+}
+
+.hero .subtitle{
+    position: relative;
+    z-index: 0;
+}
+
+
+
+
+.hero h1 {
+    color:  #66bb6a;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+p.subtitle {
+    font-size: 18px;
+    color: #cccccc;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #1f2937;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    background:#1a1a2e;
+    color: white;
+
+}
+
+.search-box i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #cccccc;
+}
+
+.faq-list {
+    margin-top: 30px;
+    min-height: 300px;
+    /* Ensure the container has a minimum height */
+}
+
+.faq-item {
+    text-align: left;
+    border-top: 1px solid #333333;
+    padding: 15px 0;
+}
+
+.faq-item:first-child {
+    border-top: none;
+}
+
+.faq-question {
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.faq-question i {
+    color:  #66bb6a;
+}
+
+.faq-answer {
+    font-size: 16px;
+    color: #cccccc;
+    margin-top: 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
+}
+
+.faq-item.open .faq-answer {
+    max-height: 200px;
+    /* Adjust as needed */
+    opacity: 1;
+}
+
+.faq-item.open .faq-question i {
+    transform: rotate(180deg);
+}

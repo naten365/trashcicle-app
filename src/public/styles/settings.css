@@ -1,0 +1,536 @@
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #0a0a16;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow: hidden;
+
+}
+
+.logo {
+    color: #2c3e50;
+    height: 8rem;
+    width: 8rem;
+    margin-left: 24px;
+    cursor: pointer;
+}
+
+.content {
+    margin-right: 50px;
+    margin-top: -35px;
+    padding: 20px;
+    background-color: #0a0a16;
+    height: calc(100vh - 85px);
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    color: #86e75c;
+    font-size: 30px;
+    margin-bottom: 8px;
+    margin-top: -40px;
+    margin-left: 360px;
+
+}
+
+.config-container {
+    background-color: #12121f;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin: 0 auto;
+    height: 380px;
+    width: 600px;
+
+}
+
+.config-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.config-item {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-right: 15px;
+    align-items: center;
+
+}
+
+.config-item1 {
+    display: flex;
+    width: 32%;
+    margin-bottom: 20px;
+    margin-right: 15px;
+    align-items: center;
+
+}
+
+
+.config-item.inline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 48%;
+}
+
+.config-item.inline label {
+    margin-bottom: 0;
+    margin-right: 10px;
+}
+
+
+.config-item.inline select {
+    margin-right: 4px;
+}
+
+
+
+
+label {
+    display: block;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 5px;
+    flex: 0 0 auto;
+    margin-right: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    font-size: 15px;
+    background: #12121f;
+    outline: none;
+    
+    transition: all 0.3s ease;
+    caret-color: white;
+    color: #ffff;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #86e75c;
+    width: 80%;
+}
+
+input::placeholder {
+    color: #b0b0b0;
+    
+}
+
+input:hover {
+    background: linear-gradient(145deg, #23234a, #161637);
+}
+
+
+
+select option {
+    background-color: #12121f;
+    color: #fff;
+  
+}
+
+select {
+    color: #b0b0b0;
+
+   
+}
+
+.toggle-switch {
+    position: relative;
+    width: 61px;
+    height: 28px;
+    margin-right: 100px;
+}
+
+.toggle-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-label {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 28px;
+}
+
+.toggle-label:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.toggle-input:checked+.toggle-label {
+    background-color: #2196F3;
+}
+
+.toggle-input:checked+.toggle-label:before {
+    transform: translateX(22px);
+}
+
+
+
+
+
+.toggle-switch1 {
+    position: relative;
+    width: 61px;
+    height: 28px;
+    margin-right: 100px;
+}
+
+.toggle-input1 {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-label1 {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 28px;
+    height: 27px;
+}
+
+.toggle-label1:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.toggle-input1:checked+.toggle-label1 {
+    background-color: #2196F3;
+}
+
+.toggle-input1:checked+.toggle-label1:before {
+    transform: translateX(22px);
+}
+
+
+
+#reset-config {
+    position: absolute;
+    background-color: #86E75C;
+    color: #0E0E28;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 234px;
+    margin-top: 51px;
+    left: 33.9em;
+    align-items: center;
+    font-weight: 500;
+
+
+}
+
+#reset-config:hover {
+    background-color: #7cd855;
+    color: white;
+}
+
+#safe-config {
+    position: absolute;
+    background-color: #ffff;
+    color: #0E0E28;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 165px;
+    margin-top: 12px;
+    left: 21.9em;
+    align-items: center;
+
+
+}
+
+#safe-config:hover {
+    color: #86E75C;
+    background-color: #fcf4f4;
+}
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.notification.show {
+    opacity: 1;
+}
+
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #0a0a16;
+    border-radius: 50%;
+    text-decoration: none;
+    color: white;
+    font-size: 50px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    margin-top: -44px;
+    margin-left: 303px;
+    position: absolute;
+}
+
+.circle:hover {
+    transform: scale(1.2);
+}
+
+
+.profile-container {
+    position: absolute;
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    margin-left: 220px;
+    margin-top: -60px;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    opacity: 0.8;
+    cursor: pointer;
+    border: 2px solid white;
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: -4px;
+    right: -10px;
+    background-color: #0a0a16;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden-input {
+    display: none;
+}
+
+.change-photo-profile {
+    margin-top: 10px;
+}
+
+/* Modo claro (Los mejores nosotros tú ta loco) */
+
+body.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.light-mode .config-container {
+    background-color: #f3f3f3;
+    color: #000000;
+}
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+body.light-mode .notification.show {
+    opacity: 1;
+}
+
+body.light-mode label {
+    color: #333333;
+    margin-bottom: 5px;
+    flex: 0 0 auto;
+    margin-right: 5px;
+}
+
+body.light-mode input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #3c3c5c;
+    border-radius: 8px;
+    font-size: 15px;
+    background: linear-gradient(145deg, #1e1e40, #141434);
+    background: #ffffff;
+    ;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), inset 0 -1px 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    caret-color: rgb(0, 0, 0);
+    color: #000000;
+}
+
+body.light-mode input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #3c3c5c;
+    border-radius: 8px;
+    font-size: 15px;
+    background: linear-gradient(145deg, #1e1e40, #141434);
+    background: #ffffff;
+    ;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), inset 0 -1px 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    caret-color: rgb(0, 0, 0);
+    color: #000000;
+
+}
+
+body.light-mode select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #3c3c5c;
+    border-radius: 8px;
+    font-size: 15px;
+    background: linear-gradient(145deg, #1e1e40, #141434);
+    background: #ffffff;
+    ;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), inset 0 -1px 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    caret-color: white;
+    color: #000000;
+}
+
+body.light-mode select option {
+    background-color: #ffffff;
+    color: #000000;
+    font-style: italic;
+}
+
+body.light-mode .circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    text-decoration: none;
+    color: #3c3c5c;
+    font-size: 50px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    margin-top: -54px;
+    margin-left: 303px;
+    position: absolute;
+}
+
+body.light-mode .content {
+    margin-right: 50px;
+    margin-top: -35px;
+    padding: 20px;
+    background-color: #fff;
+    height: calc(100vh - 85px);
+    display: flex;
+    flex-direction: column;
+}
+
+body.light-mode #safe-config {
+    position: absolute;
+    background-color: #0e0c0c;
+    color: #fff6f6;
+    font-weight: bold;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 165px;
+    margin-top: 12px;
+    left: 21.9em;
+    align-items: center;
+
+
+}
+
+body.light-mode #safe-config:hover {
+    background-color: #1c1c1c;
+    color: #86E75C;
+}
+
+body.light-mode #reset-config {
+    position: absolute;
+    background-color: #86E75C;
+    color: #0E0E28;
+    font-weight: bold;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 234px;
+    margin-top: 51px;
+    left: 33.9em;
+    align-items: center;
+
+
+}
+
+body.light-mode #reset-config:hover {
+    background-color: #7fd859;
+    color: white;
+}

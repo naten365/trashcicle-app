@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    display: flex;
+    height: 100vh;
+    overflow-y: hidden;
+    background-color: #0a0a16;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.image-section {
+    flex: 1;
+}
+
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.form-section {
+    flex: 1;
+    background-color: #0a0a16;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+}
+
+.form-container h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color:  #66bb6a;
+}
+
+.form-container p {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.form-container .fields-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.form-container .fields-container input {
+    width: 48%;
+}
+
+select {
+    font-size: 15px;
+    width: 100%;
+    padding: 15px 20px 15px 15px;
+
+    margin: 10px 0;
+    border: 1px solid #dae2e0a0;
+    border-radius: 5px;
+    background-color: #0b0d1a;
+    color: #fff;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"],
+.form-container input[type="email"],
+.form-container input[type="tel"],
+.form-container input[type="number"] {
+    font-size: 15px;
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #dae2e0a0;
+    border-radius: 5px;
+    background-color: #0b0d1a;
+    color: #fff;
+    transition: border 0.3s ease;
+}
+
+
+input.error,
+textarea.error,
+select.error {
+    border: 2px solid red;
+   
+}
+
+
+input.success {
+    border: 2px solid green;
+}
+
+/* Estilos para el botón */
+.form-container button {
+    width: 100%;
+    padding: 15px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+button [type="submit"] {
+    width: 100%;
+    padding: 15px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.send-button {
+    width: 100%;
+    padding: 15px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form-container label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.form-container label input {
+    margin-right: 10px;
+}
+
+.error-message {
+    background-color: #ff0000af;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    position: fixed;
+    top: 20px;
+    right: -100%;
+    transition: right 0.5s ease-in-out;
+    margin-right: 1rem;
+    z-index: 10;
+}
+
+.error-message.visible {
+    right: 0;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #65d888;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus {
+    outline: none;
+}
+
+
+input.error,
+textarea.error {
+    border: 1px solid red !important;
+    /* Usamos !important para asegurar que se aplique */
+}
+
+input.success {
+    border: 1px solid green;
+}
