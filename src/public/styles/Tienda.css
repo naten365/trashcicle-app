@@ -1,0 +1,467 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+:root {
+    --colorwhite: #f3f3f3;
+    --colorblack: #0b0b0b;
+    --colorheader: #080813;
+    --font-family-parrafo: 'Poppins', sans-serif;
+    --colorverde: #84ec57;
+    --colorbody: #050014;
+    --mainFont: 'Poppins', sans-serif;
+    --importantColor: #cfcc13;
+}
+
+body {
+    background-color: var(--colorbody);
+    background-attachment: fixed;
+    font-family: var(--mainFont);
+}
+
+/* header */
+
+header {
+    position: fixed;
+    width: 100%;
+    transition: background-color 300ms;
+    z-index: 6;
+}
+
+
+.container {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+    overflow: hidden;
+}
+
+.nav {
+    --state-close: scale(0);
+    --state-hamburguer: scale(1);
+    --state-menu: translate(-100%);
+    padding: 15px 10px;
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    grid-template-columns: repeat(2, max-content);
+    z-index: 6;
+}
+
+.nav:target {
+    --state-menu: translate(0);
+    --state-close: scale(1);
+    --state-hamburguer: scale(0);
+}
+
+.nav__hamburguer,
+.nav__close {
+    cursor: pointer;
+    grid-column: -2/-1;
+    grid-row: 1/2;
+    transition: .4s transform;
+}
+
+.nav__hamburguer {
+    transform: var(--state-hamburguer);
+}
+
+.nav__item a:hover {
+    color: var(--colorverde);
+}
+
+.nav__item a {
+    transition: all 300ms;
+    font-size: 17px;
+}
+
+.nav__close {
+    transform: var(--state-close);
+}
+
+.nav__icon {
+    width: 40px;
+}
+
+.nav__links {
+    font-family: var(--font-family-parrafo);
+    background-color: var(--colorheader);
+    position: absolute;
+    top: 0;
+    bottom: -290px;
+    left: 0;
+    right: 0;
+    padding: 0;
+    display: grid;
+    align-content: center;
+    gap: 1em;
+    padding-left: 6%;
+    transform: var(--state-menu);
+    transition: .3s transform;
+}
+
+.nav__item {
+    list-style: none;
+}
+
+.nav__link {
+    color: var(--colorwhite);
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.wave-svg {
+    height: 150px;
+    width: 100%;
+
+}
+
+.slider {
+    position: relative;
+    top: 180px;
+    width: 100vw;
+    height: auto;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slider .slide-track {
+    display: flex;
+    gap: 1.5rem;
+    animation: scroll 40s linear infinite;
+    -webkit-animation: scroll 40s linear infinite;
+    width: calc(200px * 14);
+}
+
+.slider .slide {
+    width: 200px;
+}
+
+.slider .slide img {
+    width: 100%;
+    object-fit: cover;
+    height: 250px;
+    border-radius: 10px;
+}
+
+.shop-title-container {
+    position: relative;
+    top: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--colorverde);
+}
+
+.shop-arrow-container {
+    position: relative;
+    top: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shop-arrow-container img {
+    animation: pulsate-bck 2s ease-in-out infinite both;
+    -webkit-animation: pulsate-bck 2s ease-in-out infinite both;
+
+}
+
+#user-points {
+    color: var(--importantColor);
+    font-size: 17px;
+}
+
+#userPointsValue {
+    font-style: italic
+}
+
+@-webkit-keyframes pulsate-bck {
+    0% {
+        -webkit-transform: scale(2);
+        transform: scale(2);
+    }
+
+    50% {
+        -webkit-transform: scale(0.9);
+        transform: scale(0.9);
+    }
+
+    100% {
+        -webkit-transform: scale(2);
+        transform: scale(2);
+    }
+}
+
+@keyframes pulsate-bck {
+    0% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+
+    50% {
+        -webkit-transform: scale(0.9);
+        transform: scale(0.9);
+    }
+
+    100% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+}
+
+.shop-product-container {
+    position: relative;
+    top: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.product {
+    border-radius: 10px;
+    height: 250px;
+    width: 250px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    object-fit: cover;
+}
+
+.product:hover {
+    transform: scale(105%)
+}
+
+.product-image-text {
+    margin-top: 10px;
+    color: var(--colorwhite);
+}
+
+.footer {
+    background: #07071B;
+    font-family: 'Play', sans-serif;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    top: 230vh;
+}
+
+.footer .row {
+    width: 100%;
+    margin: 1% 0%;
+    padding: 0.6% 0%;
+    color: gray;
+    font-size: 0.8em;
+}
+
+.footer .row a {
+    text-decoration: none;
+    color: gray;
+    transition: 0.5s;
+    font-size: 1.3em;
+}
+
+.footer .row a:hover {
+    color: #fff;
+}
+
+.footer .row ul {
+    width: 100%;
+}
+
+.footer .row ul li {
+    display: inline-block;
+    margin: 0px 30px;
+}
+
+.logof img {
+    width: 320px;
+    height: 100px;
+    margin-top: 10px;
+    padding: 10px 20px;
+}
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 2px dotted var(--importantColor);
+    cursor: help;
+  
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    width: 300px;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 105%; 
+    margin-left: -60px;
+    font-size: 15px;
+
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+@keyframes scroll {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    100% {
+        -webkit-transform: translateX(calc(-200px * 7));
+        transform: translateX(calc(-200px * 7));
+    }
+}
+
+@keyframes first {
+    from {
+        left: 0%;
+    }
+
+    to {
+        left: -100%;
+    }
+}
+
+@keyframes second {
+    from {
+        left: 100%;
+    }
+
+    to {
+        left: 0%;
+    }
+}
+
+@media screen and (min-width: 300px) and (max-width: 700px) {
+    .shop-product-container {
+        flex-direction: column;
+    }
+
+    .slider {
+        width: 100%;
+    }
+
+    .shop-title-container h1 {
+        font-size: 28px;
+        text-align: center;
+        position: relative;
+        bottom: 50px;
+    }
+    
+    .footer {
+        position: relative;
+        top: 400px;
+    }
+}       
+
+
+@media screen and (min-width:700px) {
+    .nav {
+        --state-hamburguer: scale(0);
+        --state-menu: translate(0);
+    }
+
+    .nav:target {
+        --state-close: scale(0);
+    }
+
+    .nav__links {
+        padding: 0;
+        background-color: unset;
+        position: unset;
+        gap: 2.5em;
+        grid-auto-flow: column;
+        transform: unset;
+        grid-column: -2/-1;
+        grid-row: 1/2;
+    }
+
+    .nav__link {
+        font-family: var(--font-family-parrafo);
+        letter-spacing: none;
+    }
+
+    .slider {
+        width: 100%;
+    }
+
+    .footer {
+        position: relative;
+        top: 400px;
+    }
+
+    .shop-product-container {
+        position: relative;
+        top: 300px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 40px;
+        width: fit-content;
+    }
+}
+
+@media screen and (max-width: 1230px) {
+    main {
+        flex-direction: column;
+        padding: 30rem 80rem;
+        padding: 150px 30px;
+    }
+
+    .main-info-container p {
+        font-size: 16px;
+    }
+
+    .main-info-container h1 {
+        font-size: 40px;
+    }
+
+    main img {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    button {
+        position: relative;
+        z-index: 1;
+        margin-top: 20px;
+
+    }
+
+    .img_mover {
+        width: 350px;
+        height: 340px;
+
+    }
+
+    .wave-svg-container {
+        margin-top: 70px;
+    }
+
+    .desc-container {
+        text-align: center;
+    }
+
+}

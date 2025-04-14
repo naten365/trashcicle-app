@@ -48,7 +48,7 @@
     </div>
     
     <div class="open-tips" id="openTips">?</div>
-    <button onclick="window.location.href='home.php'" type="button" class="btn-regresar" style="position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px; border-radius: 50%; background-color: #4CAF50; color: white; border: none; font-size: 20px; cursor: pointer; display: flex; justify-content: center; align-items: center;">
+    <button onclick="window.location.href='index-admin.php'" type="button" class="btn-regresar" style="position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px; border-radius: 50%; background-color: #4CAF50; color: white; border: none; font-size: 20px; cursor: pointer; display: flex; justify-content: center; align-items: center;">
       <span style="transform: rotate(180deg);">➔</span>
     </button>
     
