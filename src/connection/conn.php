@@ -1,5 +1,4 @@
 <?php
-
 $host = 'localhost';
 $dbname = 'trashcicle_db';
 $username = 'root';
@@ -12,3 +11,16 @@ try {
     // Mostrar el mensaje de error al usuario
     echo "Error: " . $e->getMessage();
 }
+
+
+//Funcion para gestionar los tipos de usuarios
+if (!function_exists('checkUserPermissions')) {
+    function checkUserPermissions($requiredType)
+    {
+        if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== $requiredType) {
+            header('Location: login-form.php?error=access_denied');
+            exit();
+        }
+    }
+}
+

@@ -1,3 +1,8 @@
+<?php
+// Include the connection file
+include '../connection/conn.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -21,12 +26,12 @@
             </a>
             <ul class="nav__links">
 
-                <li class="nav__item">
+                <!-- <li class="nav__item">
                     <div class="tooltip">
                         <p class="nav__link" id="user-points">TrashPoints: <span id="userPointsValue"></span></p>
                         <span class="tooltiptext">Estos son tus puntos actuales</span>
                     </div>
-                </li>
+                </li> -->
                 <li class="nav__item">
                     <a href="Tienda.php" class="nav__link">Tienda de puntos</a>
                 </li>
@@ -35,6 +40,8 @@
                 </li>
                 <li class="nav__item">
                     <a href="formulario-contacto.php" class="nav__link">Contáctanos</a>
+                </li>
+                <a href="login-form.php" class="nav__link">Ingresar</a>
                 </li>
 
             </ul>
@@ -51,7 +58,7 @@
 
     <main>
         <div class="main-info-container">
-            <p>"Cuida lo que amas, Cuida nuestro Planeta"</p>
+            <p>Cuida lo que amas, Cuida nuestro Planeta</p>
             <h1>¡<span>Recicla</span> y <span>Gana</span> al Hacerlo!</h1>
             <p>Somos una organización la cual se encarga del cuidado del medio
                 ambiente y la salud de la comunidad, Nuestra organización fue creada

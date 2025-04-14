@@ -1,3 +1,7 @@
+<?php
+session_start();
+include '../connection/conn.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -7,9 +11,7 @@
     <title>TrashCicle Admin Panel | Inicio de sesión</title>
     <link rel="stylesheet" href="styles/form.css">
 </head>
-
 <body>
-
     <div id="error-message" class="error-message hidden">
         Por favor, llena todos los campos obligatorios.
     </div>
@@ -35,11 +37,13 @@
                         <input type="checkbox" id="condiciones">
                         Aceptar todas las condiciones
                     </label>
+                    <label>
+                        <a href="register-customer-form.php" style="color:green; text-decoration:none;">No tienes cuenta</a>
+                    </label>
                 </form>
             </div>
         </div>
     </div>
-
     <script src="scripts/login-form.js"></script>
 
 </body>
