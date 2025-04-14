@@ -1,3 +1,8 @@
+<?php
+session_start();
+include '../connection/conn.php';
+checkUserPermissions('admin');
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -63,7 +68,7 @@
         <div class="submenu" style="display: none; position: absolute; top: 100%; right: 0; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); min-width: 150px; z-index: 100; border-radius: 4px;">
           <a href="#configuracion" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; border-bottom: 1px solid #eee;">Configuración</a>
           <a href="#perfil" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; border-bottom: 1px solid #eee;">Mi Perfil</a>
-          <a href="#cerrar-sesion" style="display: block; padding: 10px 15px; text-decoration: none; color: #333;">Cerrar Sesión</a>
+          <a href="logout.php" style="display: block; padding: 10px 15px; text-decoration: none; color: #333;">Cerrar Sesión</a>
         </div>
       </div>
     </div>

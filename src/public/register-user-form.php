@@ -1,3 +1,8 @@
+<?php
+session_start();
+include '../connection/conn.php';
+checkUserPermissions('admin');
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -44,7 +49,6 @@
             </div>
         </div>
     </div>
-
     <script src="scripts/form.js"></script>
 
 </body>

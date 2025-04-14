@@ -1,3 +1,8 @@
+<?php
+session_start();
+include '../connection/conn.php';
+checkUserPermissions('admin');
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

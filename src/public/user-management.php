@@ -1,7 +1,8 @@
 <?php
 session_start();
-
 include '../connection/conn.php';
+checkUserPermissions('admin');
+
 
 // Obtener usuarios de la base de datos usando PDO
 try {

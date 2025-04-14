@@ -1,3 +1,8 @@
+<?php
+session_start();
+include '../connection/conn.php';
+checkUserPermissions('cliente');
+?>
 <!DOCTYPE html>
 <html lang="en">
 

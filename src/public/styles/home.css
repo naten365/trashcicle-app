@@ -21,6 +21,7 @@
 
 body {
     font-family: var(--mainFont);
+    overflow-x: hidden;
 }
 
 .main-container {
@@ -161,9 +162,9 @@ main {
 }
 
 .main-info-container span {
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 1px var(--colorverde);
-    font-weight: 100;
+    color:var(--colorverde);
+    font-weight: 700;
+    font-size: 3rem;
 }
 
 .main-info-container .recicle-button {
@@ -235,7 +236,7 @@ main {
     background-image: url(../IMG/about-us-headerBG.jpg);
     font-size: 30px;
     font-weight: 800;
-    color: var(--colorwhite);
+    color: var(--colorblack);
     background-size: cover;
 }
 

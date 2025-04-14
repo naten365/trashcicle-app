@@ -1,5 +1,9 @@
+<?php
+session_start();
+include '../connection/conn.php';
+checkUserPermissions('admin');
+?>
 <html>
-
 <head>
     <title>Preguntas Frecuentes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
