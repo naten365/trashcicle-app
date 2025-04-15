@@ -8,7 +8,7 @@ checkUserPermissions('admin');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrashCicle - Agregar Producto</title>
+    <title>TrashCicle - Agregar Productos</title>
     <link rel="stylesheet" href="styles/add-products.css">
 </head>
 <body>
