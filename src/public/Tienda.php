@@ -1,6 +1,11 @@
 <?php
 session_start();
 include '../connection/conn.php';
+// Verifica si el usuario está logueado
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login-form.php"); // Redirige al login si no hay sesión
+    exit();
+}
 checkUserPermissions('cliente');
 ?>
 <!DOCTYPE html>
