@@ -42,7 +42,7 @@ checkUserPermissions('admin');
        </a>
       </div>
       <div class="menu-item" data-page="productos">
-        <a href="add-products.php">
+        <a href="dashboard-products.php">
           <i class="fas fa-box"></i>
           <span  class="span-stat" >Productos</span>
         </a>
