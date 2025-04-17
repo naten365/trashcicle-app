@@ -13,6 +13,7 @@ checkUserPermissions('admin');
 </head>
 <body>
     <div class="container">
+        <h1>cambio</h1>
         <div class="form-container">
             <h1><span>Agregar</span> un producto a la <span>Tienda</span></h1>
             <form id="productForm" novalidate>
