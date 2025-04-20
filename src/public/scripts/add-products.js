@@ -54,24 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
   
-  // Vista previa de imagen
-  productImage.addEventListener('change', function() {
-      if (this.files && this.files[0]) {
-          const reader = new FileReader();
-          
-          reader.onload = function(e) {
-              imagePreview.src = e.target.result;
-              imagePreview.style.display = 'block';
-              fileUploadContainer.style.borderColor = 'var(--success)';
-          }
-          
-          reader.readAsDataURL(this.files[0]);
-      } else {
-          imagePreview.style.display = 'none';
-      }
-      validateField(productImage);
-  });
-  
   // Efecto de arrastrar y soltar
   fileUploadContainer.addEventListener('dragover', function(e) {
       e.preventDefault();
