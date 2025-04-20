@@ -8,7 +8,7 @@ checkUserPermissions('admin');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TrashCicle Admin Panel</title>
+  <title>TrashCicle Admin PanelVV</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles/index.css">
@@ -50,7 +50,7 @@ checkUserPermissions('admin');
       <div class="menu-item" data-page="dudas">
         <a href="questions-and-answers.php">
           <i class="fas fa-question-circle"></i>
-          <span  class="span-stat">Dudas</span>
+          <span  class="span-stat">Duda</span>
         </a>
       </div>
     </div>
