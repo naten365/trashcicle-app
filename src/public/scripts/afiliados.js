@@ -1,37 +1,31 @@
 const imagenes = [
-    'IMG/hola.webp',
-    'IMG/imagen2.jpg',
-    'IMG/imagen3.webp',
+    'assets/images/hola.webp',
+    'assets/images/imagen2.jpg',
+    'assets/images/imagen3.webp'
 ];
 
 let indiceActual = 0;
 const imagenElement = document.getElementById('imagen');
 
 function mostrarImagenActual() {
-    imagenElement.src = imagenes[indiceActual];
-    imagenElement.style.transition = 'all 1s ease-in-out'; // Restablece la transición
-    imagenElement.style.opacity = 1; // Restablece la opacidad
+    imagenElement.style.opacity = 0;
+
+    setTimeout(() => {
+        imagenElement.src = imagenes[indiceActual];
+        imagenElement.style.opacity = 1;
+    }, 500); // espera que se desvanezca antes de cambiar la imagen
 }
 
 function siguienteImagen() {
-    if (indiceActual < imagenes.length - 1) {
-        indiceActual++;
-    } else {
-        indiceActual = 0;
-    }
-
-    imagenElement.style.transition = 'all 1s ease-in-out'; // Agrega transición de 1 segundo
-    imagenElement.style.opacity = 0.5;
-
-    setTimeout(() => {
-        mostrarImagenActual();
-    }, 2000); // Espera 2 segundos antes de mostrar la próxima imagen
+    indiceActual = (indiceActual + 1) % imagenes.length;
+    mostrarImagenActual();
 }
 
 function iniciarCambioAutomatico() {
-    setInterval(siguienteImagen, 4000);
+    setInterval(siguienteImagen, 4000); // cada 4 segundos
 }
 
+// Iniciar el carrusel
 mostrarImagenActual();
 iniciarCambioAutomatico();
 

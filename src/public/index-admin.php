@@ -50,7 +50,7 @@ checkUserPermissions('admin');
       <div class="menu-item" data-page="dudas">
         <a href="questions-and-answers.php">
           <i class="fas fa-question-circle"></i>
-          <span  class="span-stat">Dudas</span>
+          <span  class="span-stat">Duda</span>
         </a>
       </div>
     </div>
@@ -61,7 +61,7 @@ checkUserPermissions('admin');
     <div class="flex justify-between items-center mb-8">
       <h1 class="text-2xl font-bold text-700" style="color: rgb(240, 240, 240);">Panel de Administrador</h1>
       <div class="user-menu" style="background:rgb(240, 240, 240); position: relative; cursor: pointer; padding: 10px; display: flex; align-items: center; gap: 5px;">
-        <img src="/TRASHCICLE ADMIN PANEL/src/public/assets/images/create-users.png" alt="User">
+        <img src="assets/images/logo-trashcicle-desplex.png" alt="User">
         <span class="mr-2">Cuenta</span>
         <i class="fas fa-chevron-down"></i>
         

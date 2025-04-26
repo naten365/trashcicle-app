@@ -173,8 +173,9 @@ header {
     margin-top: 200px;
     margin-left: 175px;
     object-fit: cover;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
 }
-
 .tag {
     position: absolute;
     margin-top: 900px;
