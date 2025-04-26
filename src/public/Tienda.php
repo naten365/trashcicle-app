@@ -15,7 +15,7 @@ checkUserPermissions('cliente');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="IMG/recycle-favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/Tienda.css">
+    <link rel="stylesheet" href="styles/Tienda.css">
     <title>¡Canjea tus recompensas! | TrashCicle</title>
 </head>
 
@@ -23,8 +23,8 @@ checkUserPermissions('cliente');
     <!-- header -->
     <header class="TrashCicle">
         <nav class="nav container" id="nav">
-            <a href="Index.html">
-                <img src="IMG/logo.png" alt="logo" height="50px">
+            <a href="index.html">
+                <img src="assets/images/logo.png" alt="logo" height="50px">
             </a>
 
             <ul class="nav__links">
@@ -36,21 +36,21 @@ checkUserPermissions('cliente');
                     </div>
                 </li>
                 <li class="nav__item">
-                    <a href="Index.html" class="nav__link">Inicio</a>
+                    <a href="index.php" class="nav__link">Inicio</a>
                 </li>
                 <li class="nav__item">
-                    <a href="Afiliados.html" class="nav__link">Afiliados</a>
+                    <a href="Afiliados.php" class="nav__link">Afiliados</a>
                 </li>
                 <li class="nav__item">
-                    <a href="formulario-contacto.html" class="nav__link">Contáctanos</a>
+                    <a href="formulario-contacto.php" class="nav__link">Contáctanos</a>
                 </li>
 
             </ul>
 
             <a href="#nav" class="nav__hamburguer">
-                <img src="IMG/menu.svg" class="nav__icon">
+                <img src="assets/images/menu.svg" class="nav__icon">
                 <a href="#" class="nav__close">
-                    <img src="IMG/close.svg" class="nav__icon">
+                    <img src="assets/images/close.svg" class="nav__icon">
                 </a>
             </a>
         </nav>
@@ -62,99 +62,99 @@ checkUserPermissions('cliente');
         <div class="slider">
             <div class="slide-track">
                 <div class="slide">
-                    <img src="IMG/rec1.png" alt="">
+                    <img src="assets/images/rec1.png" alt="">
                 </div>
                 <div class="slide">
-                    <img src="IMG/rec2.jpg" alt="">
+                    <img src="assets/images/rec2.jpg" alt="">
                 </div>
                 <div class="slide">
-                    <img src="IMG/rec3.jpg" alt="">
+                    <img src="assets/images/rec3.jpg" alt="">
                 </div>
                 <div class="slide">
-                    <img src="IMG/rec4.jpg" alt="">
+                    <img src="assets/images/rec4.jpg" alt="">
                 </div>
                 <div class="slide">
-                    <img src="IMG/rec5.jpg" alt="">
+                    <img src="assets/images/rec5.jpg" alt="">
                 </div>
                 <div class="slide">
-                    <img src="IMG/rec6.jpg" alt="">
+                    <img src="assets/images/rec6.jpg" alt="">
                 </div>
                 <div class="slide">
-                    <img src="IMG/rec7.jpg" alt="">
+                    <img src="assets/images/rec7.jpg" alt="">
                 </div>
 
                 <div class="slide">
-                    <img src="IMG/rec1.png" alt="">
+                    <img src="assets/images/rec1.png" alt="">
                 </div>
                 <div class="slide">
-                    <img src="IMG/rec2.jpg" alt="">
+                    <img src="assets/images/rec2.jpg" alt="">
                 </div>
                 <div class="slide">
-                    <img src="IMG/rec3.jpg" alt="">
+                    <img src="assets/images/rec3.jpg" alt="">
                 </div>
                 <div class="slide">
-                    <img src="IMG/rec4.jpg" alt="">
+                    <img src="assets/images/rec4.jpg" alt="">
                 </div>
                 <div class="slide">
-                    <img src="IMG/rec5.jpg" alt="">
+                    <img src="assets/images/rec5.jpg" alt="">
                 </div>
                 <div class="slide">
-                    <img src="IMG/rec6.jpg" alt="">
+                    <img src="assets/images/rec6.jpg" alt="">
                 </div>
                 <div class="slide">
-                    <img src="IMG/rec7.jpg" alt="">
+                    <img src="assets/images/rec7.jpg" alt="">
                 </div>
             </div>
         </div>
     </main>
     <div class="shop-arrow-container">
-        <img src="IMG/arrow.png" alt="">
+        <img src="assets/images/arrow.png" alt="">
     </div>
     <section>
         <div class="shop-product-container">
             <div class="product-card">
-                <a href="balon-basket.html">
-                    <img src="IMG/basket.jpg" alt="" class="product">
+                <a href="balon-basket.php">
+                    <img src="assets/images/basket.jpg" alt="" class="product">
                 </a>
                 <div class="product-image-text">
                     <p>Balón de basketball.</p>
                 </div>
             </div>
             <div class="product-card">
-                <a href="balon-football.html">
-                    <img src="IMG/balon-de-futbol-soccer.jpg" alt="" class="product">
+                <a href="balon-basket.php">
+                    <img src="assets/images/balon-de-futbol-soccer.jpg" alt="" class="product">
                 </a>
                 <div class="product-image-text">
                     <p>Balón balon de fútbol.</p>
                 </div>
             </div>
             <div class="product-card">
-                <a href="bate-baseball.html">
-                    <img src="IMG/bate.jpg" alt="" class="product">
+                <a href="balon-basket.php">
+                    <img src="assets/images//bate.jpg" alt="" class="product">
                 </a>
                 <div class="product-image-text">
                     <p>Bate de béisbol.</p>
                 </div>
             </div>
             <div class="product-card">
-                <a href="omsa-card.html">
-                    <img src="IMG/omsa.jpg" alt="" class="product">
+                <a href="balon-basket.php">
+                    <img src="assets/images//omsa.jpg" alt="" class="product">
                 </a>
                 <div class="product-image-text">
                     <p>Tarjeta de viajes en la OMSA.</p>
                 </div>
             </div>
             <div class="product-card">
-                <a href="trashcicle-gorro.html">
-                    <img src="IMG/gorroTrashCicle.jpg" alt="" class="product">
+                <a href="balon-basket.php">
+                    <img src="assets/images/gorroTrashCicle.jpg" alt="" class="product">
                 </a>
                 <div class="product-image-text">
                     <p>Merch de TrashCicle (Gorro).</p>
                 </div>
             </div>
             <div class="product-card">
-                <a href="trashcicle-abrigo.html">
-                    <img src="IMG/trashCicleHoodie.jpg" alt="" class="product">
+                <a href="balon-basket.php">
+                    <img src="assets/images/trashCicleHoodie.jpg" alt="" class="product">
                 </a>
                 <div class="product-image-text">
                     <p>Merch de TrashCicle (Abrigo).</p>
@@ -166,7 +166,7 @@ checkUserPermissions('cliente');
     <footer>
         <div class="footer">
             <div class="logof">
-                <img src="IMG/logo.png" alt="">
+                <img src="assets/images/logo.png" alt="">
             </div>
             <div class="row">
                 <a href="#"></a>
@@ -177,7 +177,7 @@ checkUserPermissions('cliente');
 
             <div class="row">
                 <ul>
-                    <li><a href="formulario-contacto.html">Contáctanos</a></li>
+                    <li><a href="formulario-contacto.php">Contáctanos</a></li>
                     <li><a href="#">Política de privacidad</a></li>
                     <li><a href="#">Términos y condiciones</a></li>
                     <li><a href="#">Política de cookies</a></li>
@@ -190,8 +190,8 @@ checkUserPermissions('cliente');
         </div>
     </footer>
 
-    <script src="JS/nav-menu.js"></script>
-    <script type="module" src="JS/tienda.js"></script>
+    <script src="scritps/nav-menu.js"></script>
+    <script type="module" src="scritps/tienda.js"></script>
 </body>
 
 </html>

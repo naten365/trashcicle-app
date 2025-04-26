@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="IMG/recycle-favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/formulario.css">
+    <link rel="stylesheet" href="styles/formulario.css">
     <title>Contacta con nosotros | TrashCicle</title>
 </head>
 
@@ -13,7 +13,7 @@
     <header class="TrashCicle">
         <nav class="nav container" id="nav">
             <a href="Index.html">
-                <img src="IMG/logo.png" alt="logo" height="50px">
+                <img src="assets/images/logo.png" alt="logo" height="50px">
             </a>
 
             <ul class="nav__links">
@@ -25,20 +25,20 @@
                     </div>
                 </li>
                 <li class="nav__item">
-                    <a href="Index.html" class="nav__link">Inicio</a>
+                    <a href="index.php" class="nav__link">Inicio</a>
                 </li>
                 <li class="nav__item">
-                    <a href="Tienda.html" class="nav__link">Tienda de puntos</a>
+                    <a href="Tienda.php" class="nav__link">Tienda de puntos</a>
                 </li>
                 <li class="nav__item">
-                    <a href="Afiliados.html" class="nav__link">Afiliados</a>
+                    <a href="Afiliados.php" class="nav__link">Afiliados</a>
                 </li>
 
             </ul>
             <a href="#nav" class="nav__hamburguer">
-                <img src="IMG/menu.svg" class="nav__icon">
+                <img src="assets/images/menu.svg" class="nav__icon">
                 <a href="#" class="nav__close">
-                    <img src="IMG/close.svg" class="nav__icon">
+                    <img src="assets/images/close.svg" class="nav__icon">
                 </a>
             </a>
         </nav>
@@ -46,7 +46,7 @@
     <div class="form-container">
         <div class="caja-form">
             <h1>Contáctanos</h1>
-            <form action="Index.html" id="create-account-form">
+            <form action="index.php" id="create-account-form">
                 <input type="text" id="Name" placeholder="Ingrese su Nombre por favor"><br>
                 <input type="text" id="Last-name" placeholder="Ingrese su apellido por favor"><br>
                 <input type="email" id="Email" placeholder="Ingrese su email"><br>
@@ -57,9 +57,9 @@
         </div>
     </div>
 
-    <script src="JS/formulario.js"></script>
-    <script src="JS/nav-menu.js"></script>
-    <script type="module" src="JS/tienda.js"></script>
+    <script src="scripts/formulario.js"></script>
+    <script src="scripts/nav-menu.js"></script>
+    <script type="module" src="scritps/tienda.js"></script>
 </body>
 
 </html>

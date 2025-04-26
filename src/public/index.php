@@ -1,8 +1,4 @@
-<?php
-// Include the connection file
-include '../connection/conn.php';
-session_start();
-?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -65,7 +61,7 @@ session_start();
                 con la finalidad de motivar a las personas, Especialmente a los jóvenes
                 de hoy en día a cuidar y proteger el medio ambiente.
             </p>
-            <form action="mapa.html">
+            <form action="mapa.php">
                 <button class="recicle-button">Recicla</button>
             </form>
         </div>

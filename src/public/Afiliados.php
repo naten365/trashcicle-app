@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="IMG/recycle-favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/Afiliados.css ">
+    <link rel="stylesheet" href="styles/Afiliados.css ">
     <title>Nuestros afiliados | TrashCicle</title>
 </head>
 
@@ -14,8 +14,8 @@
     <!-- header -->
     <header class="TrashCicle">
         <nav class="nav container" id="nav">
-            <a href="Index.html">
-                <img src="IMG/logo.png" alt="logo" height="50px">
+            <a href="index.php">
+                <img src="assets/images/logo.png" alt="logo" height="50px">
             </a>
 
             <ul class="nav__links">
@@ -27,22 +27,22 @@
                     </div>
                 </li>
                 <li class="nav__item">
-                    <a href="Index.html" class="nav__link">Inicio</a>
+                    <a href="index.php" class="nav__link">Inicio</a>
                 </li>
                 <li class="nav__item">
-                    <a href="Tienda.html" class="nav__link">Tienda de puntos</a>
+                    <a href="Tienda.php" class="nav__link">Tienda de puntos</a>
                 </li>
 
                 <li class="nav__item">
-                    <a href="formulario-contacto.html" class="nav__link">Contactános</a>
+                    <a href="formulario-contacto.php" class="nav__link">Contactános</a>
                 </li>
 
             </ul>
 
             <a href="#nav" class="nav__hamburguer">
-                <img src="IMG/menu.svg" class="nav__icon">
+                <img src="assets/images/menu.svg" class="nav__icon">
                 <a href="#" class="nav__close">
-                    <img src="IMG/close.svg" class="nav__icon">
+                    <img src="assets/images/close.svg" class="nav__icon">
                 </a>
             </a>
         </nav>
@@ -52,7 +52,7 @@
     <!-- titulo y parrafo -->
     <div class="mover_afiliados">
         <h1 class="h2">Afiliados</h1>
-        <img src="" id="imagen" class="img40">
+        <img src="assets/images/hola.webp" id="imagen" class="img40">
         <p class="p">Este proyecto tiene varios afiliados los cuales ayudan
             en la creación y mantenimiento de este sitio web y de nuestro
             prototipo, el cual ayuda al medio ambiente motivando a todo tipo
@@ -73,7 +73,7 @@
         <div class="container">
             <section class="sec">
                 <div class="sec-image">
-                    <img src="IMG/medio.jpg" alt="">
+                    <img src="assets/images/medio.jpg" alt="">
                 </div>
                 <div class="sec-content">
                     <h2>Ministerio de Medio Ambiente</h2>
@@ -91,7 +91,7 @@
         <div class="container">
             <section class="sec">
                 <div class="sec-image">
-                    <img src="IMG/salud.png" alt="">
+                    <img src="assets/images/salud.png" alt="">
                 </div>
                 <div class="sec-content">
                     <h2>Ministerio de Salud Publica</h2>
@@ -111,7 +111,7 @@
         <div class="container">
             <section class="sec">
                 <div class="sec-image">
-                    <img src="IMG/logomopc.png" alt="">
+                    <img src="assets/images/logomopc.png" alt="">
                 </div>
                 <div class="sec-content">
                     <h2>Ministerio de Obras Publicas y Comunicaciones</h2>
@@ -145,7 +145,7 @@
     <footer>
         <div class="footer">
             <div class="logof">
-                <img src="IMG/logo.png" alt="">
+                <img src="assets/images/logo.png" alt="">
             </div>
             <div class="row">
                 <a href="#"></a>
@@ -156,7 +156,7 @@
 
             <div class="row">
                 <ul>
-                    <li><a href="formulario-contacto.html">Contáctanos</a></li>
+                    <li><a href="formulario-contacto.php">Contáctanos</a></li>
                     <li><a href="#">Política de privacidad</a></li>
                     <li><a href="#">Términos y condiciones</a></li>
                     <li><a href="#">Política de cookies</a></li>
@@ -168,9 +168,9 @@
             </div>
         </div>
     </footer>
-    <script src="JS/afiliados.js"></script>
-    <script type="module" src="JS/tienda.js"></script>
-    <script src="JS/canjear-producto.js"></script>
+    <script  src="scripts/afiliados.js"></script>
+    <script type="module" src="scripts/tienda.js"></script>
+    <script src="scripts/canjear-producto.js"></script>
 </body>
 
 </html>
