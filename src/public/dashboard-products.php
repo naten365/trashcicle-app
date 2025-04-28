@@ -1,3 +1,85 @@
+<?php
+session_start();
+include '../connection/conn.php';
+checkUserPermissions('admin');
+
+
+//Muestra el numero de productos en la base de datos
+function totalProductos(){
+  global $pdo;
+  $sql = "SELECT COUNT(*) AS total FROM productos";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  $result =  $stmt->fetch(PDO ::FETCH_ASSOC); 
+  return isset($result['total']) ? (int)$result['total'] : 0;
+}
+
+//Muestras los ultimos 3 productos añadidos
+function totalProductoshoy(){
+  global $pdo;
+  $sql = "SELECT COUNT(*) AS prodcutos_hoy FROM productos WHERE  fecha_creacion = CURDATE() ORDER BY fecha_creacion DESC LIMIT 5";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  $result =  $stmt->fetch(PDO ::FETCH_ASSOC); 
+  return isset($result['prodcutos_hoy']) ? (int)$result['prodcutos_hoy'] : 0;
+} 
+
+
+//Funcion que muestra el total de los zafacones en la base  de datos
+function totalZafacones(){
+    global $pdo;
+    $sql = "SELECT COUNT(*) AS totalzafacones FROM zafacones_inteligentes";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result =  $stmt->fetch(PDO ::FETCH_ASSOC); 
+    return isset($result['totalzafacones']) ? (int)$result['totalzafacones'] : 0;
+  }
+  
+  //Funcion que muestra el total  de zafacones que se encuentra disponibles en  la pagina
+  function totalZafaconesActivos(){
+    global $pdo;
+    $sql = "SELECT COUNT(*) AS totalzafacones_activos FROM zafacones_inteligentes WHERE estado= 'activo'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result =  $stmt->fetch(PDO ::FETCH_ASSOC); 
+    return isset($result['totalzafacones_activos']) ? (int)$result['totalzafacones_activos'] : 0;
+  }
+
+
+//Muestra el numero de comprar en la base de datos
+function totalCompras(){
+  global $pdo;
+  $sql = "SELECT COUNT(*) AS totalcompras FROM compras";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  $result =  $stmt->fetch(PDO ::FETCH_ASSOC); 
+  return isset($result['totalcompras']) ? (int)$result['totalcompras'] : 0;
+}
+
+
+//Muestras los ultimos 3 productos añadidos
+function totalComprashoy(){
+    global $pdo;
+    $sql = "SELECT COUNT(*) AS compras_hoy FROM compras WHERE  fecha_compra = CURDATE() ORDER BY fecha_compra DESC LIMIT 5";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result =  $stmt->fetch(PDO ::FETCH_ASSOC); 
+    return isset($result['compras_hoy']) ? (int)$result['compras_hoy'] : 0;
+  } 
+  
+
+  // Función que suma el total de puntos de los usuarios tipo "cliente"
+function totalPuntosClientes(){
+    global $pdo;
+    $sql = "SELECT SUM(user_points) AS totalpuntos FROM users WHERE type_users = 'cliente'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+    return isset($result['totalpuntos']) ? (int)$result['totalpuntos'] : 0;
+  }
+  
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -607,7 +689,7 @@
                 <div class="stat-card">
                     <h3>Total Productos</h3>
                     <div class="stat-value">
-                        124 <span class="trend">+3 nuevos</span>
+                        <?php echo totalProductos()?> <span class="trend">+<?php echo totalProductoshoy()?> nuevos</span>
                     </div>
                     <div class="progress-bar">
                         <div class="progress-fill fill-purple" style="width:80%"></div>
@@ -617,7 +699,7 @@
                 <div class="stat-card">
                     <h3>Canjes Realizados</h3>
                     <div class="stat-value">
-                        56 <span class="trend">+12%</span>
+                        <?php echo  totalCompras()?> <span class="trend">+<?php echo totalComprashoy()?> compras</span>
                     </div>
                     <div class="progress-bar">
                         <div class="progress-fill fill-blue" style="width:65%"></div>
@@ -627,7 +709,7 @@
                 <div class="stat-card">
                     <h3>Zafacones Activos</h3>
                     <div class="stat-value">
-                        28/32 <span class="trend">87.5%</span>
+                        <?php  echo totalZafaconesActivos()?>/<?php  echo  totalZafacones()?> <span class="trend">Registrados</span>
                     </div>
                     <div class="progress-bar">
                         <div class="progress-fill fill-green" style="width:87.5%"></div>
@@ -637,7 +719,7 @@
                 <div class="stat-card">
                     <h3>Puntos Entregados</h3>
                     <div class="stat-value">
-                        35,840 <span class="trend">+8.2%</span>
+                        <?php echo  totalPuntosClientes()?> <span class="trend">Pts</span>
                     </div>
                     <div class="progress-bar">
                         <div class="progress-fill fill-orange" style="width:72%"></div>
@@ -670,7 +752,7 @@
                                     <button class="view-toggle-btn active"><i class="fas fa-list"></i></button>
                                     <button class="view-toggle-btn"><i class="fas fa-th-large"></i></button>
                                 </div>
-                                <button class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Producto</button>
+                                <button class="btn btn-primary"onclick="window.location.href = 'add-products.php'"><i class="fas fa-plus"></i> Agregar Producto</button>
                             </div>
                         </div>
                         
