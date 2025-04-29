@@ -111,7 +111,7 @@ function totalPuntosClientes(){
                 <h1>Panel de Productos</h1>
                 <div class="page-actions">
                     <button class="btn btn-secondary"><i class="fas fa-download"></i> Exportar</button>
-                    <button class="btn btn-primary" onclick="window.location.href='add-products.php'">
+                    <button class="btn btn-primary"  onclick="window.location.href = 'add-products.php'">
                         <i class="fas fa-plus"></i> Agregar Producto
                     </button>
                 </div>
@@ -182,7 +182,7 @@ function totalPuntosClientes(){
                                     <button class="view-toggle-btn active"><i class="fas fa-list"></i></button>
                                     <button class="view-toggle-btn"><i class="fas fa-th-large"></i></button>
                                 </div>
-                                <button class="btn btn-primary"onclick="window.location.href = 'add-products.php'"><i class="fas fa-plus"></i> Agregar Producto</button>
+                                <button class="btn btn-primary" onclick="window.location.href = 'add-products.php'"><i class="fas fa-plus"></i> Agregar Producto</button>
                             </div>
                         </div>
                         
