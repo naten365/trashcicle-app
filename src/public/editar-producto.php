@@ -397,8 +397,7 @@ if (isset($_POST['actualizar'])) {
             <select id="estado" name="estado" required>
                 <option value="">Seleccionar estado</option>
                 <option value="Disponible" <?php if ($producto['estado_producto'] == 'Disponible') echo 'selected'; ?>>Disponible</option>
-                <option value="Agotado" <?php if ($producto['estado_producto'] == 'Agotado') echo 'selected'; ?>>Agotado</option>
-                <option value="Pendiente" <?php if ($producto['estado_producto'] == 'Pendiente') echo 'selected'; ?>>Pendiente</option>
+                <option value="No disponible" <?php if ($producto['estado_producto'] == 'No disponible') echo 'selected'; ?>>No disponible</option>
             </select>
             <div id="estadoError" class="error-message">⚠️ Seleccione un estado</div>
         </div>

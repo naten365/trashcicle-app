@@ -82,10 +82,38 @@ function totalPuntosClientes(){
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC); 
     return isset($result['totalpuntos']) ? (int)$result['totalpuntos'] : 0;
-  }
-  
+
+
+}
+
+// 1. Define cuántos productos mostrar por página
+$productosPorPagina = 6;
+
+// 2. Verifica si se recibió el número de página por GET, si no, empieza en 1
+$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
+// 3. Calcula el offset (desde qué producto empezar)
+$offset = ($paginaActual - 1) * $productosPorPagina;
+
+// 4. Obtiene el total de productos
+$sqlTotal = "SELECT COUNT(*) AS total FROM productos";
+$stmtTotal = $pdo->prepare($sqlTotal);
+$stmtTotal->execute();
+$totalProductos = $stmtTotal->fetch(PDO::FETCH_ASSOC)['total'];
+
+// 5. Calcula cuántas páginas necesitas
+$totalPaginas = ceil($totalProductos / $productosPorPagina);
+
+// 6. Obtiene los productos para la página actual
+$sql = "SELECT * FROM productos LIMIT :limit OFFSET :offset";
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(':limit', $productosPorPagina, PDO::PARAM_INT);
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+$stmt->execute();
+$productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -172,7 +200,7 @@ function totalPuntosClientes(){
                     <div class="tab-content active" id="productos-tab">
                         <div class="toolbar">
                             <div class="search-box">
-                                <input type="text" placeholder="Buscar producto...">
+                                <input type="text" id="buscarProducto" placeholder="Buscar producto...">
                                 <button><i class="fas fa-search"></i></button>
                             </div>
                             
@@ -188,11 +216,11 @@ function totalPuntosClientes(){
                         
                     
                         <div class="filter-buttons">
-                            <button class="filter-btn active">Todos</button>
-                            <button class="filter-btn">Disponibles</button>
-                            <button class="filter-btn">Sin Stock</button>
-                            <button class="filter-btn">Más Canjeados</button>
-                            <button class="filter-btn">Recién agregados</button>
+                            <button class="filter-btn active" data-filtro="todos">Todos</button>
+                            <button class="filter-btn" data-filtro="disponibles">Disponibles</button>
+                            <button class="filter-btn" data-filtro="No-disponible">No disponible</button>
+                            <button class="filter-btn" data-filtro="mas-canjeados">Más Canjeados</button>
+                            <button class="filter-btn" data-filtro="recientes">Recién agregados</button>
                         </div>
                         
                         <div class="table-container">
@@ -207,48 +235,63 @@ function totalPuntosClientes(){
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php foreach($productos as $producto): ?>
-                                        <tr>
-                                            <td>
-                                                <div style="display:flex; align-items:center; gap:10px;">
-                                                    <img src="uploads/<?php echo htmlspecialchars($producto['imagen_producto']); ?>" alt="Producto" class="product-img" style="width:40px; height:40px;">
-                                                    <span><?php echo htmlspecialchars($producto['nombre_producto']); ?></span>
-                                                </div>
-                                            </td>
-                                            <td><?php echo htmlspecialchars($producto['categria_producto']); ?></td>
-                                            <td><?php echo number_format($producto['precio'], 2); ?></td>
-                                            <td><?php echo (int)$producto['cantidad_stock']; ?></td>
-                                            <td>
-                                                <?php
-                                                $estado = $producto['estado_producto'];
-                                                $badgeClass = ($estado == 'Disponible') ? 'badge-success' : 'badge-danger';
-                                                ?>
-                                                <span class="status-badge <?php echo $badgeClass; ?>"><?php echo htmlspecialchars($estado); ?></span>
-                                            </td>
-                                            <td>
-                                                <a href="editar-producto.php?id=<?php echo $producto['id_producto']; ?>" class="action-icon edit-icon"><i class="fas fa-edit"></i></a>
-                                                <a href="ver-producto.php?id=<?php echo $producto['id_producto']; ?>" class="action-icon"><i class="fas fa-eye"></i></a>
-                                                <a href="eliminar-producto.php?id=<?php echo $producto['id_producto']; ?>" class="action-icon delete-icon"><i class="fas fa-trash"></i></a>
-                                            </td>
-                                        </tr>
+                                <tbody id="lista-productos">
+                                    <?php foreach($productos as $producto): 
+                                        $estado = $producto['estado_producto'];
+                                        $badgeClass = ($estado == 'Disponible') ? 'badge-success' : 'badge-danger';
+
+                                        // Clases de estado para el filtro
+                                        $claseEstado = ($estado == 'Disponible') ? 'disponibles' : 'No-disponible';
+
+                                        // Clases para los filtros "Más Canjeados" y "Recién agregados"
+                                        $masCanjeados = ($producto['cantidad_stock'] <= 5) ? 'mas-canjeados' : '';
+                                        $reciente = (strtotime($producto['fecha_creacion']) >= strtotime('-7 days')) ? 'recientes' : '';
+
+                                        // Combinar clases
+                                        $clasesFila = "$claseEstado $masCanjeados $reciente";
+                                    ?>
+                                    <tr class="<?php echo $clasesFila; ?>">
+                                        <td>
+                                            <div style="display:flex; align-items:center; gap:10px;">
+                                                <img src="uploads/<?php echo htmlspecialchars($producto['imagen_producto']); ?>" alt="Producto" class="product-img" style="width:40px; height:40px;">
+                                                <span><?php echo htmlspecialchars($producto['nombre_producto']); ?></span>
+                                            </div>
+                                        </td>
+                                        <td><?php echo htmlspecialchars($producto['categria_producto']); ?></td>
+                                        <td><?php echo number_format($producto['precio'], 2); ?></td>
+                                        <td><?php echo (int)$producto['cantidad_stock']; ?></td>
+                                        <td>
+                                            <span class="status-badge <?php echo $badgeClass; ?>"><?php echo htmlspecialchars($estado); ?></span>
+                                        </td>
+                                        <td>
+                                            <a href="editar-producto.php?id=<?php echo $producto['id_producto']; ?>" class="action-icon edit-icon"><i class="fas fa-edit"></i></a>
+                                            <a href="ver-producto.php?id=<?php echo $producto['id_producto']; ?>" class="action-icon"><i class="fas fa-eye"></i></a>
+                                            <a href="eliminar-producto.php?id=<?php echo $producto['id_producto']; ?>" class="action-icon delete-icon"><i class="fas fa-trash"></i></a>
+                                        </td>
+                                    </tr>
                                     <?php endforeach; ?>
-                                </tbody> 
+                                </tbody>
                             </table>
                         </div>
-                        
                         <div class="pagination">
                             <div class="page-info">
-                                Mostrando 1-6 de 24 productos
+                                Mostrando <?php echo $offset + 1; ?> - 
+                                <?php echo min($offset + $productosPorPagina, $totalProductos); ?> 
+                                de <?php echo $totalProductos; ?> productos
                             </div>
+
                             <div class="page-controls">
-                                <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
-                                <button class="page-btn active">1</button>
-                                <button class="page-btn">2</button>
-                                <button class="page-btn">3</button>
-                                <button class="page-btn">4</button>
-                                <button class="page-btn">5</button>
-                                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                                <?php if($paginaActual > 1): ?>
+                                <a href="?pagina=<?php echo $paginaActual - 1; ?>" class="page-btn"><i class="fas fa-chevron-left"></i></a>
+                                <?php endif; ?>
+
+                                <?php for($i = 1; $i <= $totalPaginas; $i++): ?>
+                                <a href="?pagina=<?php echo $i; ?>" style="text-decoration: none; font-weight:600;" class="page-btn <?php echo ($i == $paginaActual) ? 'active' : ''; ?>"><?php echo $i; ?></a>
+                                <?php endfor; ?>
+
+                                <?php if($paginaActual < $totalPaginas): ?>
+                                <a href="?pagina=<?php echo $paginaActual + 1; ?>" style="text-decoration: none; font-weight:600;" class="page-btn"><i class="fas fa-chevron-right"></i></a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -446,6 +489,75 @@ function totalPuntosClientes(){
                 });
             });
         });
-    </script>     
+    </script>  
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.page-btn').forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const url = this.getAttribute('href');
+
+                    fetch(url)
+                        .then(response => response.text())
+                        .then(data => {
+                            // Extrae solo los productos y la nueva paginación
+                            const parser = new DOMParser();
+                            const htmlDoc = parser.parseFromString(data, 'text/html');
+                            
+                            const nuevosProductos = htmlDoc.querySelector('#lista-productos');
+                            const nuevoPaginado = htmlDoc.querySelector('#paginado');
+
+                            document.querySelector('#lista-productos').innerHTML = nuevosProductos.innerHTML;
+                            document.querySelector('#paginado').innerHTML = nuevoPaginado.innerHTML;
+                            
+                            // Reasigna los eventos a los nuevos botones
+                            document.querySelectorAll('.page-btn').forEach(function (btn) {
+                                btn.addEventListener('click', arguments.callee);
+                            });
+                        });
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const inputBuscar = document.getElementById("buscarProducto");
+            const filas = document.querySelectorAll("#lista-productos tr");
+
+            inputBuscar.addEventListener("keyup", function () {
+                const filtro = inputBuscar.value.toLowerCase();
+
+                filas.forEach(fila => {
+                    const nombreProducto = fila.querySelector("td span").textContent.toLowerCase();
+                    fila.style.display = nombreProducto.includes(filtro) ? "" : "none";
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const botonesFiltro = document.querySelectorAll(".filter-btn");
+            const filas = document.querySelectorAll("#lista-productos tr");
+
+            botonesFiltro.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    // Activar botón
+                    botonesFiltro.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+
+                    const filtro = btn.getAttribute("data-filtro");
+
+                    filas.forEach(fila => {
+                        if (filtro === "todos") {
+                            fila.style.display = "";
+                        } else {
+                            fila.style.display = fila.classList.contains(filtro) ? "" : "none";
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>
