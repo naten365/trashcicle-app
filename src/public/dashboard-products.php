@@ -85,7 +85,6 @@ function totalPuntosClientes(){
 
 
 }
-
 // 1. Define cuántos productos mostrar por página
 $productosPorPagina = 6;
 
@@ -333,9 +332,9 @@ $totalPaginas = ceil($totalCanjes / $canjesPorPagina);
  
                         <div class="filter-buttons">
                             <button class="filter-btn active" data-filtro="todos">Todos</button>
-                            <button class="filter-btn" data-filtro="Canjeo exitoso">Exitosos</button>
+                            <button class="filter-btn" data-filtro="canjeo-exitoso">Exitosos</button>
                             <button class="filter-btn" data-filtro="pendiente">Pendientes</button>
-                            <button class="filter-btn" data-filtro="recientes">Recién Canjeados</button>
+                            <button class="filter-btn" data-filtro="recientes">Canjeado hoy</button>
                         </div>
                                         
 
@@ -356,6 +355,7 @@ $totalPaginas = ceil($totalCanjes / $canjesPorPagina);
                                     // Asignar clase según el estado
                                     $estado = $canje['estado_compras'];
                                     $badgeClass = ($estado === 'Canjeo exitoso') ? 'badge-success' : 'badge-warning';
+            
 
                                     // Filtros por fecha
                                     $fecha = strtotime($canje['fecha_compra']);
@@ -371,8 +371,12 @@ $totalPaginas = ceil($totalCanjes / $canjesPorPagina);
                                     // Filtro pendiente
                                     $clasePendiente = ($estado === 'pendiente') ? 'pendiente' : '';
 
+                                    // Nueva clase basada en estado (para botón "canjeo exitoso")
+                                    $estadoClass = strtolower(str_replace(' ', '-', $estado));
+
                                     // Clases combinadas para filtros
-                                    $clasesFila = "$claseFecha $clasePendiente";
+                                    $clasesFila = "$claseFecha $clasePendiente $estadoClass";
+
                                 ?>
                                 <tr class="<?php echo $clasesFila; ?>">
                                     <td>
@@ -524,6 +528,32 @@ $totalPaginas = ceil($totalCanjes / $canjesPorPagina);
                 });
             });
 
-            </script>
+    </script>
+    <script>
+    document.querySelectorAll('.filter-btn').forEach(boton => {
+        boton.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            boton.classList.add('active');
+
+            const filtro = boton.getAttribute('data-filtro');
+            const filas = document.querySelectorAll('#lista-canjes tr');
+
+            filas.forEach(fila => {
+                fila.style.display = 'none';
+                const clases = fila.className.split(' ');
+
+                if (filtro === 'todos') {
+                    fila.style.display = '';
+                } else if (filtro === 'recientes') {
+                    if (clases.includes('hoy')) {
+                        fila.style.display = '';
+                    }
+                } else if (clases.includes(filtro)) {
+                    fila.style.display = '';
+                }
+            });
+        });
+    });
+    </script>
 </body>
 </html>
