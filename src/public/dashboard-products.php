@@ -112,6 +112,24 @@ $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt->execute();
 $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
+//Obtenemos todos los valores de la compras
+// Parámetros para paginación
+$canjesPorPagina = 6;
+$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$offset = ($paginaActual - 1) * $canjesPorPagina;
+
+// Consulta paginada
+$sql = "SELECT * FROM compras LIMIT :limit OFFSET :offset";
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(':limit', $canjesPorPagina, PDO::PARAM_INT);
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+$stmt->execute();
+$canjes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Obtener total de canjes para paginación
+$totalCanjes = $pdo->query("SELECT COUNT(*) FROM compras")->fetchColumn();
+$totalPaginas = ceil($totalCanjes / $canjesPorPagina);
 ?>
 
 <!DOCTYPE html>
@@ -216,7 +234,7 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         
                     
                         <div class="filter-buttons">
-                            <button class="filter-btn active" data-filtro="todos">Todos</button>
+                            <button class="filter-btn active">Todos</button>
                             <button class="filter-btn" data-filtro="disponibles">Disponibles</button>
                             <button class="filter-btn" data-filtro="No-disponible">No disponible</button>
                             <button class="filter-btn" data-filtro="mas-canjeados">Más Canjeados</button>
@@ -273,6 +291,7 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </tbody>
                             </table>
                         </div>
+                        <!--Paginacion de la pagina-->
                         <div class="pagination">
                             <div class="page-info">
                                 Mostrando <?php echo $offset + 1; ?> - 
@@ -299,7 +318,7 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="tab-content" id="canjes-tab">
                         <div class="toolbar">
                             <div class="search-box">
-                                <input type="text" placeholder="Buscar canje...">
+                                <input type="text"  id="buscarCanje" placeholder="Buscar canje...">
                                 <button><i class="fas fa-search"></i></button>
                             </div>
                             
@@ -313,18 +332,17 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
  
                         <div class="filter-buttons">
-                            <button class="filter-btn active">Todos los canjes</button>
-                            <button class="filter-btn">Hoy</button>
-                            <button class="filter-btn">Esta semana</button>
-                            <button class="filter-btn">Este mes</button>
-                            <button class="filter-btn">Pendientes</button>
+                            <button class="filter-btn active" data-filtro="todos">Todos</button>
+                            <button class="filter-btn" data-filtro="Canjeo exitoso">Exitosos</button>
+                            <button class="filter-btn" data-filtro="pendiente">Pendientes</button>
+                            <button class="filter-btn" data-filtro="recientes">Recién Canjeados</button>
                         </div>
-                        
+                                        
+
                         <div class="table-container">
                             <table class="data-table">
                                 <thead>
                                     <tr>
-                                        <th><input type="checkbox"></th>
                                         <th>Producto</th>
                                         <th>Usuario</th>
                                         <th>Puntos</th>
@@ -333,129 +351,66 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>
-                                            <div style="display:flex; align-items:center; gap:10px;">
-                                                <img src="/api/placeholder/40/40" alt="Producto" class="product-img">
-                                                <span>Botella Reutilizable</span>
-                                            </div>
-                                        </td>
-                                        <td>María Pérez</td>
-                                        <td>500</td>
-                                        <td>28/04/2025</td>
-                                        <td><span class="status-badge badge-success">Completado</span></td>
-                                        <td>
-                                            <a class="action-icon edit-icon"><i class="fas fa-edit"></i></a>
-                                            <a class="action-icon"><i class="fas fa-eye"></i></a>
-                                            <a class="action-icon delete-icon"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>
-                                            <div style="display:flex; align-items:center; gap:10px;">
-                                                <img src="/api/placeholder/40/40" alt="Producto" class="product-img">
-                                                <span>Bolsa Ecológica</span>
-                                            </div>
-                                        </td>
-                                        <td>Juan Rodríguez</td>
-                                        <td>300</td>
-                                        <td>27/04/2025</td>
-                                        <td><span class="status-badge badge-success">Completado</span></td>
-                                        <td>
-                                            <a class="action-icon edit-icon"><i class="fas fa-edit"></i></a>
-                                            <a class="action-icon"><i class="fas fa-eye"></i></a>
-                                            <a class="action-icon delete-icon"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>
-                                            <div style="display:flex; align-items:center; gap:10px;">
-                                                <img src="/api/placeholder/40/40" alt="Producto" class="product-img">
-                                                <span>Kit Reciclaje Hogar</span>
-                                            </div>
-                                        </td>
-                                        <td>Ana Martínez</td>
-                                        <td>1200</td>
-                                        <td>25/04/2025</td>
-                                        <td><span class="status-badge badge-warning">Pendiente</span></td>
-                                        <td>
-                                            <a class="action-icon edit-icon"><i class="fas fa-edit"></i></a>
-                                            <a class="action-icon"><i class="fas fa-eye"></i></a>
-                                            <a class="action-icon delete-icon"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>
-                                            <div style="display:flex; align-items:center; gap:10px;">
-                                                <img src="/api/placeholder/40/40" alt="Producto" class="product-img">
-                                                <span>Cuaderno Papel Reciclado</span>
-                                            </div>
-                                        </td>
-                                        <td>Carlos López</td>
-                                        <td>400</td>
-                                        <td>24/04/2025</td>
-                                        <td><span class="status-badge badge-success">Completado</span></td>
-                                        <td>
-                                            <a class="action-icon edit-icon"><i class="fas fa-edit"></i></a>
-                                            <a class="action-icon"><i class="fas fa-eye"></i></a>
-                                            <a class="action-icon delete-icon"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>
-                                            <div style="display:flex; align-items:center; gap:10px;">
-                                                <img src="/api/placeholder/40/40" alt="Producto" class="product-img">
-                                                <span>Maceta Biodegradable</span>
-                                            </div>
-                                        </td>
-                                        <td>Laura Gómez</td>
-                                        <td>350</td>
-                                        <td>23/04/2025</td>
-                                        <td><span class="status-badge badge-danger">Cancelado</span></td>
-                                        <td>
-                                            <a class="action-icon edit-icon"><i class="fas fa-edit"></i></a>
-                                            <a class="action-icon"><i class="fas fa-eye"></i></a>
-                                            <a class="action-icon delete-icon"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>
-                                            <div style="display:flex; align-items:center; gap:10px;">
-                                                <img src="/api/placeholder/40/40" alt="Producto" class="product-img">
-                                                <span>Camiseta Reciclaje</span>
-                                            </div>
-                                        </td>
-                                        <td>Pedro Sánchez</td>
-                                        <td>700</td>
-                                        <td>22/04/2025</td>
-                                        <td><span class="status-badge badge-success">Completado</span></td>
-                                        <td>
-                                            <a class="action-icon edit-icon"><i class="fas fa-edit"></i></a>
-                                            <a class="action-icon"><i class="fas fa-eye"></i></a>
-                                            <a class="action-icon delete-icon"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <tbody id="lista-canjes">
+                                <?php foreach($canjes as  $canje): 
+                                    // Asignar clase según el estado
+                                    $estado = $canje['estado_compras'];
+                                    $badgeClass = ($estado === 'Canjeo exitoso') ? 'badge-success' : 'badge-warning';
+
+                                    // Filtros por fecha
+                                    $fecha = strtotime($canje['fecha_compra']);
+                                    $hoy = strtotime(date('Y-m-d'));
+                                    $semana = strtotime('-7 days');
+                                    $mes = strtotime('-30 days');
+
+                                    $claseFecha = '';
+                                    if ($fecha >= $hoy) $claseFecha = 'hoy';
+                                    elseif ($fecha >= $semana) $claseFecha = 'semana';
+                                    elseif ($fecha >= $mes) $claseFecha = 'mes';
+
+                                    // Filtro pendiente
+                                    $clasePendiente = ($estado === 'pendiente') ? 'pendiente' : '';
+
+                                    // Clases combinadas para filtros
+                                    $clasesFila = "$claseFecha $clasePendiente";
+                                ?>
+                                <tr class="<?php echo $clasesFila; ?>">
+                                    <td>
+                                        <div style="display:flex; align-items:center; gap:10px;">
+                                            <img src="uploads/<?php echo htmlspecialchars($canje['imagen_producto'] ?? 'placeholder.png'); ?>" alt="Producto" class="product-img" style="width:40px; height:40px;">
+                                            <span><?php echo htmlspecialchars($canje['compra']); ?></span>
+                                        </div>
+                                    </td>
+                                    <td><?php echo htmlspecialchars($canje['usuario_nombre']); ?></td>
+                                    <td><?php echo (int)$canje['puntos']; ?></td>
+                                    <td><?php echo date('d/m/Y', strtotime($canje['fecha_compra'])); ?></td>
+                                    <td><span class="status-badge <?php echo $badgeClass; ?>"><?php echo ucfirst($estado); ?></span></td>
+                                    <td><a href="ver-canje.php?id=<?php echo $canje['id']; ?>" class="action-icon"><i class="fas fa-eye"></i></a></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
                             </table>
                         </div>
-                        
+                        <!--Paginacion de la pagina-->
                         <div class="pagination">
                             <div class="page-info">
-                                Mostrando 1-6 de 18 canjes
+                                Mostrando <?php echo $offset + 1; ?> -
+                                <?php echo min($offset + $canjesPorPagina, $totalCanjes); ?>
+                                de <?php echo $totalCanjes; ?> canjes
                             </div>
+
                             <div class="page-controls">
-                                <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
-                                <button class="page-btn active">1</button>
-                                <button class="page-btn">2</button>
-                                <button class="page-btn">3</button>
-                                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                                <?php if($paginaActual > 1): ?>
+                                    <a href="?pagina=<?php echo $paginaActual - 1; ?>" class="page-btn"><i class="fas fa-chevron-left"></i></a>
+                                <?php endif; ?>
+
+                                <?php for($i = 1; $i <= $totalPaginas; $i++): ?>
+                                    <a href="?pagina=<?php echo $i; ?>" class="page-btn <?php echo ($i == $paginaActual) ? 'active' : ''; ?>"><?php echo $i; ?></a>
+                                <?php endfor; ?>
+
+                                <?php if($paginaActual < $totalPaginas): ?>
+                                    <a href="?pagina=<?php echo $paginaActual + 1; ?>" class="page-btn"><i class="fas fa-chevron-right"></i></a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -558,6 +513,17 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             });
         });
     </script>
+    <script>
+            document.getElementById("buscarCanje").addEventListener("input", function () {
+                const filtro = this.value.toLowerCase();
+                const filas = document.querySelectorAll("#lista-canjes tr");
 
+                filas.forEach(fila => {
+                    const texto = fila.textContent.toLowerCase();
+                    fila.style.display = texto.includes(filtro) ? "" : "none";
+                });
+            });
+
+            </script>
 </body>
 </html>

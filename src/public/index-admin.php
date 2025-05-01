@@ -64,10 +64,6 @@ function totalZafaconesActivos(){
   $result =  $stmt->fetch(PDO ::FETCH_ASSOC); 
   return isset($result['totalzafacones_activos']) ? (int)$result['totalzafacones_activos'] : 0;
 }
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
