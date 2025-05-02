@@ -155,7 +155,7 @@ $totalPaginas = ceil($totalCanjes / $canjesPorPagina);
             <div class="page-header">
                 <h1>Panel de Productos</h1>
                 <div class="page-actions">
-                    <button class="btn btn-secondary"><i class="fas fa-download"></i> Exportar</button>
+                    <button class="btn btn-secondary" id="exportar-pdf"><i class="fas fa-download" ></i> Exportar</button>
                     <button class="btn btn-primary"  onclick="window.location.href = 'add-products.php'">
                         <i class="fas fa-plus"></i> Agregar Producto
                     </button>
@@ -555,5 +555,24 @@ $totalPaginas = ceil($totalCanjes / $canjesPorPagina);
         });
     });
     </script>
+    <script>
+        document.getElementById('exportar-pdf').addEventListener('click', function () {
+            const tabla = document.getElementById('lista-canjes').parentNode; // El tbody no tiene encabezado, así que tomamos el contenedor completo
+
+            html2canvas(tabla).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+
+                const imgProps = pdf.getImageProperties(imgData);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save("tabla-canjes.pdf");
+            });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
