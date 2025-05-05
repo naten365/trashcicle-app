@@ -29,10 +29,10 @@ include '../connection/conn.php';
                     <div class="error-message visible">Nombre de usuario o contraseña incorrectos.</div>
                 <?php endif; ?>
 
-                <form action="process-login.php" method="post" id="formulario">
-                    <input type="text" id="usuario" name="login_nombre_usuario" placeholder="Nombre de usuario">
-                    <input type="password" id="contraseña" name="login_contraseña" placeholder="Contraseña">
-                    <button type="submit">Enviar</button>
+                <form id="formulario" action="process-login.php" method="POST">
+                    <input type="text" id="usuario" name="login_nombre_usuario" placeholder="Nombre de usuario" required>
+                    <input type="password" id="contraseña" name="login_contraseña" placeholder="Contraseña" required>
+                    <button type="submit">Iniciar sesión</button>
                     <label>
                         <input type="checkbox" id="condiciones">
                         Aceptar todas las condiciones
@@ -44,6 +44,11 @@ include '../connection/conn.php';
             </div>
         </div>
     </div>
+    
+        <?php if (isset($_GET['error']) && $_GET['error'] === 'invalid_credentials'): ?>
+        <p style="color: red;">Credenciales inválidas. Inténtalo de nuevo.</p>
+        <?php endif; ?>
+
     <script src="scripts/login-form.js"></script>
 
 </body>

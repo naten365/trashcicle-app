@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new Exception("Todos los campos son obligatorios.");
         }
 
+        // Consulta para obtener el usuario desde la base de datos
         $stmt = $pdo->prepare("SELECT user_id, user_password, is_restricted, type_users, user_restriction_reason FROM users WHERE user_name = :user_name");
         $stmt->execute([':user_name' => $login_nombre_usuario]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -21,27 +22,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: account-suspended.php?reason=$reason");
                 exit();
             } else {
+                // Guardar información del usuario en la sesión
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['user_type'] = $user['type_users'];
-
-                //Redirigir a la pagina dependiendo el tipo de usuario
-                if($user['type_users'] === 'admin'){
-                    header("Location:  index-admin.php"); 
-                }else if($user['type_users'] === 'cliente'){
-                    header("Location:  Tienda.php");
-                }else{
-                    echo "<script>alert('Tipo de usuario no reconocido.');</script>";
-                    header("Location: login-form.php?error=1");
-                }
-
-                //Cerramos el ciclo del proceso  la sesion
+                header("Location: index-admin.php");
                 exit();
             }
         } else {
-            header("Location: login-form.php?error=1");
+            // Credenciales inválidas
+            header("Location: login-form.php?error=invalid_credentials");
             exit();
         }
     } catch (Exception $e) {
+        // Manejo de errores
         echo "Error: " . $e->getMessage();
     }
 }
