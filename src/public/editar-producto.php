@@ -26,6 +26,8 @@ if (isset($_POST['actualizar'])) {
     $nombre = $_POST['nombre_producto']; // Cambiar a 'nombre' para coincidir con el formulario
     $descripcion = $_POST['descripcion'];
     $precio = $_POST['precio'];
+    $puntos = $_POST['puntos']; // Cambiar a 'points' para coincidir con el formulario
+    $etiqueta = $_POST['etiqueta']; // Cambiar a 'etiqueta' para coincidir con el formulario
     $cantidad = $_POST['stock']; // Cambiar a 'stock' para coincidir con el formulario
     $categoria = $_POST['categoria']; // Cambiar a 'categoria' para coincidir con el formulario
     $estado = $_POST['estado']; // Cambiar a 'estado' para coincidir con el formulario
@@ -37,7 +39,9 @@ if (isset($_POST['actualizar'])) {
         precio = :precio,
         cantidad_stock = :cantidad,
         categria_producto = :categoria, 
-        estado_producto = :estado
+        estado_producto = :estado,
+        product_prices_points = :puntos,
+        product_etiqueta = :etiqueta
         WHERE id_producto = :id";
 
     $stmt = $pdo->prepare($sql);
@@ -47,6 +51,8 @@ if (isset($_POST['actualizar'])) {
         ':precio' => $precio,
         ':cantidad' => $cantidad,
         ':categoria' => $categoria,
+        ':puntos' => $puntos,
+        ':etiqueta' => $etiqueta,
         ':estado' => $estado,
         ':id' => $id
     ]);
@@ -368,9 +374,21 @@ if (isset($_POST['actualizar'])) {
         </div>
         
         <div class="form-group">
-            <label for="precio">Precio (puntos)</label>
+            <label for="precio">Precio (Dinero)</label>
             <input type="number" id="precio" name="precio" value="<?php echo $producto['precio']?>" min="0" step="0.01" required>
             <div id="precioError" class="error-message">⚠️ El precio debe ser mayor que 0</div>
+        </div>
+
+        <div class="form-group">
+            <label for="precio">Precio (Puntos)</label>
+            <input type="number" id="precio" name="puntos" value="<?php echo $producto['product_prices_points']?>" min="0" step="0.01" required>
+            <div id="precioError" class="error-message">⚠️ El precio debe ser mayor que 0</div>
+        </div>
+
+        <div class="form-group">
+            <label for="etiqueta">Etiqueta</label>
+            <input type="text" id="etiqueta" name="etiqueta" value="<?php echo $producto['product_etiqueta']?>"required>
+            <div id="etiquetaError" class="error-message">⚠️ Debe tener 3 caracteres o mas</div>
         </div>
         
         <div class="form-group">
@@ -391,6 +409,8 @@ if (isset($_POST['actualizar'])) {
             </select>
             <div id="categoriaError" class="error-message">⚠️ Seleccione una categoría</div>
         </div>
+
+        
         
         <div class="form-group">
             <label for="estado">Estado del producto</label>
