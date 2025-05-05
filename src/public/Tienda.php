@@ -1,3 +1,34 @@
+<?php
+session_start();
+include '../connection/conn.php';
+checkUserPermissions('cliente');
+
+//Verificar si el usuario está autenticado
+if(!isset($_SESSION['user_id'])){
+    header('Location: login.php');
+    exit();
+}
+
+//Obtenemos los datos del usuario del a sesion
+$user_id = $_SESSION['user_id'];
+
+//Obtener los datos del usuario de la base de datos
+$sql =  "SELECT * FROM users WHERE user_id = :id";
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(':id',$user_id, PDO::PARAM_INT);
+$stmt->execute();
+$usuarios=  $stmt->fetch((PDO::FETCH_ASSOC));
+
+
+//Obtener los datos de la tabla productos de la base de datos
+$sql =  "SELECT * FROM productos";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$productos_tienda=  $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,12 +45,12 @@
         </div>
         <div class="trash-points">
             <img src="assets/images/logo-trashcicle-desplex.png" alt="TrashPoints Icon">
-            <span>TrashPoints: 1,250</span>
+            <span>TrashPoints: <?php echo $usuarios['user_points']?></span>
         </div>
         <nav class="nav">
-            <a href="#" class="nav-link active">Tienda</a>
-            <a href="#" class="nav-link">Nuestros afiliados</a>
-            <a href="#" class="nav-link">Contáctanos</a>
+            <a href="Tienda.php" class="nav-link active">Tienda</a>
+            <a href="Afiliados.php" class="nav-link">Nuestros afiliados</a>
+            <a href="formulario-contacto.php" class="nav-link">Contáctanos</a>
         </nav>
     </header>
     <!-- Hero Section -->
@@ -36,131 +67,36 @@
             <button class="filter-button active">Todos</button>
             <button class="filter-button">Deportes</button>
             <button class="filter-button">Hogar</button>
-            <button class="filter-button">Escolar</button>
+            <button class="filter-button">Otros</button>
         </div>
     </div>
 
     <!-- Product Grid -->
      <div class="wreapper">
         <div class="product-grid">
-            <!-- Product 1 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="assets/images/balon-de-futbol-soccer.jpg" alt="Contenedor Eco Premium">
-                    <div class="product-tag">100% Reciclado</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">Contenedor Eco Premium</h3>
-                    <p class="product-description">Contenedor de diseño minimalista fabricado con plásticos reciclados de alta calidad.</p>
-                    <div class="product-footer">
-                        <div class="product-price">$45.99</div>
-                        <div class="trash-points-badge">
-                            <span>200 TP</span>
-                        </div>
+            <?php foreach ($productos_tienda as $producto): ?>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="uploads/<?= htmlspecialchars($producto['imagen_producto']) ?>" alt="<?= htmlspecialchars($producto['nombre_producto']) ?>">
+                        <div class="product-tag"><?= htmlspecialchars($producto['product_etiqueta']) ?></div>
                     </div>
-                    <button class="add-to-cart">Añadir al carrito</button>
-                </div>
-            </div>
-
-            <!-- Product 2 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="assets/images/basket.jpg" alt="Balón de Basketball Pro">
-                    <div class="product-tag">Edición Especial</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">Balón de Basketball Pro</h3>
-                    <p class="product-description">Balón oficial fabricado con materiales sostenibles de alto rendimiento.</p>
-                    <div class="product-footer">
-                        <div class="product-price">$59.99</div>
-                        <div class="trash-points-badge">
-                            <span>280 TP</span>
+                    <div class="product-info">
+                        <h3 class="product-title"><?= htmlspecialchars($producto['nombre_producto']) ?></h3>
+                        <p class="product-description"><?= htmlspecialchars($producto['descripcion']) ?></p>
+                        <div class="product-footer">
+                            <div class="product-price">$RD<?= htmlspecialchars($producto['precio']) ?></div>
+                            <div class="trash-points-badge">
+                                <span><?= htmlspecialchars($producto['product_prices_points']) ?> TP</span>
+                            </div>
                         </div>
+                        <button class="add-to-cart">Canjear Producto</button>
                     </div>
-                    <button class="add-to-cart">Añadir al carrito</button>
                 </div>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="assets/images//Afiliados trash.png" alt="Kit Escolar Premium">
-                    <div class="product-tag">Bestseller</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">Kit Escolar Premium</h3>
-                    <p class="product-description">Set completo de material escolar fabricado con materiales 100% reciclados.</p>
-                    <div class="product-footer">
-                        <div class="product-price">$39.99</div>
-                        <div class="trash-points-badge">
-                            <span>180 TP</span>
-                        </div>
-                    </div>
-                    <button class="add-to-cart">Añadir al carrito</button>
-                </div>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="assets/images/bate.jpg" alt="Botella Térmica Eco">
-                    <div class="product-tag">Novedad</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">Botella Térmica Eco</h3>
-                    <p class="product-description">Botella de acero inoxidable con aislamiento térmico y diseño sostenible.</p>
-                    <div class="product-footer">
-                        <div class="product-price">$29.99</div>
-                        <div class="trash-points-badge">
-                            <span>150 TP</span>
-                        </div>
-                    </div>
-                    <button class="add-to-cart">Añadir al carrito</button>
-                </div>
-            </div>
-
-            <!-- Product 5 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="assets/images/basket.jpg" alt="Mochila Sostenible">
-                    <div class="product-tag">Impermeable</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">Mochila Sostenible</h3>
-                    <p class="product-description">Mochila fabricada con materiales reciclados de alta resistencia y durabilidad.</p>
-                    <div class="product-footer">
-                        <div class="product-price">$55.99</div>
-                        <div class="trash-points-badge">
-                            <span>250 TP</span>
-                        </div>
-                    </div>
-                    <button class="add-to-cart">Añadir al carrito</button>
-                </div>
-            </div>
-
-            <!-- Product 6 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="assets/images/balon-de-futbol-soccer.jpg" alt="Set de Jardinería Eco">
-                    <div class="product-tag">Orgánico</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">Set de Jardinería Eco</h3>
-                    <p class="product-description">Kit completo de herramientas de jardinería fabricadas con materiales reciclados.</p>
-                    <div class="product-footer">
-                        <div class="product-price">$49.99</div>
-                        <div class="trash-points-badge">
-                            <span>220 TP</span>
-                        </div>
-                    </div>
-                    <button class="add-to-cart">Añadir al carrito</button>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 
-
-    <!-- Newsletter Section -->
+    <!-- Newsletter Section --> 
     <section class="newsletter">
         <h2>Únete a nuestra comunidad sostenible</h2>
         <p>Suscríbete para recibir las últimas novedades, ofertas exclusivas y consejos para un estilo de vida más sostenible.</p>
