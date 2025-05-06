@@ -25,10 +25,7 @@ $sql =  "SELECT * FROM productos";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $productos_tienda=  $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
