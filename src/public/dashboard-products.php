@@ -258,7 +258,7 @@ $totalPaginas = ceil($totalCanjes / $canjesPorPagina);
                                         $badgeClass = ($estado == 'Disponible') ? 'badge-success' : 'badge-danger';
 
                                         // Clases de estado para el filtro
-                                        $claseEstado = ($estado == 'Disponible') ? 'disponibles' : 'No-disponible';
+                                        $claseEstado = ($estado == 'Disponible') ? 'Disponibles' : 'No-disponible';
 
                                         // Clases para los filtros "Más Canjeados" y "Recién agregados"
                                         $masCanjeados = ($producto['cantidad_stock'] <= 5) ? 'mas-canjeados' : '';

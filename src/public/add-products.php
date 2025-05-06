@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         ':fecha'     => $fecha,
                         ':imagen'    => $nombreImagen,
                         ':categoria' => 'otros', // puedes actualizar esto si tienes categorías dinámicas
-                        ':estado'    => 'disponible'
+                        ':estado'    => 'Disponible'
                     ]);
 
                     $productoAgregado = true;
