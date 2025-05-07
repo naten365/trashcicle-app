@@ -78,9 +78,9 @@ $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   <div class="filter-container">
   <label for="filter-status">Filtrar por estado:</label>
-  <select id="filter-status" class="filter-select">
-    <option value="all">Todos</option>
-    <option value="enabled">Habilitado</option>
+  <select id="filter-status" class="filter-select" style="outline: none;">
+    <option value="all" style="outline: none;">Todos</option>
+    <option value="enabled" style="outline: none;">Habilitado</option>
     <option value="disabled">Deshabilitado</option>
   </select>
 </div>
