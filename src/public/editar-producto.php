@@ -402,10 +402,9 @@ if (isset($_POST['actualizar'])) {
             <label for="categoria">Categoría</label>
             <select id="categoria" name="categoria" required>
                 <option value="">Seleccionar categoría</option>
-                <option value="otros" <?php if ($producto['categria_producto'] == 'otros') echo 'selected'; ?>>otros</option>
-                <option value="Plastico" <?php if ($producto['categria_producto'] == 'Plastico') echo 'selected'; ?>>Plastico</option>
-                <option value="Organico" <?php if ($producto['categria_producto'] == 'Organico') echo 'selected'; ?>>Organico</option>
-                <option value="Carton_paper" <?php if ($producto['categria_producto'] == 'Carton_paper') echo 'selected'; ?>>Carton o Paper</option>
+                <option value="Otros" <?php if ($producto['categria_producto'] == 'Otros') echo 'selected'; ?>>Otros</option>
+                <option value="Deportes" <?php if ($producto['categria_producto'] == 'Deportes') echo 'selected'; ?>>Deportes</option>
+                <option value="Hogar" <?php if ($producto['categria_producto'] == 'Hogar') echo 'selected'; ?>>Hogar</option>
             </select>
             <div id="categoriaError" class="error-message">⚠️ Seleccione una categoría</div>
         </div>
