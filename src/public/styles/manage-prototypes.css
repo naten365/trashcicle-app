@@ -1,3 +1,4 @@
+/* Original CSS - Keep all existing styles */
 * {
     margin: 0;
     padding: 0;
@@ -260,3 +261,425 @@ a {
     margin-right: 8px;
     vertical-align: middle;
 }
+
+/* ===============================
+   RESPONSIVE DESIGN STYLES
+   =============================== */
+
+/* Base responsive adjustments for all devices */
+@media screen and (max-width: 1200px) {
+    body {
+        padding: 30px;
+    }
+}
+
+
+/* Small Tablet Styles */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+    
+    .header {
+        flex-wrap: wrap;
+    }
+    
+    .title {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .btn {
+        margin-top: 10px;
+    }
+    
+    .device-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .device-status {
+        margin: 15px 0;
+    }
+    
+    .action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+        width: 100%;
+    }
+    
+    .action-buttons button {
+        margin-left: 0;
+        flex: 1;
+        min-width: 100px;
+    }
+    
+    .row {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+/* Tablet Styles */
+@media screen and (max-width: 768px) {
+    .device-card {
+        flex-direction: column; /* Cambiar a columna */
+        align-items: flex-start; /* Alinear al inicio */
+        padding: 15px; /* Reducir padding */
+    }
+
+    .device-status {
+        margin: 10px 0; /* Reducir margen */
+    }
+
+    .action-buttons {
+        justify-content: center; /* Centrar botones */
+        gap: 8px; /* Reducir espacio entre botones */
+    }
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 576px) {
+    .device-card {
+        padding: 10px; /* Reducir padding aún más */
+    }
+
+    .device-name {
+        font-size: 16px; /* Reducir tamaño de fuente */
+    }
+
+    .device-location {
+        font-size: 12px; /* Reducir tamaño de fuente */
+    }
+
+    .action-buttons button {
+        flex: 1; /* Hacer que los botones ocupen el ancho completo */
+        min-width: auto; /* Permitir que los botones se ajusten automáticamente */
+    }
+}
+
+/* Extra Small Devices */
+@media screen and (max-width: 400px) {
+    .device-card {
+        padding: 8px; /* Reducir padding */
+    }
+
+    .device-name {
+        font-size: 14px; /* Reducir tamaño de fuente */
+    }
+
+    .action-buttons button {
+        padding: 6px 8px; /* Reducir padding de los botones */
+        font-size: 12px; /* Reducir tamaño de fuente de los botones */
+    }
+
+    .device-status {
+        flex-direction: column; /* Cambiar a columna */
+        align-items: flex-start; /* Alinear al inicio */
+    }
+}
+/* Fix for Safari and iOS devices */
+@supports (-webkit-touch-callout: none) {
+    /* Prevent input zooming on iOS */
+    input, select, textarea {
+        font-size: 16px;
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background-color: white;
+        color: black;
+        padding: 0;
+    }
+    
+    .btn, .search-container, .action-buttons {
+        display: none;
+    }
+    
+    .device-card {
+        break-inside: avoid;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+    }
+}
+
+/* General Styles */
+.device-card {
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease-in-out; /* Transición suave */
+}
+
+.device-card.hidden {
+    display: none; /* Ocultar completamente las tarjetas que no coincidan */
+}
+
+.device-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.device-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.device-location {
+    color: #888;
+    font-size: 14px;
+}
+
+.device-status {
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 180px;
+}
+
+.status-indicator {
+    width: 16px;
+    height: 16px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    margin-left: 9px;
+}
+
+.device-points {
+    color: #888;
+    margin: 0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-buttons button {
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-edit {
+    background-color: #202938;
+    color: white;
+}
+
+.btn-disable {
+    background-color: #202938;
+    color: white;
+}
+
+.btn-view-more {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Responsive Styles */
+
+/* Tablet Styles */
+@media screen and (max-width: 768px) {
+    .device-card {
+        flex-direction: column; /* Cambiar a columna */
+        align-items: flex-start; /* Alinear al inicio */
+        padding: 15px; /* Reducir padding */
+    }
+
+    .device-status {
+        margin: 10px 0; /* Reducir margen */
+    }
+
+    .action-buttons {
+        justify-content: center; /* Centrar botones */
+        gap: 8px; /* Reducir espacio entre botones */
+    }
+
+    .action-buttons button {
+        flex: 1; /* Hacer que los botones ocupen el ancho completo */
+        min-width: auto; /* Permitir que los botones se ajusten automáticamente */
+    }
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 576px) {
+    .device-card {
+        padding: 10px; /* Reducir padding aún más */
+    }
+
+    .device-name {
+        font-size: 16px; /* Reducir tamaño de fuente */
+    }
+
+    .device-location {
+        font-size: 12px; /* Reducir tamaño de fuente */
+    }
+
+    .action-buttons button {
+        flex: 1; /* Hacer que los botones ocupen el ancho completo */
+        min-width: auto; /* Permitir que los botones se ajusten automáticamente */
+    }
+}
+
+/* Extra Small Devices */
+@media screen and (max-width: 400px) {
+    .device-card {
+        padding: 8px; /* Reducir padding */
+    }
+
+    .device-name {
+        font-size: 14px; /* Reducir tamaño de fuente */
+    }
+
+    .action-buttons button {
+        padding: 6px 8px; /* Reducir padding de los botones */
+        font-size: 12px; /* Reducir tamaño de fuente de los botones */
+    }
+
+    .device-status {
+        flex-direction: column; /* Cambiar a columna */
+        align-items: flex-start; /* Alinear al inicio */
+    }
+}
+
+/* Fix for Safari and iOS devices */
+@supports (-webkit-touch-callout: none) {
+    /* Prevent input zooming on iOS */
+    input, select, textarea {
+        font-size: 16px;
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background-color: white;
+        color: black;
+        padding: 0;
+    }
+    
+    .btn, .search-container, .action-buttons {
+        display: none;
+    }
+    
+    .device-card {
+        break-inside: avoid;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+    }
+}
+
+.filter-container {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .filter-select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: var(--secondary-color);
+    color: white;
+    font-size: 14px;
+  }
+  
+  .modal-contenido {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+  
+  .cerrar-modal {
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .modal-body {
+    margin-top: 20px;
+    overflow: hidden;
+  }
+  
+  .modal-body iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  /* Responsivo para tablets */
+  @media screen and (max-width: 768px) {
+    .modal-contenido {
+      width: 95%;
+      padding: 15px;
+    }
+  
+    .modal-header h2 {
+      font-size: 18px;
+    }
+  
+    .modal-body iframe {
+      height: 250px;
+    }
+  }
+  
+  /* Responsivo para móviles */
+  @media screen and (max-width: 576px) {
+    .modal-contenido {
+      width: 100%;
+      margin: 0;
+      height: 100%;
+      border-radius: 0;
+      padding: 10px;
+    }
+  
+    .modal-header {
+      padding-bottom: 5px;
+    }
+  
+    .modal-header h2 {
+      font-size: 16px;
+    }
+  
+    .cerrar-modal {
+      font-size: 20px;
+    }
+  
+    .modal-body iframe {
+      height: 200px;
+    }
+  }
+
+  .location-modal {
+    width: 90%;
+    max-width: 800px;
+  }
+  
