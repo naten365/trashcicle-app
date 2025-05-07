@@ -10,6 +10,14 @@ $stmt->execute();
 $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
+//Codigo para obtener todas las compras
+$sql = 'SELECT * FROM compras';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$canjes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 //Muestra el numero de productos en la base de datos
 function totalProductos(){
   global $pdo;
@@ -82,53 +90,8 @@ function totalPuntosClientes(){
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC); 
     return isset($result['totalpuntos']) ? (int)$result['totalpuntos'] : 0;
-
-
 }
-// 1. Define cuántos productos mostrar por página
-$productosPorPagina = 6;
 
-// 2. Verifica si se recibió el número de página por GET, si no, empieza en 1
-$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-
-// 3. Calcula el offset (desde qué producto empezar)
-$offset = ($paginaActual - 1) * $productosPorPagina;
-
-// 4. Obtiene el total de productos
-$sqlTotal = "SELECT COUNT(*) AS total FROM productos";
-$stmtTotal = $pdo->prepare($sqlTotal);
-$stmtTotal->execute();
-$totalProductos = $stmtTotal->fetch(PDO::FETCH_ASSOC)['total'];
-
-// 5. Calcula cuántas páginas necesitas
-$totalPaginas = ceil($totalProductos / $productosPorPagina);
-
-// 6. Obtiene los productos para la página actual
-$sql = "SELECT * FROM productos LIMIT :limit OFFSET :offset";
-$stmt = $pdo->prepare($sql);
-$stmt->bindValue(':limit', $productosPorPagina, PDO::PARAM_INT);
-$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-$stmt->execute();
-$productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-//Obtenemos todos los valores de la compras
-// Parámetros para paginación
-$canjesPorPagina = 6;
-$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-$offset = ($paginaActual - 1) * $canjesPorPagina;
-
-// Consulta paginada
-$sql = "SELECT * FROM compras LIMIT :limit OFFSET :offset";
-$stmt = $pdo->prepare($sql);
-$stmt->bindValue(':limit', $canjesPorPagina, PDO::PARAM_INT);
-$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-$stmt->execute();
-$canjes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Obtener total de canjes para paginación
-$totalCanjes = $pdo->query("SELECT COUNT(*) FROM compras")->fetchColumn();
-$totalPaginas = ceil($totalCanjes / $canjesPorPagina);
 ?>
 
 <!DOCTYPE html>
@@ -231,12 +194,11 @@ $totalPaginas = ceil($totalCanjes / $canjesPorPagina);
                             </div>
                         </div>
                         
-                    
                         <div class="filter-buttons">
-                            <button class="filter-btn active">Todos</button>
-                            <button class="filter-btn" data-filtro="disponibles">Disponibles</button>
+                            <button class="filter-btn active" data-filtro="todos">Todos</button>
+                            <button class="filter-btn" data-filtro="mas-canjeados">Más canjeados</button>
                             <button class="filter-btn" data-filtro="No-disponible">No disponible</button>
-                            <button class="filter-btn" data-filtro="mas-canjeados">Más Canjeados</button>
+                            <button class="filter-btn" data-filtro="Disponibles">Disponibles</button>
                             <button class="filter-btn" data-filtro="recientes">Recién agregados</button>
                         </div>
                         
@@ -289,28 +251,18 @@ $totalPaginas = ceil($totalCanjes / $canjesPorPagina);
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
+                            <!-- Mensaje cuando no hay resultado -->
+                            <p id="sin-resultados-productos" style="display: none; text-align: center; padding: 10px; color: gray;">
+                                No hay productos que coincidan con tu búsqueda.
+                            </p>
+                            <!-- Mensaje cuando no hay resultados -->
+                            <p id="no-resultados" style="display: none; text-align: center; color: white; margin-top: 15px; font-weight: bold;">
+                                No hay resultados para este filtro.
+                            </p>
                         </div>
-                        <!--Paginacion de la pagina-->
-                        <div class="pagination">
-                            <div class="page-info">
-                                Mostrando <?php echo $offset + 1; ?> - 
-                                <?php echo min($offset + $productosPorPagina, $totalProductos); ?> 
-                                de <?php echo $totalProductos; ?> productos
-                            </div>
-
-                            <div class="page-controls">
-                                <?php if($paginaActual > 1): ?>
-                                <a href="?pagina=<?php echo $paginaActual - 1; ?>" class="page-btn"><i class="fas fa-chevron-left"></i></a>
-                                <?php endif; ?>
-
-                                <?php for($i = 1; $i <= $totalPaginas; $i++): ?>
-                                <a href="?pagina=<?php echo $i; ?>" style="text-decoration: none; font-weight:600;" class="page-btn <?php echo ($i == $paginaActual) ? 'active' : ''; ?>"><?php echo $i; ?></a>
-                                <?php endfor; ?>
-
-                                <?php if($paginaActual < $totalPaginas): ?>
-                                <a href="?pagina=<?php echo $paginaActual + 1; ?>" style="text-decoration: none; font-weight:600;" class="page-btn"><i class="fas fa-chevron-right"></i></a>
-                                <?php endif; ?>
-                            </div>
+                        <!-- Info del producto -->
+                        <div class="page-info">
+                           
                         </div>
                     </div>
                     <!-- Contenido del tab Canjes -->
@@ -394,27 +346,14 @@ $totalPaginas = ceil($totalCanjes / $canjesPorPagina);
                                 <?php endforeach; ?>
                             </tbody>
                             </table>
-                        </div>
-                        <!--Paginacion de la pagina-->
-                        <div class="pagination">
-                            <div class="page-info">
-                                Mostrando <?php echo $offset + 1; ?> -
-                                <?php echo min($offset + $canjesPorPagina, $totalCanjes); ?>
-                                de <?php echo $totalCanjes; ?> canjes
-                            </div>
 
-                            <div class="page-controls">
-                                <?php if($paginaActual > 1): ?>
-                                    <a href="?pagina=<?php echo $paginaActual - 1; ?>" class="page-btn"><i class="fas fa-chevron-left"></i></a>
-                                <?php endif; ?>
-
-                                <?php for($i = 1; $i <= $totalPaginas; $i++): ?>
-                                    <a href="?pagina=<?php echo $i; ?>" class="page-btn <?php echo ($i == $paginaActual) ? 'active' : ''; ?>"><?php echo $i; ?></a>
-                                <?php endfor; ?>
-
-                                <?php if($paginaActual < $totalPaginas): ?>
-                                    <a href="?pagina=<?php echo $paginaActual + 1; ?>" class="page-btn"><i class="fas fa-chevron-right"></i></a>
-                                <?php endif; ?>
+                            <!-- Mensaje cuando no hay resultado -->
+                            <p id="sin-resultados-canjes" style="display: none; text-align: center; color: gray; padding: 10px;">
+                                No hay canjes que coincidan con tu búsqueda.
+                            </p>
+                            <!-- Mensaje cuando no hay resultados -->
+                            <p id="no-resultados-canjes" style="display: none; text-align: center; color: white; margin-top: 15px; font-weight: bold;">
+                                No hay resultados para este filtro.
                             </div>
                         </div>
                     </div>
@@ -422,156 +361,7 @@ $totalPaginas = ceil($totalCanjes / $canjesPorPagina);
             </div>
         </div>
     </div>
-    <script>
-        // Función para cambiar entre pestañas (Productos y Canjes)
-        document.addEventListener('DOMContentLoaded', function() {
-            // Seleccionar las pestañas
-            const tabs = document.querySelectorAll('.panel-tab');
-            
-            // Agregar evento de clic a cada pestaña
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    // Quitar la clase active de todas las pestañas
-                    tabs.forEach(t => t.classList.remove('active'));
-                    
-                    // Agregar la clase active a la pestaña actual
-                    this.classList.add('active');
-                    
-                    // Ocultar todos los contenidos de pestañas
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    
-                    // Mostrar el contenido correspondiente a la pestaña actual
-                    const tabId = this.getAttribute('data-tab') + '-tab';
-                    document.getElementById(tabId).classList.add('active');
-                });
-            });
-        });
-    </script>  
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.page-btn').forEach(function (btn) {
-                btn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const url = this.getAttribute('href');
-
-                    fetch(url)
-                        .then(response => response.text())
-                        .then(data => {
-                            // Extrae solo los productos y la nueva paginación
-                            const parser = new DOMParser();
-                            const htmlDoc = parser.parseFromString(data, 'text/html');
-                            
-                            const nuevosProductos = htmlDoc.querySelector('#lista-productos');
-                            const nuevoPaginado = htmlDoc.querySelector('#paginado');
-
-                            document.querySelector('#lista-productos').innerHTML = nuevosProductos.innerHTML;
-                            document.querySelector('#paginado').innerHTML = nuevoPaginado.innerHTML;
-                            
-                            // Reasigna los eventos a los nuevos botones
-                            document.querySelectorAll('.page-btn').forEach(function (btn) {
-                                btn.addEventListener('click', arguments.callee);
-                            });
-                        });
-                });
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const inputBuscar = document.getElementById("buscarProducto");
-            const filas = document.querySelectorAll("#lista-productos tr");
-
-            inputBuscar.addEventListener("keyup", function () {
-                const filtro = inputBuscar.value.toLowerCase();
-
-                filas.forEach(fila => {
-                    const nombreProducto = fila.querySelector("td span").textContent.toLowerCase();
-                    fila.style.display = nombreProducto.includes(filtro) ? "" : "none";
-                });
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const botonesFiltro = document.querySelectorAll(".filter-btn");
-            const filas = document.querySelectorAll("#lista-productos tr");
-
-            botonesFiltro.forEach(btn => {
-                btn.addEventListener("click", () => {
-                    // Activar botón
-                    botonesFiltro.forEach(b => b.classList.remove("active"));
-                    btn.classList.add("active");
-
-                    const filtro = btn.getAttribute("data-filtro");
-
-                    filas.forEach(fila => {
-                        if (filtro === "todos") {
-                            fila.style.display = "";
-                        } else {
-                            fila.style.display = fila.classList.contains(filtro) ? "" : "none";
-                        }
-                    });
-                });
-            });
-        });
-    </script>
-    <script>
-            document.getElementById("buscarCanje").addEventListener("input", function () {
-                const filtro = this.value.toLowerCase();
-                const filas = document.querySelectorAll("#lista-canjes tr");
-
-                filas.forEach(fila => {
-                    const texto = fila.textContent.toLowerCase();
-                    fila.style.display = texto.includes(filtro) ? "" : "none";
-                });
-            });
-
-    </script>
-    <script>
-    document.querySelectorAll('.filter-btn').forEach(boton => {
-        boton.addEventListener('click', () => {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            boton.classList.add('active');
-
-            const filtro = boton.getAttribute('data-filtro');
-            const filas = document.querySelectorAll('#lista-canjes tr');
-
-            filas.forEach(fila => {
-                fila.style.display = 'none';
-                const clases = fila.className.split(' ');
-
-                if (filtro === 'todos') {
-                    fila.style.display = '';
-                } else if (filtro === 'recientes') {
-                    if (clases.includes('hoy')) {
-                        fila.style.display = '';
-                    }
-                } else if (clases.includes(filtro)) {
-                    fila.style.display = '';
-                }
-            });
-        });
-    });
-    </script>
-    <script>
-        document.getElementById('exportar-pdf').addEventListener('click', function () {
-            const tabla = document.getElementById('lista-canjes').parentNode; // El tbody no tiene encabezado, así que tomamos el contenedor completo
-
-            html2canvas(tabla).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-
-                const imgProps = pdf.getImageProperties(imgData);
-                const pdfWidth = pdf.internal.pageSize.getWidth();
-                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                pdf.save("tabla-canjes.pdf");
-            });
-        });
-    </script>
+    <script src="scripts/dashboard-products.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>

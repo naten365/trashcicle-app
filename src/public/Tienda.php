@@ -48,6 +48,7 @@ $productos_tienda=  $stmt->fetchAll(PDO::FETCH_ASSOC);
             <a href="Tienda.php" class="nav-link active">Tienda</a>
             <a href="Afiliados.php" class="nav-link">Nuestros afiliados</a>
             <a href="formulario-contacto.php" class="nav-link">Contáctanos</a>
+            <a href="customer-page.php" class="nav-link">Mi perfil</a>
         </nav>
     </header>
     <!-- Hero Section -->
@@ -67,12 +68,11 @@ $productos_tienda=  $stmt->fetchAll(PDO::FETCH_ASSOC);
             <button class="filter-button">Otros</button>
         </div>
     </div>
-
     <!-- Product Grid -->
-     <div class="wreapper">
+    <div class="wreapper">
         <div class="product-grid">
             <?php foreach ($productos_tienda as $producto): ?>
-                <div class="product-card">
+                <div class="product-card" data-category="<?= htmlspecialchars($producto['categria_producto']) ?>">
                     <div class="product-image">
                         <img src="uploads/<?= htmlspecialchars($producto['imagen_producto']) ?>" alt="<?= htmlspecialchars($producto['nombre_producto']) ?>">
                         <div class="product-tag"><?= htmlspecialchars($producto['product_etiqueta']) ?></div>
@@ -157,5 +157,85 @@ $productos_tienda=  $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </footer>
     <script src="scripts/tienda.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener todos los botones de filtro
+            const filterButtons = document.querySelectorAll('.filter-button');
+            // Obtener el contenedor de productos
+            const productGrid = document.querySelector('.product-grid');
+            
+            // Crear elemento para mostrar mensaje cuando no hay productos
+            const noProductsMessage = document.createElement('div');
+            noProductsMessage.className = 'no-products-message';
+            noProductsMessage.textContent = 'No hay productos disponibles en esta categoría';
+            noProductsMessage.style.display = 'none';
+            noProductsMessage.style.width = '100%';
+            noProductsMessage.style.padding = '20px';
+            noProductsMessage.style.textAlign = 'center';
+            noProductsMessage.style.fontSize = '18px';
+            noProductsMessage.style.color = '#666';
+            
+            // Agregar el mensaje después de la cuadrícula de productos
+            productGrid.parentNode.insertBefore(noProductsMessage, productGrid.nextSibling);
+            
+            // Agregar evento click a cada botón
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Quitar clase 'active' de todos los botones
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Agregar clase 'active' al botón clickeado
+                    this.classList.add('active');
+                    
+                    // Obtener la categoría seleccionada
+                    const selectedCategory = this.textContent.trim();
+                    
+                    // Filtrar productos por categoría
+                    filterProducts(selectedCategory);
+                });
+            });
+            
+            // Función para filtrar productos
+            function filterProducts(category) {
+                // Obtener todos los productos
+                const productCards = document.querySelectorAll('.product-card');
+                let visibleProducts = 0;
+                
+                // Si la categoría es "Todos", mostrar todos los productos
+                if (category === 'Todos') {
+                    productCards.forEach(card => {
+                        card.style.display = 'flex';
+                        visibleProducts++;
+                    });
+                } else {
+                    // Ocultar/mostrar productos según la categoría
+                    productCards.forEach(card => {
+                        // Obtener la categoría del producto
+                        const productCategory = card.getAttribute('data-category');
+                        
+                        // Comprobar si la categoría del producto coincide con la seleccionada
+                        if (productCategory === category) {
+                            card.style.display = 'flex';
+                            visibleProducts++;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+                
+                // Mostrar u ocultar el mensaje según si hay productos visibles
+                if (visibleProducts === 0) {
+                    productGrid.style.display = 'none';
+                    noProductsMessage.style.display = 'flex';
+                } else {
+                    productGrid.style.display = 'flex';  // O el valor original que tenga
+                    noProductsMessage.style.display = 'none';
+                }
+            }
+            
+            // Inicializar mostrando todos los productos (simular clic en "Todos")
+            document.querySelector('.filter-button.active').click();
+        });
+    </script>
 </body>
 </html>

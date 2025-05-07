@@ -7,6 +7,7 @@ $productoAgregado = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['productName'] ?? '';
+    $puntos = $_POST['productPoints'] ?? '';
     $precio = $_POST['productPrice'] ?? '';
     $descripcion = $_POST['productDescription'] ?? '';
     $stock = 1;
@@ -24,19 +25,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (move_uploaded_file($imagen['tmp_name'], $rutaDestino)) {
                 try {
                     $sql = "INSERT INTO productos 
-                        (nombre_producto, descripcion, precio, cantidad_stock, fecha_creacion, imagen_producto, categria_producto, estado_producto)
+                        (nombre_producto, descripcion, precio,product_prices_points, cantidad_stock, fecha_creacion, imagen_producto, categria_producto, estado_producto)
                         VALUES 
-                        (:nombre, :descripcion, :precio, :stock, :fecha, :imagen, :categoria, :estado)";
+                        (:nombre, :descripcion, :precio,:points, :stock, :fecha, :imagen, :categoria, :estado)";
 
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([
                         ':nombre'    => $nombre,
                         ':descripcion' => $descripcion,
                         ':precio'    => $precio,
+                        ':points'    => $puntos,
                         ':stock'     => $stock,
                         ':fecha'     => $fecha,
                         ':imagen'    => $nombreImagen,
-                        ':categoria' => 'otros', // puedes actualizar esto si tienes categorías dinámicas
+                        ':categoria' => 'Otros', // puedes actualizar esto si tienes categorías dinámicas
                         ':estado'    => 'Disponible'
                     ]);
 
@@ -108,8 +110,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 
                 <div class="form-group">
-                    <label for="productPrice">Precio (puntos)</label>
+                    <label for="productPrice">Precio (Moneda)</label>
                     <input type="number" id="productPrice" name="productPrice" placeholder="Valor en puntos" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productPrice">Precio (Puntos)</label>
+                    <input type="number" id="productPrice" name="productPoints" placeholder="Valor en puntos" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productCategory">Categoría</label>
+                    <select id="productCategory" name="productCategory" required>
+                        <option value="" disabled selected>Selecciona una categoría</option>
+                        <option value="Otros">Otros</option>
+                        <option value="Electrónica">Electrónica</option>
+                        <option value="Ropa">Ropa</option>
+                        <option value="Muebles">Muebles</option>
+                        <option value="Juguetes">Juguetes</option>
+                    </select>
+
                 </div>
                 
                 <div class="form-group full-width">

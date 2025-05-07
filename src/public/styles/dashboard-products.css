@@ -330,11 +330,34 @@ body {
 .data-table {
     width: 100%;
     border-collapse: collapse;
+    /* background: red; */
 }
+
+.table-container::-webkit-scrollbar {
+    background: transparent;
+    width: 8px;
+    cursor: pointer;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #3a8a3e92;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 1s  ease-in-out;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #3a8a3e;
+}
+
 
 .table-container {
     overflow-x: auto;
+    height: 300px;
+    padding:3px;
+
 }
+
 
 .data-table th {
     text-align: left;
