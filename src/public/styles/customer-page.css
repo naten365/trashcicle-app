@@ -466,7 +466,7 @@
             }
         }
         
-        @media (max-width: 992px) {
+        @media (max-width: 1158px) {
             .profile-wrapper {
                 grid-template-columns: 1fr;
             }
@@ -494,7 +494,7 @@
             }
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 850px) {
             .navbar {
                 padding: 1rem 1.5rem;
                 flex-wrap: wrap;
@@ -571,6 +571,7 @@
             }
             
             .content-header {
+
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1rem;
@@ -618,271 +619,341 @@
         .btn.animated {
             animation: pulse 2s infinite;
         }
+
     
-/* Funcion del dashboard */
-/* Energy Dashboard */
-.energy-dashboard {
-    background-color: #1e2a23;
-    border-radius: 12px;
-    padding: 25px;
-    margin-bottom: 30px;
-}
+        /* //////////////////////////////////////////////////////// */
+    
+        /* Energy Dashboard */
+        .energy-dashboard {
+            background-color: #1e2a23;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .energy-dashboard h2 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .energy-dashboard p {
+            color: #b0b0b0;
+            margin-bottom: 25px;
+        }
+        
+        .energy-chart-container {
+            height: 300px;
+            margin-bottom: 30px;
+            position: relative;
+            background-color: #17211c;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .energy-highlights {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .highlight-card {
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            background-color: #212121;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        .highlight-icon {
+            background-color: rgba(126, 217, 87, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .highlight-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .highlight-content h3 {
+            font-size: 1.6rem;
+            color: #7ed957;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+        
+        .highlight-content p {
+            color: #b0b0b0;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Energy Distribution */
+        .energy-distribution {
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .distribution-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .distribution-chart {
+            flex: 1;
+            height: 220px;
+            background-color: #212121;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .distribution-info {
+            flex: 1;
+        }
+        
+        .distribution-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .distribution-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 12px;
+        }
+        
+        .distribution-label {
+            color: #d0d0d0;
+            font-size: 1rem;
+        }
+        
+        /* Energy Forecast */
+        .energy-forecast {
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            padding: 25px;
+        }
+        
+        .energy-forecast p {
+            color: #b0b0b0;
+            margin-top: -10px;
+            margin-bottom: 25px;
+        }
+        
+        .forecast-stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .forecast-stat-card {
+            background-color: #232323;
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .forecast-stat-card:hover {
+            background-color: #2a2a2a;
+            transform: scale(1.03);
+        }
+        
+        .forecast-stat-card h3 {
+            font-size: 1.8rem;
+            color: #7ed957;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+        
+        .forecast-stat-card p {
+            color: #b0b0b0;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        
+    /* Nuevos cambios realizados> */
+    /* Responsive adjustments for Energy Dashboard and main-content */
 
-.energy-dashboard h2 {
-    font-size: 1.8rem;
-    color: #ffffff;
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-
-.energy-dashboard p {
-    color: #b0b0b0;
-    margin-bottom: 25px;
-}
-
-.energy-chart-container {
-    height: 300px;
-    margin-bottom: 30px;
-    position: relative;
-    background-color: #17211c;
-    border-radius: 8px;
-    padding: 15px;
-}
-
-.energy-highlights {
+/* General container responsiveness */
+.div-contend-panel-general, .main-content {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 20px;
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en dispositivos pequeños */
 }
 
-.highlight-card {
-    background-color: #1a1a1a;
-    border-radius: 10px;
-    padding: 20px;
-    flex: 1;
-    min-width: 200px; /* Asegura un tamaño mínimo para tarjetas */
+/* Default styles for larger screens */
+.energy-dashboard, .main-content {
     display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-.highlight-card:hover {
-    transform: translateY(-5px);
-    background-color: #212121;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-.highlight-icon {
-    background-color: rgba(126, 217, 87, 0.1);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
-}
-
-.highlight-icon svg {
-    width: 24px;
-    height: 24px;
-}
-
-.highlight-content h3 {
-    font-size: 1.6rem;
-    color: #7ed957;
-    margin: 0;
-    margin-bottom: 5px;
-}
-
-.highlight-content p {
-    color: #b0b0b0;
-    margin: 0;
-    font-size: 0.9rem;
-}
-
-/* Energy Distribution */
-.energy-distribution {
-    background-color: #1a1a1a;
-    border-radius: 12px;
-    padding: 25px;
-    margin-bottom: 30px;
-}
-
-.section-title {
-    font-size: 1.6rem;
-    color: #ffffff;
-    margin-top: 0;
-    margin-bottom: 20px;
-}
-
-.distribution-container {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    flex-wrap: wrap; /* Añadido para responsividad */
-}
-
-.distribution-chart {
-    flex: 1;
-    height: 220px;
-    min-width: 250px; /* Asegura un ancho mínimo */
-    background-color: #212121;
-    border-radius: 8px;
-    padding: 15px;
-}
-
-.distribution-info {
-    flex: 1;
-    min-width: 250px; /* Asegura un ancho mínimo */
-}
-
-.distribution-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.distribution-color {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    margin-right: 12px;
-}
-
-.distribution-label {
-    color: #d0d0d0;
-    font-size: 1rem;
-}
-
-/* Energy Forecast */
-.energy-forecast {
-    background-color: #1a1a1a;
-    border-radius: 12px;
-    padding: 25px;
-}
-
-.energy-forecast p {
-    color: #b0b0b0;
-    margin-top: -10px;
-    margin-bottom: 25px;
-}
-
-.forecast-stats {
-    display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 20px;
-    flex-wrap: wrap; /* Añadido para responsividad */
 }
 
-.forecast-stat-card {
-    background-color: #232323;
-    border-radius: 10px;
-    padding: 20px;
-    flex: 1;
-    min-width: 200px; /* Asegura un ancho mínimo */
-    text-align: center;
-    transition: all 0.3s ease;
-    margin-bottom: 15px; /* Espacio entre cards cuando se apilan */
-}
-
-.forecast-stat-card:hover {
-    background-color: #2a2a2a;
-    transform: scale(1.03);
-}
-
-.forecast-stat-card h3 {
-    font-size: 1.8rem;
-    color: #7ed957;
-    margin: 0;
-    margin-bottom: 10px;
-}
-
-.forecast-stat-card p {
-    color: #b0b0b0;
-    margin: 0;
-    font-size: 0.9rem;
-}
-
-/* Media Queries para responsividad */
-@media (max-width: 992px) {
+/* Responsive for medium screens (tablets) */
+@media (max-width: 974px) {
     .energy-highlights {
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 15px;
     }
-    
-    .highlight-card {
-        flex-basis: calc(50% - 10px);
-        margin-bottom: 20px;
+
+    .forecast-stats {
+        flex-direction: column;
+        gap: 15px;
     }
-    
+
     .distribution-container {
         flex-direction: column;
+        gap: 15px;
     }
-    
-    .distribution-chart, .distribution-info {
-        width: 100%;
-    }
-}
 
-@media (max-width: 768px) {
-    .energy-dashboard, 
-    .energy-distribution, 
-    .energy-forecast {
-        padding: 20px;
-    }
-    
-    .energy-dashboard h2 {
-        font-size: 1.5rem;
-    }
-    
-    .section-title {
-        font-size: 1.4rem;
-    }
-    
     .energy-chart-container {
         height: 250px;
     }
 }
 
-@media (max-width: 576px) {
-    .highlight-card {
-        flex-basis: 100%;
-    }
-    
-    .energy-dashboard, 
-    .energy-distribution, 
-    .energy-forecast {
+/* Responsive for small screens (mobile) */
+@media (max-width: 800px) {
+    .div-contend-panel-general, .main-content {
         padding: 15px;
-        border-radius: 8px;
-    }
-    
-    .energy-dashboard h2 {
-        font-size: 1.3rem;
-    }
-    
-    .section-title {
-        font-size: 1.2rem;
     }
 
-    .highlight-content h3,
-    .forecast-stat-card h3 {
+    .energy-dashboard h2, .section-title {
         font-size: 1.4rem;
     }
-    
+
+    .energy-dashboard p, .forecast-stat-card p {
+        font-size: 0.85rem;
+    }
+
+    .highlight-card {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 10px;
+    }
+
+    .highlight-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .forecast-stat-card h3 {
+        font-size: 1.5rem;
+    }
+
     .energy-chart-container {
         height: 200px;
-        padding: 10px;
     }
-    
-    .highlight-icon {
-        width: 40px;
-        height: 40px;
+}
+
+/* Responsive for extra small screens (very small mobile) */
+@media (max-width: 650px) {
+    .energy-highlights, .forecast-stats {
+        flex-direction: column;
+        gap: 10px;
     }
-    
-    .highlight-icon svg {
-        width: 20px;
-        height: 20px;
+
+    .highlight-card, .forecast-stat-card {
+        padding: 15px;
+    }
+
+    .energy-dashboard {
+        padding: 15px;
+    }
+
+    .energy-chart-container {
+        height: 180px;
+    }
+
+    .distribution-container {
+        gap: 10px;
+    }
+
+    .distribution-chart {
+        height: 180px;
+    }
+}
+
+/*Nuevas funcionalidades del sistema con respecto a la grafica*/
+/* Ajustes para gráficos en pantallas pequeñas */
+
+/* Contenedor de la gráfica con scroll horizontal */
+.energy-chart-container {
+    height: 300px; /* Altura predeterminada */
+    margin-bottom: 30px;
+    position: relative;
+    background-color: #17211c;
+    border-radius: 8px;
+    padding: 15px;
+    overflow-x: auto; /* Habilitar scroll horizontal */
+    white-space: nowrap; /* Evitar que el contenido se ajuste automáticamente */
+}
+
+/* Asegurar que el canvas de la gráfica no se desborde */
+.energy-chart-container canvas {
+    min-width: 600px; /* Ancho mínimo para evitar que se comprima demasiado */
+    max-width: 100%; /* Asegurar que no exceda el contenedor */
+    display: block;
+    margin: 0 auto; /* Centrar la gráfica */
+}
+
+/* Ajustes responsivos para pantallas pequeñas */
+@media (max-width: 768px) {
+    .energy-chart-container {
+        height: 250px; /* Reducir la altura en pantallas pequeñas */
+        padding: 10px; /* Reducir el padding */
+    }
+
+    .energy-chart-container canvas {
+        min-width: 500px; /* Ajustar el ancho mínimo */
+    }
+}
+
+@media (max-width: 650px) {
+    .energy-chart-container {
+        height: 200px; /* Reducir aún más la altura */
+        padding: 2px;
+    }
+
+    .energy-chart-container canvas {
+        min-width: 400px; /* Ajustar el ancho mínimo para pantallas muy pequeñas */
+    }
+}
+@media (max-width: 500px) {
+    .energy-chart-container {
+        height: 180px; /* Altura mínima para pantallas muy pequeñas */
+        padding: 2px;
+    }
+
+    .energy-chart-container canvas {
+        min-width: 300px; /* Ajustar el ancho mínimo para pantallas muy pequeñas */
     }
 }

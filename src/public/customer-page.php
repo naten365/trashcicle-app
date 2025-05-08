@@ -187,15 +187,14 @@ $totalCompras = $compras['total'];
                     </div>
                 </div>
                 <!-- Panel de Energía -->
-                <div class="div-contend-energia">
-                    
+                <div class="div-contend-energia" style="display: none;">
                     <div class="content-header">
                         <h1>Panel de Energía</h1>
                         <button class="btn animated" onclick="window.location.href='Tienda.php'">Ver Estadísticas</button>
                     </div>
 
                     <!-- Energy Dashboard -->
-                    <div class="energy-dashboard" style="display: none;">
+                    <div class="energy-dashboard">
                         <h2>Tu Producción Energética</h2>
                         <p>Visualiza tu contribución a la energía renovable a través del tiempo</p>
                         
