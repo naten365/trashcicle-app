@@ -309,7 +309,7 @@ $totalPuntos = $resultado['total_puntos'] ?? 0; // Si no hay resultados, se devu
                                     <div class="purchase-date">Comprado el <?php echo $detalles['fecha_canje'] ?></div>
                                 </div>
                                 <div class="purchase-meta">
-                                    <div class="purchase-price">RD$<?php echo $detalles['compra_precio_dinero'] ?></div>
+                                    <div class="purchase-price">RD$<?php echo $detalles['precio_product_canje'] ?></div>
                                     <div class="purchase-points">
                                         <span class="purchase-icon">★</span> <?php echo $detalles['product_prices_points'] ?>
                                     </div>
