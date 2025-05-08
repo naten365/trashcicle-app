@@ -1179,3 +1179,99 @@
         min-width: 100%;
     }
 }
+
+
+
+/* Apartados  de ver los productos reciclados */
+.activity-list{
+   height: 560px;
+   padding: 30px;
+   overflow-y: scroll;
+   padding: 2.5rem;
+   border-radius: 16px;
+   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+   order: 1px solid var(--border-color);
+}
+
+
+
+.activity-list::-webkit-scrollbar {
+    background: transparent;
+    width: 8px;
+    cursor: pointer;
+}
+
+.activity-list::-webkit-scrollbar-thumb {
+    background: #3a8a3e92;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 1s  ease-in-out;
+}
+
+.activity-list::-webkit-scrollbar-thumb:hover {
+    background: #3a8a3e;
+}
+
+.activity-item {
+    display: flex;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-divider);
+    padding: 0px 0px 0px 0px;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(142, 218, 101, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--spacing-md);
+    color: var(--color-accent);
+    font-size: 24px;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: #7ed957;
+}
+
+.activity-description {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.activity-time {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-lg);
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 480px) {
+    .activity-item {
+        flex-direction: column;
+    }
+    
+    .activity-icon {
+        margin-bottom: var(--spacing-md);
+        margin-right: 0;
+    }
+}
