@@ -355,10 +355,69 @@ $totalCompras = $compras['total'];
                 </div>
                 <!--Panel de los productos reciclados -->
                 <div class="div-contend-reciclaje">
-                        <div class="content-header">
-                            <h1>Elementos reciclados</h1>
-                            <button class="btn animated" onclick="window.location.href='Tienda.php'">Recicla Ahora</button>
+                    <div class="content-header">
+                        <h1>Elementos reciclados</h1>
+                        <button class="btn animated" onclick="window.location.href='Tienda.php'">Recicla Ahora</button>
+                    </div>
+
+                    <h2 class="section-title">Actividad Reciente</h2>
+
+                    <div class="activity-list" >
+                        <div class="activity-wrapper">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                ♻️
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Reciclaste 2.3kg de residuos orgánicos</div>
+                                <div class="activity-description">Has generado 12 TrashPoints y contribuido a 3.5 kWh de energía renovable</div>
+                                <div class="activity-time">Hace 2 días</div>
+                            </div>
                         </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                💳
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Compraste una Botella Ecológica</div>
+                                <div class="activity-description">Has canjeado 180 TrashPoints por este producto</div>
+                                <div class="activity-time">Hace 1 semana</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                ♻️
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Reciclaste 1.5kg de plástico</div>
+                                <div class="activity-description">Has generado 8 TrashPoints y contribuido a 2.1 kWh de energía renovable</div>
+                                <div class="activity-time">Hace 2 semanas</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                ♻️
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Reciclaste 3.7kg de papel</div>
+                                <div class="activity-description">Has generado 15 TrashPoints y contribuido a 4.2 kWh de energía renovable</div>
+                                <div class="activity-time">Hace 3 semanas</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                ♻️
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Reciclaste 3.7kg de papel</div>
+                                <div class="activity-description">Has generado 15 TrashPoints y contribuido a 4.2 kWh de energía renovable</div>
+                                <div class="activity-time">Hace 3 semanas</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
