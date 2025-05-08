@@ -1,51 +1,66 @@
 <?php
 session_start();
-include '../connection/conn.php';
+include '../connection/conn.php'; // Ya está conectando bien
 
+$mensaje = "";
+$productoAgregado = false;
 
-$servidor = "localhost";
-$usuario = "root";
-$clave = "";
-$baseDeDatos = "trashcicle_db";
-
-$enlace = mysqli_connect($servidor, $usuario, $clave, $baseDeDatos);
-
-
-if (!$enlace) {
-    die("❌ Error de conexión: " . mysqli_connect_error());
-}
-
-$mensaje = ""; 
-$productoAgregado = false; 
-
-
-if (isset($_POST['registro'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['productName'] ?? '';
+    $puntos = $_POST['productPoints'] ?? '';
     $precio = $_POST['productPrice'] ?? '';
     $descripcion = $_POST['productDescription'] ?? '';
-    $stock = 1; 
+    $stock = 1;
     $fecha = date('Y-m-d H:i:s');
 
-    if (!empty($nombre) && !empty($precio) && !empty($descripcion)) {
-        $stmt = $enlace->prepare("INSERT INTO productos (nombre_producto, descripcion, precio, cantidad_stock, fecha_creacion) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssdis", $nombre, $descripcion, $precio, $stock, $fecha);
+    // Validar campos
+    if (!empty($nombre) && !empty($precio) && !empty($descripcion) && isset($_FILES['productImage'])) {
 
-        if ($stmt->execute()) {
-            $mensaje = "✅ Producto agregado exitosamente.";
-            $productoAgregado = true; 
+        $imagen = $_FILES['productImage'];
+        $nombreImagen = uniqid() . "_" . basename($imagen['name']);
+        $rutaDestino = "uploads/" . $nombreImagen;
+
+        $formatosPermitidos = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+        if (in_array($imagen['type'], $formatosPermitidos)) {
+            if (move_uploaded_file($imagen['tmp_name'], $rutaDestino)) {
+                try {
+                    $sql = "INSERT INTO productos 
+                        (nombre_producto, descripcion, precio,product_prices_points, cantidad_stock, fecha_creacion, imagen_producto, categria_producto, estado_producto)
+                        VALUES 
+                        (:nombre, :descripcion, :precio,:points, :stock, :fecha, :imagen, :categoria, :estado)";
+
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute([
+                        ':nombre'    => $nombre,
+                        ':descripcion' => $descripcion,
+                        ':precio'    => $precio,
+                        ':points'    => $puntos,
+                        ':stock'     => $stock,
+                        ':fecha'     => $fecha,
+                        ':imagen'    => $nombreImagen,
+                        ':categoria' => 'Otros', // puedes actualizar esto si tienes categorías dinámicas
+                        ':estado'    => 'Disponible'
+                    ]);
+
+                    $productoAgregado = true;
+                    $_SESSION['mensaje'] = "✅ Producto agregado exitosamente.";
+                    header("Location: dashboard-products.php"); // Redirigir a la página de productos después de agregar
+                } catch (PDOException $e) {
+                    $_SESSION['mensaje'] = "❌ Error al registrar: " . $e->getMessage();
+                }
+            } else {
+                $_SESSION['mensaje'] = "❌ Error al subir la imagen.";
+            }
         } else {
-            $mensaje = "❌ Error al registrar: " . $stmt->error;
+            $_SESSION['mensaje'] = "⚠️ Formato de imagen no permitido.";
         }
-
-        $stmt->close();
     } else {
-        $mensaje = "⚠️ Todos los campos son obligatorios.";
+        $_SESSION['mensaje'] = "⚠️ Todos los campos son obligatorios, incluida la imagen.";
     }
+
+    exit;
 }
-
-mysqli_close($enlace);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -78,10 +93,15 @@ mysqli_close($enlace);
     </style>
 </head>
 <body>
+<?php if (isset($_SESSION['mensaje'])): ?>
+    <script>
+        alert("<?= $_SESSION['mensaje'] ?>");
+    </script>
+    <?php unset($_SESSION['mensaje']); ?>
+<?php endif; ?>
 <div class="container">
     <div class="form-container">
         <h1><span>Agregar</span> un producto a la <span>Tienda</span></h1>
-
         <form id="productForm" method="POST" enctype="multipart/form-data" novalidate onsubmit="return validateForm()">
             <div class="form-layout">
                 <div class="form-group">
@@ -90,8 +110,26 @@ mysqli_close($enlace);
                 </div>
                 
                 <div class="form-group">
-                    <label for="productPrice">Precio (puntos)</label>
+                    <label for="productPrice">Precio (Moneda)</label>
                     <input type="number" id="productPrice" name="productPrice" placeholder="Valor en puntos" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productPrice">Precio (Puntos)</label>
+                    <input type="number" id="productPrice" name="productPoints" placeholder="Valor en puntos" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productCategory">Categoría</label>
+                    <select id="productCategory" name="productCategory" required>
+                        <option value="" disabled selected>Selecciona una categoría</option>
+                        <option value="Otros">Otros</option>
+                        <option value="Electrónica">Electrónica</option>
+                        <option value="Ropa">Ropa</option>
+                        <option value="Muebles">Muebles</option>
+                        <option value="Juguetes">Juguetes</option>
+                    </select>
+
                 </div>
                 
                 <div class="form-group full-width">
@@ -106,11 +144,10 @@ mysqli_close($enlace);
                         <div class="file-upload-icon">+</div>
                         <div class="file-upload-text">Subir imagen o arrastrar aquí</div>
                     </div>
-                    <img id="imagePreview" class="file-preview" src="#" alt="Vista previa">
+                    <img id="imagePreview" class="file-preview" src="#" alt="Vista previa" style="display:block;">
                     <div class="error-message">Se requiere una imagen del producto</div>
                 </div>
             </div>
-            
             <button type="submit" class="submit-btn" name="registro">Agregar</button>
         </form>
     </div>
@@ -149,13 +186,26 @@ function validateForm() {
     return true; 
 }
 
+  // Vista previa de imagen
+  productImage.addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+          const reader = new FileReader();
+          
+          reader.onload = function(e) {
+              imagePreview.src = e.target.result;
+              imagePreview.style.display = 'block';
+              fileUploadContainer.style.borderColor = 'var(--success)';
+          }
+          
+          reader.readAsDataURL(this.files[0]);
+      } else {
+          imagePreview.style.display = 'none';
 
-<?php if ($productoAgregado): ?>
-    alert("✅ Producto agregado exitosamente.");
-<?php endif; ?>
+      }
+      validateField(productImage);
+  });
 </script>
 
 <script src="scripts/add-products.js"></script>
-
 </body>
 </html>

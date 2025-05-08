@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CSS/product-desc.css">
-    <link rel="shortcut icon" href="IMG/recycle-favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles/product-desc.css">
+    <link rel="shortcut icon" href="assets/images/recycle-favicon.png" type="image/x-icon">
     <title>Canjear producto | TrashCicle</title>
 </head>
 
@@ -13,8 +13,8 @@
     <!-- header -->
     <header class="TrashCicle">
         <nav class="nav container" id="nav">
-            <a href="Index.html">
-                <img src="IMG/logo.png" alt="logo" height="50px">
+            <a href="index.html">
+                <img src="assets/images/logo.png" alt="logo" height="50px">
             </a>
 
             <ul class="nav__links">
@@ -26,20 +26,20 @@
                     </div>
                 </li>
                 <li class="nav__item">
-                    <a href="Tienda.html" class="nav__link">Tienda de puntos</a>
+                    <a href="Tienda.php" class="nav__link">Tienda de puntos</a>
                 </li>
                 <li class="nav__item">
-                    <a href="Afiliados.html" class="nav__link">Afiliados</a>
+                    <a href="Afiliados.php" class="nav__link">Afiliados</a>
                 </li>
                 <li class="nav__item">
-                    <a href="formulario-contacto.html" class="nav__link">Contáctanos</a>
+                    <a href="formulario-contacto.php" class="nav__link">Contáctanos</a>
                 </li>
 
             </ul>
             <a href="#nav" class="nav__hamburguer">
-                <img src="IMG/menu.svg" class="nav__icon">
+                <img src="assets/images/menu.svg" class="nav__icon">
                 <a href="#" class="nav__close">
-                    <img src="IMG/close.svg" class="nav__icon">
+                    <img src="assets/images/close.svg" class="nav__icon">
                 </a>
             </a>
         </nav>
@@ -48,7 +48,7 @@
         <div class="product-container">
             <div class="product-img">
                 <h1>Pelota de baloncesto</h1>
-                <img src="IMG/basket.jpg" alt="">
+                <img src="assets/images/basket.jpg" alt="">
             </div>
             <div class="product-desc-container">
                 <p class="product-desc">Sumérgete en el juego con nuestro balón de baloncesto Trashcicle,
@@ -73,7 +73,7 @@
             </div>
         </div>
     </main>
-    <img src="IMG/info-icon.png" alt="Imagen Informativa" onclick="openPopup()" class="popup-img1">
+    <img src="assets/images/info-icon.png" alt="Imagen Informativa" onclick="openPopup()" class="popup-img1">
     <div class="contenedor-popup" id="popup">
         <div class="contenido-popup">
             <span class="close-btn" onclick="closePopup()">&times;</span>
@@ -84,9 +84,9 @@
                 los centros de reciclaje TrashCicle locales para obtener información específica.</p>
         </div>
     </div>
-    <script type="module" src="JS/tienda.js"></script>
-    <script src="JS/canjear-producto.js"></script>
-    <script src="JS/desc-producto.js"></script>
+    <script type="module" src="scritps/tienda.js"></script>
+    <script src="scritps/canjear-producto.js"></script>
+    <script src="scritps/desc-producto.js"></script>
 </body>
 
 </html>

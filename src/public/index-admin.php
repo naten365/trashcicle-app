@@ -2,6 +2,68 @@
 session_start();
 include '../connection/conn.php';
 checkUserPermissions('admin');
+
+
+//Muestra el numero de productos en la base de datos
+function totalProductos(){
+  global $pdo;
+  $sql = "SELECT COUNT(*) AS total FROM productos";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  $result =  $stmt->fetch(PDO ::FETCH_ASSOC); 
+  return isset($result['total']) ? (int)$result['total'] : 0;
+}
+
+//Muestras los ultimos 3 productos añadidos
+function totalProductoshoy(){
+  global $pdo;
+  $sql = "SELECT COUNT(*) AS prodcutos_hoy FROM productos WHERE  fecha_creacion = CURDATE() ORDER BY fecha_creacion DESC LIMIT 5";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  $result =  $stmt->fetch(PDO ::FETCH_ASSOC); 
+  return isset($result['prodcutos_hoy']) ? (int)$result['prodcutos_hoy'] : 0;
+} 
+
+//Funcion que muestra el numero total de usuarios en la base de datos
+function totalClientes(){
+  global $pdo;
+  $sql = "SELECT COUNT(*) AS totalcliente FROM users  WHERE type_users = 'cliente'";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  $result =  $stmt->fetch(PDO ::FETCH_ASSOC); 
+  return isset($result['totalcliente']) ? (int)$result['totalcliente'] : 0;
+}
+
+//Funcion que muestra el total de usuarios nuevos en la base de datos
+function totalClientesHoy(){
+  global $pdo;
+  $sql = "SELECT COUNT(*) AS totalcliente_hoy FROM users WHERE type_users = 'cliente' AND user_register_time = CURDATE()";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  $result =  $stmt->fetch(PDO ::FETCH_ASSOC); 
+  return (int) ($result['totalcliente_hoy'] ?? 0);
+}
+
+
+//Funcion que muestra el total de los zafacones en la base  de datos
+function totalZafacones(){
+  global $pdo;
+  $sql = "SELECT COUNT(*) AS totalzafacones FROM zafacones_inteligentes";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  $result =  $stmt->fetch(PDO ::FETCH_ASSOC); 
+  return isset($result['totalzafacones']) ? (int)$result['totalzafacones'] : 0;
+}
+
+//Funcion que muestra el total  de zafacones que se encuentra disponibles en  la pagina
+function totalZafaconesActivos(){
+  global $pdo;
+  $sql = "SELECT COUNT(*) AS totalzafacones_activos FROM zafacones_inteligentes WHERE estado= 'activo'";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  $result =  $stmt->fetch(PDO ::FETCH_ASSOC); 
+  return isset($result['totalzafacones_activos']) ? (int)$result['totalzafacones_activos'] : 0;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -50,7 +112,7 @@ checkUserPermissions('admin');
       <div class="menu-item" data-page="dudas">
         <a href="questions-and-answers.php">
           <i class="fas fa-question-circle"></i>
-          <span  class="span-stat">Dudas</span>
+          <span  class="span-stat">Duda</span>
         </a>
       </div>
     </div>
@@ -61,7 +123,7 @@ checkUserPermissions('admin');
     <div class="flex justify-between items-center mb-8">
       <h1 class="text-2xl font-bold text-700" style="color: rgb(240, 240, 240);">Panel de Administrador</h1>
       <div class="user-menu" style="background:rgb(240, 240, 240); position: relative; cursor: pointer; padding: 10px; display: flex; align-items: center; gap: 5px;">
-        <img src="/TRASHCICLE ADMIN PANEL/src/public/assets/images/create-users.png" alt="User">
+        <img src="assets/images/logo-trashcicle-desplex.png" alt="User">
         <span class="mr-2">Cuenta</span>
         <i class="fas fa-chevron-down"></i>
         
@@ -210,8 +272,8 @@ checkUserPermissions('admin');
           <span class="badge badge-blue">HOY</span>
         </div>
         <div class="flex items-baseline mt-4">
-          <span class="text-2xl font-bold text-900">245</span>
-          <span class="text-green-500 text-sm font-semibold ml-2">+12%</span>
+          <span class="text-2xl font-bold text-900"><?php echo  totalClientes()?></span>
+          <span class="text-green-500 text-sm font-semibold ml-2">+<?php echo totalClientesHoy()?> nuevos</span>
         </div>
         <div class="mt-2">
           <div class="w-full bg-gray-200 rounded-full h-2.5">
@@ -226,8 +288,8 @@ checkUserPermissions('admin');
           <span class="badge badge-green">ONLINE</span>
         </div>
         <div class="flex items-baseline mt-4">
-          <span class="text-2xl font-bold text-900">28/32</span>
-          <span class="text-green-500 text-sm font-semibold ml-2">87.5%</span>
+          <span class="text-2xl font-bold text-900"><?php echo  totalZafaconesActivos()?>/ <?php echo totalZafacones()?></span>
+          <span class="text-green-500 text-sm font-semibold ml-2">  Registrados</span>
         </div>
         <div class="mt-2">
           <div class="w-full bg-200 rounded-full h-2.5">
@@ -242,8 +304,12 @@ checkUserPermissions('admin');
           <span class="badge badge-purple">CATÁLOGO</span>
         </div>
         <div class="flex items-baseline mt-4">
-          <span class="text-2xl font-bold text-900">124</span>
-          <span class="text-green-500 text-sm font-semibold ml-2">+3 nuevos</span>
+          <span class="text-2xl font-bold text-900">
+            <!--Span con funcion que mueste el total  de producto en la tienda-->
+            <?php echo totalProductos()?>
+          </span>
+          <!-- Span que muestros el numero de los porductos nuevos añadidos -->
+          <span class="text-green-500 text-sm font-semibold ml-2">+<?php echo totalProductoshoy()?> nuevos</span>
         </div>
         <div class="mt-2">
           <div class="w-full bg-gray-200 rounded-full h-2.5">

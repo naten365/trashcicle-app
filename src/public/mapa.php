@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CSS/mapa.css">
-    <link rel="shortcut icon" href="IMG/recycle-favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles/mapa.css">
+    <link rel="shortcut icon" href="assets/images/recycle-favicon.png" type="image/x-icon">
     <title>Puntos verdes | TrashCicle</title>
 </head>
 
@@ -13,26 +13,26 @@
     <!-- header -->
     <header class="TrashCicle">
         <nav class="nav container" id="nav">
-            <a href="Index.html">
-                <img src="IMG/logo.png" alt="logo" height="50px">
+            <a href="index.html">
+                <img src="assets/images//logo.png" alt="logo" height="50px">
             </a>
 
             <ul class="nav__links">
                 <li class="nav__item">
-                    <a href="Tienda.html" class="nav__link">Tienda de puntos</a>
+                    <a href="Tienda.php" class="nav__link">Tienda de puntos</a>
                 </li>
                 <li class="nav__item">
-                    <a href="Afiliados.html" class="nav__link">Afiliados</a>
+                    <a href="Afiliados.php" class="nav__link">Afiliados</a>
                 </li>
                 <li class="nav__item">
-                    <a href="formulario-contacto.html" class="nav__link">Contáctanos</a>
+                    <a href="formulario-contacto.php" class="nav__link">Contáctanos</a>
                 </li>
 
             </ul>
             <a href="#nav" class="nav__hamburguer">
-                <img src="IMG/menu.svg" class="nav__icon">
+                <img src="assets/images/menu.svg" class="nav__icon">
                 <a href="#" class="nav__close">
-                    <img src="IMG/close.svg" class="nav__icon">
+                    <img src="assets/images/close.svg" class="nav__icon">
                 </a>
             </a>
         </nav>
@@ -61,7 +61,7 @@
     <footer>
         <div class="footer">
             <div class="logof">
-                <img src="IMG/logo.png" alt="">
+                <img src="assets/images/logo.png" alt="">
             </div>
             <div class="row">
                 <a href="#"></a>
@@ -72,7 +72,7 @@
 
             <div class="row">
                 <ul>
-                    <li><a href="formulario-contacto.html">Contáctanos</a></li>
+                    <li><a href="formulario-contacto.php">Contáctanos</a></li>
                     <li><a href="#">Política de privacidad</a></li>
                     <li><a href="#">Términos y condiciones</a></li>
                     <li><a href="#">Política de cookies</a></li>
@@ -84,8 +84,8 @@
             </div>
         </div>
     </footer>
-    <script src="JS/nav-menu.js"></script>
-    <script src="JS/abrir-modal.js"></script>
+    <script src="scripts/nav-menu.js"></script>
+    <script src="scripts/abrir-modal.js"></script>
 </body>
 
 </html>
