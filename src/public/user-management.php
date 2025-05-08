@@ -64,9 +64,11 @@ try {
 <body>
     <div class="container">
         <aside class="sidebar" style="background:#1a1a2e;">
-            <div class="logo">
-                <img class="logo" src="/src/public/assets/images/logo-trashcicle.png" alt="">
-            </div>
+                <div class="logo-container">
+                    <a href="index-admin.php">
+                        <img src="assets/images/logo-trashcicle-new.png" alt="TrashCicle Logo" class="w-full trashcicle-logo">
+                    </a>
+                </div>
             <nav>
                 <ul>
 
