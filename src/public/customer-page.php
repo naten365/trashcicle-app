@@ -238,8 +238,8 @@ $totalPuntos = $resultado['total_puntos'] ?? 0; // Si no hay resultados, se devu
                                         <path d="M11 15h2"></path>
                                     </svg> </div>
                                 <div class="activity-content">
-                                    <h3>Compraste una <?php echo $cont['compra'] ?></h3>
-                                    <p>Has canjeado <?php echo $cont['puntos'] ?> TrashPoints por este producto</p>
+                                    <h3>Compraste una <?php echo $cont['nombre_producto'] ?></h3>
+                                    <p>Has canjeado <?php echo $cont['product_prices_points'] ?> TrashPoints por este producto</p>
                                     <p class="activity-date">Compra realizada <?php echo  $cont['fecha_compra'] ?></p>
                                 </div>
                             </div>
@@ -336,15 +336,15 @@ $totalPuntos = $resultado['total_puntos'] ?? 0; // Si no hay resultados, se devu
                     <div class="purchases-container">
                         <?php foreach ($compra_detalles as $detalles): ?>
                             <div class="purchase-card">
-                                <img src="assets/images/balon-de-futbol-soccer.jpg" alt="Producto" class="purchase-image">
+                                <img src="uploads/<?php echo $detalles['imagen_producto'] ?>" alt="Producto" class="purchase-image">
                                 <div class="purchase-details">
-                                    <div class="purchase-title"><?php echo $detalles['compra'] ?></div>
-                                    <div class="purchase-date">Comprado el <?php echo $detalles['fecha_compra'] ?></div>
+                                    <div class="purchase-title"><?php echo $detalles['nombre_producto'] ?></div>
+                                    <div class="purchase-date">Comprado el <?php echo $detalles['fecha_canje'] ?></div>
                                 </div>
                                 <div class="purchase-meta">
-                                    <div class="purchase-price">RD$<?php echo $detalles['compra_precio_dinero'] ?></div>
+                                    <div class="purchase-price">RD$<?php echo $detalles['precio_product_canje'] ?></div>
                                     <div class="purchase-points">
-                                        <span class="purchase-icon">★</span> <?php echo $detalles['puntos'] ?>
+                                        <span class="purchase-icon">★</span> <?php echo $detalles['product_prices_points'] ?>
                                     </div>
                                 </div>
                             </div>
