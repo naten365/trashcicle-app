@@ -1184,7 +1184,7 @@
 
 /* Apartados  de ver los productos reciclados */
 .activity-list{
-   height: 560px;
+   max-height: 560px;
    padding: 30px;
    overflow-y: scroll;
    padding: 2.5rem;
@@ -1275,3 +1275,33 @@
         margin-right: 0;
     }
 }
+
+/* Codigo para la naimacion  estetica  del none */
+/* Keyframes para animaciones */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Aplicar animación por defecto a las secciones */
+.main-content-section {
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
