@@ -207,7 +207,7 @@ $totalPuntos = $resultado['total_puntos'] ?? 0; // Si no hay resultados, se devu
                                 <div class="activity-content">
                                     <h3>Compraste una <?php echo $cont['nombre_producto'] ?></h3>
                                     <p>Has canjeado <?php echo $cont['product_prices_points'] ?> TrashPoints por este producto</p>
-                                    <p class="activity-date">Compra realizada <?php echo  $cont['fecha_canje'] ?></p>
+                                    <p class="activity-date">Compra realizada <?php echo  $cont['fecha_compra'] ?></p>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -309,7 +309,7 @@ $totalPuntos = $resultado['total_puntos'] ?? 0; // Si no hay resultados, se devu
                                     <div class="purchase-date">Comprado el <?php echo $detalles['fecha_canje'] ?></div>
                                 </div>
                                 <div class="purchase-meta">
-                                    <div class="purchase-price">RD$<?php echo $detalles['product_prices_points'] ?></div>
+                                    <div class="purchase-price">RD$<?php echo $detalles['compra_precio_dinero'] ?></div>
                                     <div class="purchase-points">
                                         <span class="purchase-icon">★</span> <?php echo $detalles['product_prices_points'] ?>
                                     </div>
