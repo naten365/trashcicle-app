@@ -62,9 +62,7 @@
             <span id="spanError"></span>
         </div>
       </div>
-      <div>
-        <h1>DD</h1>
-      </div>
+      <samp></samp>
 
     <script src="scripts/formulario.js"></script>
     <script src="scripts/nav-menu.js"></script>
