@@ -336,6 +336,7 @@ body {
 .table-container::-webkit-scrollbar {
     background: transparent;
     width: 8px;
+    height: 2px;
     cursor: pointer;
 }
 
@@ -592,4 +593,9 @@ body {
     .search-box {
         max-width: 100%;
     }
+}
+
+.card-trashelement{
+    position: relative;
+    top: 25px;
 }

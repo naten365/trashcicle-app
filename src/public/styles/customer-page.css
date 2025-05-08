@@ -10,6 +10,10 @@
             --border-color: rgba(255, 255, 255, 0.1);
             --gradient-start: rgba(126, 217, 87, 0.15);
             --gradient-end: rgba(26, 29, 35, 0.6);
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --border-radius: 12px;
 }
         
         * {
@@ -466,7 +470,7 @@
             }
         }
         
-        @media (max-width: 992px) {
+        @media (max-width: 1158px) {
             .profile-wrapper {
                 grid-template-columns: 1fr;
             }
@@ -494,7 +498,7 @@
             }
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 850px) {
             .navbar {
                 padding: 1rem 1.5rem;
                 flex-wrap: wrap;
@@ -571,6 +575,7 @@
             }
             
             .content-header {
+
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1rem;
@@ -618,271 +623,685 @@
         .btn.animated {
             animation: pulse 2s infinite;
         }
+
     
-/* Funcion del dashboard */
-/* Energy Dashboard */
-.energy-dashboard {
-    background-color: #1e2a23;
-    border-radius: 12px;
-    padding: 25px;
-    margin-bottom: 30px;
-}
+        /* //////////////////////////////////////////////////////// */
+    
+        /* Energy Dashboard */
+        .energy-dashboard {
+            background-color: #1e2a23;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .energy-dashboard h2 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .energy-dashboard p {
+            color: #b0b0b0;
+            margin-bottom: 25px;
+        }
+        
+        .energy-chart-container {
+            height: 300px;
+            margin-bottom: 30px;
+            position: relative;
+            background-color: #17211c;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .energy-highlights {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .highlight-card {
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            background-color: #212121;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        .highlight-icon {
+            background-color: rgba(126, 217, 87, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .highlight-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .highlight-content h3 {
+            font-size: 1.6rem;
+            color: #7ed957;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+        
+        .highlight-content p {
+            color: #b0b0b0;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Energy Distribution */
+        .energy-distribution {
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .distribution-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .distribution-chart {
+            flex: 1;
+            height: 220px;
+            background-color: #212121;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .distribution-info {
+            flex: 1;
+        }
+        
+        .distribution-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .distribution-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 12px;
+        }
+        
+        .distribution-label {
+            color: #d0d0d0;
+            font-size: 1rem;
+        }
+        
+        /* Energy Forecast */
+        .energy-forecast {
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            padding: 25px;
+        }
+        
+        .energy-forecast p {
+            color: #b0b0b0;
+            margin-top: -10px;
+            margin-bottom: 25px;
+        }
+        
+        .forecast-stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .forecast-stat-card {
+            background-color: #232323;
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .forecast-stat-card:hover {
+            background-color: #2a2a2a;
+            transform: scale(1.03);
+        }
+        
+        .forecast-stat-card h3 {
+            font-size: 1.8rem;
+            color: #7ed957;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+        
+        .forecast-stat-card p {
+            color: #b0b0b0;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        
+    /* Nuevos cambios realizados> */
+    /* Responsive adjustments for Energy Dashboard and main-content */
 
-.energy-dashboard h2 {
-    font-size: 1.8rem;
-    color: #ffffff;
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-
-.energy-dashboard p {
-    color: #b0b0b0;
-    margin-bottom: 25px;
-}
-
-.energy-chart-container {
-    height: 300px;
-    margin-bottom: 30px;
-    position: relative;
-    background-color: #17211c;
-    border-radius: 8px;
-    padding: 15px;
-}
-
-.energy-highlights {
+/* General container responsiveness */
+.div-contend-panel-general, .main-content {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 20px;
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en dispositivos pequeños */
 }
 
-.highlight-card {
-    background-color: #1a1a1a;
-    border-radius: 10px;
-    padding: 20px;
-    flex: 1;
-    min-width: 200px; /* Asegura un tamaño mínimo para tarjetas */
+/* Default styles for larger screens */
+.energy-dashboard, .main-content {
     display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-.highlight-card:hover {
-    transform: translateY(-5px);
-    background-color: #212121;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-.highlight-icon {
-    background-color: rgba(126, 217, 87, 0.1);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
-}
-
-.highlight-icon svg {
-    width: 24px;
-    height: 24px;
-}
-
-.highlight-content h3 {
-    font-size: 1.6rem;
-    color: #7ed957;
-    margin: 0;
-    margin-bottom: 5px;
-}
-
-.highlight-content p {
-    color: #b0b0b0;
-    margin: 0;
-    font-size: 0.9rem;
-}
-
-/* Energy Distribution */
-.energy-distribution {
-    background-color: #1a1a1a;
-    border-radius: 12px;
-    padding: 25px;
-    margin-bottom: 30px;
-}
-
-.section-title {
-    font-size: 1.6rem;
-    color: #ffffff;
-    margin-top: 0;
-    margin-bottom: 20px;
-}
-
-.distribution-container {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    flex-wrap: wrap; /* Añadido para responsividad */
-}
-
-.distribution-chart {
-    flex: 1;
-    height: 220px;
-    min-width: 250px; /* Asegura un ancho mínimo */
-    background-color: #212121;
-    border-radius: 8px;
-    padding: 15px;
-}
-
-.distribution-info {
-    flex: 1;
-    min-width: 250px; /* Asegura un ancho mínimo */
-}
-
-.distribution-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.distribution-color {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    margin-right: 12px;
-}
-
-.distribution-label {
-    color: #d0d0d0;
-    font-size: 1rem;
-}
-
-/* Energy Forecast */
-.energy-forecast {
-    background-color: #1a1a1a;
-    border-radius: 12px;
-    padding: 25px;
-}
-
-.energy-forecast p {
-    color: #b0b0b0;
-    margin-top: -10px;
-    margin-bottom: 25px;
-}
-
-.forecast-stats {
-    display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 20px;
-    flex-wrap: wrap; /* Añadido para responsividad */
 }
 
-.forecast-stat-card {
-    background-color: #232323;
-    border-radius: 10px;
-    padding: 20px;
-    flex: 1;
-    min-width: 200px; /* Asegura un ancho mínimo */
-    text-align: center;
-    transition: all 0.3s ease;
-    margin-bottom: 15px; /* Espacio entre cards cuando se apilan */
-}
-
-.forecast-stat-card:hover {
-    background-color: #2a2a2a;
-    transform: scale(1.03);
-}
-
-.forecast-stat-card h3 {
-    font-size: 1.8rem;
-    color: #7ed957;
-    margin: 0;
-    margin-bottom: 10px;
-}
-
-.forecast-stat-card p {
-    color: #b0b0b0;
-    margin: 0;
-    font-size: 0.9rem;
-}
-
-/* Media Queries para responsividad */
-@media (max-width: 992px) {
+/* Responsive for medium screens (tablets) */
+@media (max-width: 974px) {
     .energy-highlights {
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 15px;
     }
-    
-    .highlight-card {
-        flex-basis: calc(50% - 10px);
-        margin-bottom: 20px;
+
+    .forecast-stats {
+        flex-direction: column;
+        gap: 15px;
     }
-    
+
     .distribution-container {
         flex-direction: column;
+        gap: 15px;
     }
-    
-    .distribution-chart, .distribution-info {
-        width: 100%;
-    }
-}
 
-@media (max-width: 768px) {
-    .energy-dashboard, 
-    .energy-distribution, 
-    .energy-forecast {
-        padding: 20px;
-    }
-    
-    .energy-dashboard h2 {
-        font-size: 1.5rem;
-    }
-    
-    .section-title {
-        font-size: 1.4rem;
-    }
-    
     .energy-chart-container {
         height: 250px;
     }
 }
 
-@media (max-width: 576px) {
-    .highlight-card {
-        flex-basis: 100%;
-    }
-    
-    .energy-dashboard, 
-    .energy-distribution, 
-    .energy-forecast {
+/* Responsive for small screens (mobile) */
+@media (max-width: 800px) {
+    .div-contend-panel-general, .main-content {
         padding: 15px;
-        border-radius: 8px;
-    }
-    
-    .energy-dashboard h2 {
-        font-size: 1.3rem;
-    }
-    
-    .section-title {
-        font-size: 1.2rem;
     }
 
-    .highlight-content h3,
-    .forecast-stat-card h3 {
+    .energy-dashboard h2, .section-title {
         font-size: 1.4rem;
     }
-    
+
+    .energy-dashboard p, .forecast-stat-card p {
+        font-size: 0.85rem;
+    }
+
+    .highlight-card {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 10px;
+    }
+
+    .highlight-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .forecast-stat-card h3 {
+        font-size: 1.5rem;
+    }
+
     .energy-chart-container {
         height: 200px;
-        padding: 10px;
-    }
-    
-    .highlight-icon {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .highlight-icon svg {
-        width: 20px;
-        height: 20px;
     }
 }
+
+/* Responsive for extra small screens (very small mobile) */
+@media (max-width: 650px) {
+    .energy-highlights, .forecast-stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .highlight-card, .forecast-stat-card {
+        padding: 15px;
+    }
+
+    .energy-dashboard {
+        padding: 15px;
+    }
+
+    .energy-chart-container {
+        height: 180px;
+    }
+
+    .distribution-container {
+        gap: 10px;
+    }
+
+    .distribution-chart {
+        height: 180px;
+    }
+}
+
+/*Nuevas funcionalidades del sistema con respecto a la grafica*/
+/* Ajustes para gráficos en pantallas pequeñas */
+
+/* Contenedor de la gráfica con scroll horizontal */
+.energy-chart-container {
+    height: 300px; /* Altura predeterminada */
+    margin-bottom: 30px;
+    position: relative;
+    background-color: #17211c;
+    border-radius: 8px;
+    padding: 15px;
+    overflow-x: auto; /* Habilitar scroll horizontal */
+    white-space: nowrap; /* Evitar que el contenido se ajuste automáticamente */
+}
+
+/* Asegurar que el canvas de la gráfica no se desborde */
+.energy-chart-container canvas {
+    min-width: 600px; /* Ancho mínimo para evitar que se comprima demasiado */
+    max-width: 100%; /* Asegurar que no exceda el contenedor */
+    display: block;
+    margin: 0 auto; /* Centrar la gráfica */
+}
+
+/* Ajustes responsivos para pantallas pequeñas */
+@media (max-width: 768px) {
+    .energy-chart-container {
+        height: 250px; /* Reducir la altura en pantallas pequeñas */
+        padding: 10px; /* Reducir el padding */
+    }
+
+    .energy-chart-container canvas {
+        min-width: 500px; /* Ajustar el ancho mínimo */
+    }
+}
+
+@media (max-width: 650px) {
+    .energy-chart-container {
+        height: 200px; /* Reducir aún más la altura */
+        padding: 2px;
+    }
+
+    .energy-chart-container canvas {
+        min-width: 400px; /* Ajustar el ancho mínimo para pantallas muy pequeñas */
+    }
+}
+@media (max-width: 500px) {
+    .energy-chart-container {
+        height: 180px; /* Altura mínima para pantallas muy pequeñas */
+        padding: 2px;
+    }
+
+    .energy-chart-container canvas {
+        min-width: 300px; /* Ajustar el ancho mínimo para pantallas muy pequeñas */
+    }
+}
+
+/* Apartado de mis comprar en generl */
+
+/* Elementos stat del apartados de comrpras */
+.purchase-stats {
+    position: relative;
+    top: 15px;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    padding: 50px 30px ;
+    border-radius: 16px;
+}
+
+.stat-card {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+}
+
+.stat-card:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 2px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+
+/* Card Poductos */
+.purchases-container {
+    position: relative;
+    top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    max-height: 750px;
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+.purchases-container::-webkit-scrollbar {
+    background: transparent;
+    width: 8px;
+    cursor: pointer;
+}
+
+.purchases-container::-webkit-scrollbar-thumb {
+    background: #3a8a3e92;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 1s  ease-in-out;
+}
+
+.purchases-container::-webkit-scrollbar-thumb:hover {
+    background: #3a8a3e;
+}
+
+
+.purchase-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    flex: 1;
+    min-width: 250px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-bg);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.purchase-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+
+.purchase-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.purchase-details {
+    flex-grow: 1;
+}
+
+.purchase-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color:#7ed957 ;
+}
+
+.purchase-date {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.purchase-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-md);
+}
+
+.purchase-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-accent);
+}
+
+.purchase-points {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    color:#7ed957 ;
+}
+
+.purchase-icon {
+    color:#7ed957 ;
+    font-size: 16px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-lg);
+    color: var(--color-text-secondary);
+}
+
+.empty-icon {
+    font-size: 48px;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+}
+
+.purchase-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.stat-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 2px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+    
+    .stat-card {
+        min-width: 120px;
+    }
+
+    .purchase-card {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .purchase-stats {
+        flex-direction: column;
+    }
+    
+    .stat-card {
+        min-width: 100%;
+    }
+}
+
+
+
+/* Apartados  de ver los productos reciclados */
+.activity-list{
+   max-height: 560px;
+   padding: 30px;
+   overflow-y: scroll;
+   padding: 2.5rem;
+   border-radius: 16px;
+   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+   order: 1px solid var(--border-color);
+}
+
+
+
+.activity-list::-webkit-scrollbar {
+    background: transparent;
+    width: 8px;
+    cursor: pointer;
+}
+
+.activity-list::-webkit-scrollbar-thumb {
+    background: #3a8a3e92;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 1s  ease-in-out;
+}
+
+.activity-list::-webkit-scrollbar-thumb:hover {
+    background: #3a8a3e;
+}
+
+.activity-item {
+    display: flex;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-divider);
+    padding: 0px 0px 0px 0px;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(142, 218, 101, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--spacing-md);
+    color: var(--color-accent);
+    font-size: 24px;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: #7ed957;
+}
+
+.activity-description {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.activity-time {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-lg);
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 480px) {
+    .activity-item {
+        flex-direction: column;
+    }
+    
+    .activity-icon {
+        margin-bottom: var(--spacing-md);
+        margin-right: 0;
+    }
+}
+
+/* Codigo para la naimacion  estetica  del none */
+/* Keyframes para animaciones */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Aplicar animación por defecto a las secciones */
+.main-content-section {
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
