@@ -106,6 +106,7 @@ function showHistory(userId) {
     let historyHTML = `
         <div class="user-details">
             <h3>${user.name}</h3>
+            <p><strong>Email:</strong> ${user.email}</p>
             <p><strong>Puntos actuales:</strong> ${user.points || 0}</p>
             <h4>Historial de transacciones</h4>
             ${user.history && user.history.length > 0 ?
@@ -228,12 +229,27 @@ function removeRestriction(userId) {
     }
 }
 
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'none';
+function closeModal(modalElement) {
+    if (typeof modalElement === 'string') {
+        modalElement = document.getElementById(modalElement);
+    }
+    if (modalElement) {
+        modalElement.style.display = 'none';
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const closeButtons = document.querySelectorAll('.close-button');
+    
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const modal = this.closest('.modal');
+            if (modal) {
+                closeModal(modal);
+            }
+        });
+    });
+});
 
 searchInput.addEventListener('input', filterUsers);
 
