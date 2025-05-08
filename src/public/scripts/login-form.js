@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
             isValid = false;
         }
 
-        if (contraseña.value.trim().length < 9 || contraseña.value.trim() === "") {
+        if (contraseña.value.trim() === "") {
             contraseña.classList.add("error");
             isValid = false;
         }

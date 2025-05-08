@@ -122,7 +122,7 @@ $totalCompras = $compras['total'];
             <!-- Main Content -->
             <div class="main-content">
                 <!-- Panel General -->
-                <div class="div-contend-panel-general">
+                <div class="div-contend-panel-general" style="display: none;">
                     <div class="content-header">
                         <h1>Panel Principal</h1>
                         <button class="btn animated" onclick="window.location.href='Tienda.php'">Reciclar Ahora</button>
@@ -195,7 +195,7 @@ $totalCompras = $compras['total'];
                     </div>
 
                     <!-- Energy Dashboard -->
-                    <div class="energy-dashboard" style="display: none;">
+                    <div class="energy-dashboard">
                         <h2>Tu Producción Energética</h2>
                         <p>Visualiza tu contribución a la energía renovable a través del tiempo</p>
                         

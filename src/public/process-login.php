@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if($user['type_users'] === 'admin'){
                     header("Location:  index-admin.php"); 
                 }else if($user['type_users'] === 'cliente'){
-                    header("Location:  Tienda.php");
+                    header("Location:  home-user.php");
                 }else{
                     echo "<script>alert('Tipo de usuario no reconocido.');</script>";
                     header("Location: login-form.php?error=1");
