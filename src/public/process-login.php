@@ -28,6 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit();
             }
             
+            // Actualizar estado online
+            $updateStmt = $pdo->prepare("UPDATE users SET is_online = 1, last_activity = NOW() WHERE user_id = :user_id");
+            $updateStmt->execute([':user_id' => $user['user_id']]);
+            
             if($user['type_users'] === 'admin') {
                 $_SESSION['admin_logged_in'] = true;
                 $_SESSION['admin_id'] = $user['user_id'];

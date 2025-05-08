@@ -293,3 +293,16 @@ window.addEventListener('click', (e) => {
 });
 
 filterUsers();
+
+function updateUsersStatus() {
+    fetch('update_online_status.php')
+        .then(response => response.json())
+        .then(() => {
+            // Recargar la lista de usuarios
+            location.reload();
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+// Actualizar cada 30 segundos
+setInterval(updateUsersStatus, 30000);
