@@ -50,8 +50,6 @@ $productos_tienda =  $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <a href="home-user.php" class="nav-link">Inicio</a>
             <a href="Tienda.php" class="nav-link active">Tienda</a>
-            <a href="Afiliados.php" class="nav-link">Nuestros afiliados</a>
-            <a href="formulario-contacto.php" class="nav-link">Contáctanos</a>
             <a href="customer-page.php" class="nav-link">Mi perfil</a>
         </nav>
     </header>

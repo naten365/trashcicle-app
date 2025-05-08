@@ -7,7 +7,7 @@ try {
     if (!isset($_SESSION['user_id'])) {
         throw new Exception('Debes iniciar sesión para realizar el canje');
     }
-    
+
 
     $user_id = $_SESSION['user_id'];
     $product_id = $_POST['product_id'] ?? null;
@@ -41,7 +41,8 @@ try {
     $stmt->execute([$user_id]);
     $user_points = $stmt->fetchColumn();
 
-    $stmt = $pdo->prepare("SELECT product_prices_points, nombre_producto FROM productos WHERE id_producto = ?");
+    // Obtener información completa del producto
+    $stmt = $pdo->prepare("SELECT id_producto, nombre_producto, imagen_producto, product_prices_points FROM productos WHERE id_producto = ?");
     $stmt->execute([$product_id]);
     $producto = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -55,9 +56,37 @@ try {
         throw new Exception('No tienes suficientes TrashPoints para este canje');
     }
 
-    // Registrar el canje
-    $stmt = $pdo->prepare("INSERT INTO canjes (user_id, product_id, nombre_entrega, telefono, direccion, referencias, fecha_canje, estado) VALUES (?, ?, ?, ?, ?, ?, NOW(), 'pendiente')");
-    $stmt->execute([$user_id, $product_id, $nombre, $telefono, $direccion, $referencias]);
+    // Registrar el canje con todos los campos necesarios
+    $stmt = $pdo->prepare("INSERT INTO canjes (
+    user_id, 
+    product_id, 
+    nombre_entrega, 
+    telefono, 
+    direccion, 
+    referencias, 
+    fecha_canje, 
+    estado,
+    nombre_producto,
+    imagen_producto,
+    product_prices_points
+    ) VALUES (
+        ?, ?, ?, ?, ?, ?, 
+        NOW(), 
+        'pendiente',
+        ?, ?, ?
+    )");
+
+    $stmt->execute([
+        $user_id,
+        $product_id,
+        $nombre,
+        $telefono,
+        $direccion,
+        $referencias,
+        $producto['nombre_producto'],
+        $producto['imagen_producto'],
+        $producto['product_prices_points']
+    ]);
 
     // Actualizar puntos del usuario
     $new_points = $user_points - $required_points;
@@ -73,12 +102,11 @@ try {
         'success' => true,
         'message' => '¡Producto canjeado exitosamente!'
     ]);
-
 } catch (Exception $e) {
     if ($pdo->inTransaction()) {
         $pdo->rollBack();
     }
-    
+
     echo json_encode([
         'success' => false,
         'message' => $e->getMessage()

@@ -71,9 +71,8 @@ $totalPuntos = $resultado['total_puntos'] ?? 0; // Si no hay resultados, se devu
                 <img src="assets/images/logo-trashcicle-desplex.png" alt="TrashPoints Icon">
                 <span><span class="span-title-trashpoints">TrashPoints:</span> <?php echo $usuarios['user_points'] ?></span>
             </div>
+            <a href="home-user.php">Inicio</a>
             <a href="Tienda.php">Tienda</a>
-            <a href="#">Nuestros afiliados</a>
-            <a href="#">Contáctanos</a>
             <a href="#" class="active">Mi Perfil</a>
         </div>
     </nav>
@@ -195,38 +194,6 @@ $totalPuntos = $resultado['total_puntos'] ?? 0; // Si no hay resultados, se devu
                     <div class="activity-feed">
                         <h2 class="section-title">Actividad Reciente</h2>
 
-                        <div class="activity-item">
-                            <div class="activity-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#7ed957" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2">
-                                    <path d="M12 17l-2 2l2 2"></path>
-                                    <path d="M10 19h9a2 2 0 0 0 1.75 -2.75l-.55 -1"></path>
-                                    <path d="M8.536 11l-.732 -2.732l-2.732 .732"></path>
-                                    <path d="M7.804 8.268l-4.5 7.794a2 2 0 0 0 1.506 2.89l1.141 .024"></path>
-                                    <path d="M15.464 11l2.732 .732l.732 -2.732"></path>
-                                    <path d="M18.196 11.732l-4.5 -7.794a2 2 0 0 0 -3.256 -.14l-.591 .976"></path>
-                                </svg> </div>
-                            <div class="activity-content">
-                                <h3>Reciclaste 2.3kg de residuos orgánicos</h3>
-                                <p>Has generado 12 TrashPoints y contribuido a 3.5 kWh de energía renovable</p>
-                                <p class="activity-date">Hace 2 días</p>
-                            </div>
-                        </div>
-
-                        <div class="activity-item">
-                            <div class="activity-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#7ed957" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2">
-                                    <path d="M12 19h-6a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v4.5"></path>
-                                    <path d="M3 10h18"></path>
-                                    <path d="M16 19h6"></path>
-                                    <path d="M19 16l3 3l-3 3"></path>
-                                    <path d="M7.005 15h.005"></path>
-                                    <path d="M11 15h2"></path>
-                                </svg> </div>
-                            <div class="activity-content">
-                                <h3>Compraste una Botella Ecológica</h3>
-                                <p>Has canjeado 180 TrashPoints por este producto</p>
-                                <p class="activity-date">Hace 1 semana</p>
-                            </div>
-                        </div>
-
                         <?php foreach ($compra_detalles as $cont) : ?>
                             <div class="activity-item">
                                 <div class="activity-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#7ed957" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2">
@@ -238,9 +205,9 @@ $totalPuntos = $resultado['total_puntos'] ?? 0; // Si no hay resultados, se devu
                                         <path d="M11 15h2"></path>
                                     </svg> </div>
                                 <div class="activity-content">
-                                    <h3>Compraste una <?php echo $cont['compra'] ?></h3>
-                                    <p>Has canjeado <?php echo $cont['puntos'] ?> TrashPoints por este producto</p>
-                                    <p class="activity-date">Compra realizada <?php echo  $cont['fecha_compra'] ?></p>
+                                    <h3>Compraste una <?php echo $cont['nombre_producto'] ?></h3>
+                                    <p>Has canjeado <?php echo $cont['product_prices_points'] ?> TrashPoints por este producto</p>
+                                    <p class="activity-date">Compra realizada <?php echo  $cont['fecha_canje'] ?></p>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -336,15 +303,15 @@ $totalPuntos = $resultado['total_puntos'] ?? 0; // Si no hay resultados, se devu
                     <div class="purchases-container">
                         <?php foreach ($compra_detalles as $detalles): ?>
                             <div class="purchase-card">
-                                <img src="assets/images/balon-de-futbol-soccer.jpg" alt="Producto" class="purchase-image">
+                                <img src="uploads/<?php echo $detalles['imagen_producto'] ?>" alt="Producto" class="purchase-image">
                                 <div class="purchase-details">
-                                    <div class="purchase-title"><?php echo $detalles['compra'] ?></div>
-                                    <div class="purchase-date">Comprado el <?php echo $detalles['fecha_compra'] ?></div>
+                                    <div class="purchase-title"><?php echo $detalles['nombre_producto'] ?></div>
+                                    <div class="purchase-date">Comprado el <?php echo $detalles['fecha_canje'] ?></div>
                                 </div>
                                 <div class="purchase-meta">
-                                    <div class="purchase-price">RD$<?php echo $detalles['compra_precio_dinero'] ?></div>
+                                    <div class="purchase-price">RD$<?php echo $detalles['product_prices_points'] ?></div>
                                     <div class="purchase-points">
-                                        <span class="purchase-icon">★</span> <?php echo $detalles['puntos'] ?>
+                                        <span class="purchase-icon">★</span> <?php echo $detalles['product_prices_points'] ?>
                                     </div>
                                 </div>
                             </div>
