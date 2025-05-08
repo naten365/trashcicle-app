@@ -336,6 +336,7 @@ body {
 .table-container::-webkit-scrollbar {
     background: transparent;
     width: 8px;
+    height: 2px;
     cursor: pointer;
 }
 

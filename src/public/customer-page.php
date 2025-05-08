@@ -122,7 +122,7 @@ $totalCompras = $compras['total'];
             <!-- Main Content -->
             <div class="main-content">
                 <!-- Panel General -->
-                <div class="div-contend-panel-general">
+                <div class="div-contend-panel-general" style="display: none;">
                     <div class="content-header">
                         <h1>Panel Principal</h1>
                         <button class="btn animated" onclick="window.location.href='Tienda.php'">Reciclar Ahora</button>
@@ -245,6 +245,120 @@ $totalCompras = $compras['total'];
                             </div>
                         </div>
                     </div>
+                </div>
+                <!-- Panel de registro de compra -->
+                <div class="div-contend-compras" style="display: none;">
+                    <div class="content-header">
+                        <h1>Mis Compras</h1>
+                        <button class="btn animated" onclick="window.location.href='Tienda.php'">Comprar productos</button>
+                    </div>
+
+                    <div class="purchase-stats">
+                        <div class="stat-card">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">Productos comprados</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">120</div>
+                            <div class="stat-label">TrashPoints gastados</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">15 kg</div>
+                            <div class="stat-label">CO₂ evitado</div>
+                        </div>
+                    </div>
+                    <!-- Recommendations -->
+                    <div class="recommendations">
+                        <h2 class="section-title">Producto comprados</h2>
+                    </div>
+
+                    <div class="purchases-container">
+                        <div class="purchase-card">
+                            <img src="assets/images/balon-de-futbol-soccer.jpg" alt="Producto" class="purchase-image">
+                            <div class="purchase-details">
+                                <div class="purchase-title">Bolsa Reutilizable Eco</div>
+                                <div class="purchase-date">Comprado el 5 de mayo, 2025</div>
+                            </div>
+                            <div class="purchase-meta">
+                                <div class="purchase-price">€15.99</div>
+                                <div class="purchase-points">
+                                    <span class="purchase-icon">★</span> 25 pts
+                                </div>
+                            </div>
+                        </div>    
+                        <div class="purchase-card">
+                            <img src="assets/images/balon-de-futbol-soccer.jpg" alt="Producto" class="purchase-image">
+                            <div class="purchase-details">
+                                <div class="purchase-title">Bolsa Reutilizable Eco</div>
+                                <div class="purchase-date">Comprado el 5 de mayo, 2025</div>
+                            </div>
+                            <div class="purchase-meta">
+                                <div class="purchase-price">€15.99</div>
+                                <div class="purchase-points">
+                                    <span class="purchase-icon">★</span> 25 pts
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="purchase-card">
+                            <img src="assets/images/balon-de-futbol-soccer.jpg" alt="Producto" class="purchase-image">
+                            <div class="purchase-details">
+                                <div class="purchase-title">Bolsa Reutilizable Eco</div>
+                                <div class="purchase-date">Comprado el 5 de mayo, 2025</div>
+                            </div>
+                            <div class="purchase-meta">
+                                <div class="purchase-price">€15.99</div>
+                                <div class="purchase-points">
+                                    <span class="purchase-icon">★</span> 25 pts
+                                </div>
+                            </div>
+                        </div>      
+                        <div class="purchase-card">
+                            <img src="assets/images/balon-de-futbol-soccer.jpg" alt="Producto" class="purchase-image">
+                            <div class="purchase-details">
+                                <div class="purchase-title">Bolsa Reutilizable Eco</div>
+                                <div class="purchase-date">Comprado el 5 de mayo, 2025</div>
+                            </div>
+                            <div class="purchase-meta">
+                                <div class="purchase-price">€15.99</div>
+                                <div class="purchase-points">
+                                    <span class="purchase-icon">★</span> 25 pts
+                                </div>
+                            </div>
+                        </div>
+                        <div class="purchase-card">
+                            <img src="assets/images/balon-de-futbol-soccer.jpg" alt="Producto" class="purchase-image">
+                            <div class="purchase-details">
+                                <div class="purchase-title">Bolsa Reutilizable Eco</div>
+                                <div class="purchase-date">Comprado el 5 de mayo, 2025</div>
+                            </div>
+                            <div class="purchase-meta">
+                                <div class="purchase-price">€15.99</div>
+                                <div class="purchase-points">
+                                    <span class="purchase-icon">★</span> 25 pts
+                                </div>
+                            </div>
+                        </div>      
+                        <div class="purchase-card">
+                            <img src="assets/images/balon-de-futbol-soccer.jpg" alt="Producto" class="purchase-image">
+                            <div class="purchase-details">
+                                <div class="purchase-title">Bolsa Reutilizable Eco</div>
+                                <div class="purchase-date">Comprado el 5 de mayo, 2025</div>
+                            </div>
+                            <div class="purchase-meta">
+                                <div class="purchase-price">€15.99</div>
+                                <div class="purchase-points">
+                                    <span class="purchase-icon">★</span> 25 pts
+                                </div>
+                            </div>
+                        </div>            
+                    </div>
+                </div>
+                <!--Panel de los productos reciclados -->
+                <div class="div-contend-reciclaje">
+                        <div class="content-header">
+                            <h1>Elementos reciclados</h1>
+                            <button class="btn animated" onclick="window.location.href='Tienda.php'">Recicla Ahora</button>
+                        </div>
                 </div>
             </div>
         </div>
