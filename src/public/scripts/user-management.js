@@ -106,6 +106,7 @@ function showHistory(userId) {
     let historyHTML = `
         <div class="user-details">
             <h3>${user.name}</h3>
+            <p><strong>Email:</strong> ${user.email}</p>
             <p><strong>Puntos actuales:</strong> ${user.points || 0}</p>
             <h4>Historial de transacciones</h4>
             ${user.history && user.history.length > 0 ?
@@ -193,47 +194,77 @@ function restrictUser(userId) {
     }
 }
 
-function removeRestriction(userId) {
-    const user = users.find(u => u.user_id === userId);
-    if (!user) return;
-
-    if (confirm('¿Está seguro de que desea habilitar a este usuario?')) {
-        fetch('restrict-user.php', {
+async function removeRestriction(userId) {
+    try {
+        const response = await fetch('restrict-user.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 userId: userId,
-                is_restricted: false,
-                restrictionReason: ''
+                is_restricted: false
             })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Actualizar el usuario en el array local
-                user.is_restricted = false;
-                user.restrictionReason = '';
-                // Recargar la lista de usuarios
-                location.reload();
-            } else {
-                alert('Error al habilitar el usuario: ' + (data.message || 'Error desconocido'));
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al conectar con el servidor');
         });
+
+        const data = await response.json();
+        
+        if (data.success) {
+            // Actualizar el estado del usuario en el array local
+            const userIndex = users.findIndex(u => u.user_id === userId);
+            if (userIndex !== -1) {
+                users[userIndex].is_restricted = 0;
+                users[userIndex].restrictionReason = null;
+            }
+
+            // Actualizar la UI directamente
+            const userCard = document.querySelector('.user-card:has(.button-enable[onclick*="' + userId + '"])');
+            if (userCard) {
+                const actionsDiv = userCard.querySelector('.user-actions');
+                // Reemplazar el botón "Habilitar" por "Restringir usuario"
+                actionsDiv.innerHTML = actionsDiv.innerHTML.replace(
+                    `<button class="button button-enable" onclick="removeRestriction(${userId})">Habilitar</button>`,
+                    `<button class="button button-restrict" onclick="restrictUser(${userId})">Restringir usuario</button>`
+                );
+            }
+            
+            // Mostrar mensaje de éxito
+            alert('Usuario habilitado correctamente');
+            
+            // Actualizar la lista filtrada si es necesario
+            if (currentFilter === 'restringidos') {
+                filterUsers();
+            }
+        } else {
+            throw new Error(data.message || 'Error al habilitar usuario');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al habilitar usuario');
     }
 }
 
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'none';
+function closeModal(modalElement) {
+    if (typeof modalElement === 'string') {
+        modalElement = document.getElementById(modalElement);
+    }
+    if (modalElement) {
+        modalElement.style.display = 'none';
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const closeButtons = document.querySelectorAll('.close-button');
+    
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const modal = this.closest('.modal');
+            if (modal) {
+                closeModal(modal);
+            }
+        });
+    });
+});
 
 searchInput.addEventListener('input', filterUsers);
 
@@ -262,3 +293,16 @@ window.addEventListener('click', (e) => {
 });
 
 filterUsers();
+
+function updateUsersStatus() {
+    fetch('update_online_status.php')
+        .then(response => response.json())
+        .then(() => {
+            // Recargar la lista de usuarios
+            location.reload();
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+// Actualizar cada 30 segundos
+setInterval(updateUsersStatus, 30000);
