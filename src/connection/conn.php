@@ -12,26 +12,15 @@ try {
     echo "Error: " . $e->getMessage();
 }
 
-//Función para gestionar los tipos de usuarios
+
+//Funcion para gestionar los tipos de usuarios
 if (!function_exists('checkUserPermissions')) {
     function checkUserPermissions($requiredType)
     {
-        if($requiredType === 'admin') {
-            // Verificar sesión de administrador
-            if(!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in'] || $_SESSION['admin_type'] !== 'admin') {
-                header('Location: login-form.php?error=access_denied');
-                exit();
-            }
-        } else if($requiredType === 'cliente') {
-            // Verificar sesión de cliente
-            if(!isset($_SESSION['user_logged_in']) || !$_SESSION['user_logged_in'] || $_SESSION['user_type'] !== 'cliente') {
-                header('Location: login-form.php?error=access_denied');
-                exit();
-            }
-        } else {
-            // Tipo no reconocido
-            header('Location: login-form.php?error=invalid_type');
+        if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== $requiredType) {
+            header('Location: login-form.php?error=access_denied');
             exit();
         }
     }
 }
+

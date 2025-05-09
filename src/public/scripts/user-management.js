@@ -60,10 +60,10 @@ function createUserCard(user) {
         <div class="user-actions">
             <button class="button button-history" onclick="showHistory(${user.user_id})">Historial</button>
             <button class="button button-info" onclick="showInfo(${user.user_id})">Información</button>
-            ${user.is_restricted == 1 ?
-                `<button class="button button-enable" onclick="removeRestriction(${user.user_id})">Habilitar</button>` :
-                `<button class="button button-restrict" onclick="restrictUser(${user.user_id})">Restringir usuario</button>`
-            }
+            ${user.is_restricted ?
+            `<button class="button button-enable" onclick="removeRestriction(${user.user_id})">Habilitar</button>` :
+            `<button class="button button-restrict" onclick="restrictUser(${user.user_id})">Restringir usuario</button>`
+        }
         </div>
     `;
     return card;
@@ -106,7 +106,6 @@ function showHistory(userId) {
     let historyHTML = `
         <div class="user-details">
             <h3>${user.name}</h3>
-            <p><strong>Email:</strong> ${user.email}</p>
             <p><strong>Puntos actuales:</strong> ${user.points || 0}</p>
             <h4>Historial de transacciones</h4>
             ${user.history && user.history.length > 0 ?
@@ -163,21 +162,26 @@ function restrictUser(userId) {
 
     const reason = prompt('Por favor, ingrese el motivo de la restricción:');
     if (reason) {
+        // Actualizar en la base de datos
         fetch('restrict-user.php', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
                 userId: userId,
-                is_restricted: 1, // <-- Usa 1, no true
+                is_restricted: true,
                 restrictionReason: reason
             })
         })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                user.is_restricted = 1;
+                // Actualizar el usuario en el array local
+                user.is_restricted = true;
                 user.restrictionReason = reason;
-                filterUsers(); // Refresca la lista sin recargar
+                // Recargar la lista de usuarios
+                location.reload();
             } else {
                 alert('Error al restringir el usuario: ' + (data.message || 'Error desconocido'));
             }
@@ -189,55 +193,47 @@ function restrictUser(userId) {
     }
 }
 
-async function removeRestriction(userId) {
+function removeRestriction(userId) {
     const user = users.find(u => u.user_id === userId);
     if (!user) return;
-    try {
-        const response = await fetch('restrict-user.php', {
+
+    if (confirm('¿Está seguro de que desea habilitar a este usuario?')) {
+        fetch('restrict-user.php', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
                 userId: userId,
-                is_restricted: 0 // <-- Usa 0, no false
+                is_restricted: false,
+                restrictionReason: ''
             })
-        });
-
-        const data = await response.json();
-        if (data.success) {
-            user.is_restricted = 0;
-            user.restrictionReason = null;
-            filterUsers(); // Refresca la lista sin recargar
-            alert('Usuario habilitado correctamente');
-        } else {
-            throw new Error(data.message || 'Error al habilitar usuario');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Error al habilitar usuario');
-    }
-}
-
-function closeModal(modalElement) {
-    if (typeof modalElement === 'string') {
-        modalElement = document.getElementById(modalElement);
-    }
-    if (modalElement) {
-        modalElement.style.display = 'none';
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const closeButtons = document.querySelectorAll('.close-button');
-    
-    closeButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const modal = this.closest('.modal');
-            if (modal) {
-                closeModal(modal);
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Actualizar el usuario en el array local
+                user.is_restricted = false;
+                user.restrictionReason = '';
+                // Recargar la lista de usuarios
+                location.reload();
+            } else {
+                alert('Error al habilitar el usuario: ' + (data.message || 'Error desconocido'));
             }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al conectar con el servidor');
         });
-    });
-});
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
 
 searchInput.addEventListener('input', filterUsers);
 
@@ -266,16 +262,3 @@ window.addEventListener('click', (e) => {
 });
 
 filterUsers();
-
-function updateUsersStatus() {
-    fetch('update_user_status.php')
-        .then(response => response.json())
-        .then(() => {
-            // Recargar la lista de usuarios
-            location.reload();
-        })
-        .catch(error => console.error('Error:', error));
-}
-
-// Actualizar cada 30 segundos
-setInterval(updateUsersStatus, 30000);

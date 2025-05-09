@@ -41,17 +41,12 @@ body {
     padding: 3rem;
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.logo-container img {
-    object-fit: contain;
-    width: 200px;
+.logo {
+    color: var(--accent-green);
+    height: 10rem;
+    width: 10rem;
+    position: relative;
+    top: -1rem;
 }
 
 .nav-item,
@@ -216,8 +211,6 @@ svg {
     background-color: rgba(0, 0, 0, 0.5);
     align-items: center;
     justify-content: center;
-    z-index: 1000;
-    backdrop-filter: blur(5px);
 }
 
 .modal-content {
@@ -226,69 +219,31 @@ svg {
     border-radius: 1rem;
     width: 90%;
     max-width: 500px;
-    box-shadow: var(--box-shadow);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    animation: modalFadeIn 0.3s ease;
 }
 
 .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.modal-header h2 {
-    font-size: 1.5rem;
-    color: var(--text-light);
-    font-weight: 600;
+    margin-bottom: 1rem;
 }
 
 .close-button {
     background: none;
     border: none;
-    color: var(--text-light);
+    color: var(--text-primary);
     font-size: 1.5rem;
     cursor: pointer;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.close-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: rotate(90deg);
 }
 
 .modal-body {
     margin-bottom: 1.5rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
 }
 
 .modal-footer {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .user-details {

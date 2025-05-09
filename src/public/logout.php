@@ -1,12 +1,5 @@
 <?php
-session_start();
-include '../connection/conn.php';
-
-// Actualizar estado offline antes de destruir la sesión
-if (isset($_SESSION['user_id'])) {
-    $stmt = $pdo->prepare("UPDATE users SET is_online = 0 WHERE user_id = ?");
-    $stmt->execute([$_SESSION['user_id']]);
-}
+session_start(); // Inicia o reanuda la sesión
 
 // Destruye todas las variables de sesión
 $_SESSION = array();

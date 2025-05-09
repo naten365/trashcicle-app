@@ -11,7 +11,7 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 //Codigo para obtener todas las compras
-$sql = 'SELECT * FROM canjes';
+$sql = 'SELECT * FROM compras';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $canjes = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -305,7 +305,7 @@ function totalPuntosClientes(){
                                 <tbody id="lista-canjes">
                                 <?php foreach($canjes as  $canje): 
                                     // Asignar clase según el estado
-                                    $estado = $canje['estado'];
+                                    $estado = $canje['estado_compras'];
                                     $badgeClass = ($estado === 'Canjeo exitoso') ? 'badge-success' : 'badge-warning';
             
 
@@ -334,14 +334,14 @@ function totalPuntosClientes(){
                                     <td>
                                         <div style="display:flex; align-items:center; gap:10px;">
                                             <img src="uploads/<?php echo htmlspecialchars($canje['imagen_producto'] ?? 'placeholder.png'); ?>" alt="Producto" class="product-img" style="width:40px; height:40px;">
-                                            <span><?php echo htmlspecialchars($canje['nombre_producto']); ?></span>
+                                            <span><?php echo htmlspecialchars($canje['compra']); ?></span>
                                         </div>
                                     </td>
-                                    <td><?php echo htmlspecialchars($canje['nombre_entrega']); ?></td>
-                                    <td><?php echo (int)$canje['product_prices_points']; ?></td>
-                                    <td><?php echo date('d/m/Y', strtotime($canje['fecha_canje'])); ?></td>
+                                    <td><?php echo htmlspecialchars($canje['usuario_nombre']); ?></td>
+                                    <td><?php echo (int)$canje['puntos']; ?></td>
+                                    <td><?php echo date('d/m/Y', strtotime($canje['fecha_compra'])); ?></td>
                                     <td><span class="status-badge <?php echo $badgeClass; ?>"><?php echo ucfirst($estado); ?></span></td>
-                                    <td><a href="ver-canje.php?id=<?php echo $canje['id_canje']; ?>" class="action-icon"><i class="fas fa-eye"></i></a></td>
+                                    <td><a href="ver-canje.php?id=<?php echo $canje['id']; ?>" class="action-icon"><i class="fas fa-eye"></i></a></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
