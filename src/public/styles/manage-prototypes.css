@@ -164,16 +164,25 @@ body {
 
 /* Modal styles */
 .modal-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-    justify-content: center;
+    background: rgba(15, 17, 23, 0.9);
+    backdrop-filter: blur(8px);
+    display: flex;
     align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 .modal {
@@ -262,6 +271,151 @@ a {
     vertical-align: middle;
 }
 
+/* Estilos para el modal del mapa */
+/* Modal del mapa */
+.map-modal {
+    background-color: var(--dark-secondary);
+    width: 90%;
+    max-width: 900px;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.3s ease-out;
+}
+
+.modal-overlay.show .map-modal {
+    transform: scale(1);
+    opacity: 1;
+}
+
+
+.modal-overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+}
+
+.modal-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.modal-title span {
+    color: var(--primary-color);
+}
+
+.modal-title svg {
+    width: 28px;
+    height: 28px;
+    color: var(--primary);
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-close-map {
+    background: linear-gradient(45deg, var(--primary), #6BC249);
+    color: var(--dark);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+    transition: all 0.3s ease;
+}
+
+.btn-close-map:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(126, 217, 87, 0.2);
+}
+
+.btn-close-map svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Personalizacion del popup del mapa */
+.leaflet-popup-content-wrapper {
+    background-color: var(--dark-secondary);
+    color: var(--text-primary);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-popup-tip {
+    background-color: var(--dark-secondary);
+}
+
+.leaflet-popup-content {
+    padding: 0.75rem 1rem;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+}
+
+/** Responsive */
+@media (max-width: 768px) {
+    .map-modal {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    #map {
+        height: 400px;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+    }
+
+    .btn-close-map {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-modal {
+        width: 100%;
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    #map {
+        height: 350px;
+    }
+
+    .modal-title {
+        font-size: 1.25rem;
+    }
+
+    .modal-title svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
 /* ===============================
    RESPONSIVE DESIGN STYLES
    =============================== */
@@ -279,29 +433,29 @@ a {
     body {
         padding: 20px;
     }
-    
+
     .header {
         flex-wrap: wrap;
     }
-    
+
     .title {
         margin-bottom: 10px;
         width: 100%;
     }
-    
+
     .btn {
         margin-top: 10px;
     }
-    
+
     .device-card {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .device-status {
         margin: 15px 0;
     }
-    
+
     .action-buttons {
         display: flex;
         flex-wrap: wrap;
@@ -309,80 +463,102 @@ a {
         margin-top: 15px;
         width: 100%;
     }
-    
+
     .action-buttons button {
         margin-left: 0;
         flex: 1;
         min-width: 100px;
     }
-    
+
     .row {
         flex-direction: column;
         gap: 10px;
     }
 }
+
 /* Tablet Styles */
 @media screen and (max-width: 768px) {
     .device-card {
-        flex-direction: column; /* Cambiar a columna */
-        align-items: flex-start; /* Alinear al inicio */
-        padding: 15px; /* Reducir padding */
+        flex-direction: column;
+        /* Cambiar a columna */
+        align-items: flex-start;
+        /* Alinear al inicio */
+        padding: 15px;
+        /* Reducir padding */
     }
 
     .device-status {
-        margin: 10px 0; /* Reducir margen */
+        margin: 10px 0;
+        /* Reducir margen */
     }
 
     .action-buttons {
-        justify-content: center; /* Centrar botones */
-        gap: 8px; /* Reducir espacio entre botones */
+        justify-content: center;
+        /* Centrar botones */
+        gap: 8px;
+        /* Reducir espacio entre botones */
     }
 }
 
 /* Mobile Styles */
 @media screen and (max-width: 576px) {
     .device-card {
-        padding: 10px; /* Reducir padding aún más */
+        padding: 10px;
+        /* Reducir padding aún más */
     }
 
     .device-name {
-        font-size: 16px; /* Reducir tamaño de fuente */
+        font-size: 16px;
+        /* Reducir tamaño de fuente */
     }
 
     .device-location {
-        font-size: 12px; /* Reducir tamaño de fuente */
+        font-size: 12px;
+        /* Reducir tamaño de fuente */
     }
 
     .action-buttons button {
-        flex: 1; /* Hacer que los botones ocupen el ancho completo */
-        min-width: auto; /* Permitir que los botones se ajusten automáticamente */
+        flex: 1;
+        /* Hacer que los botones ocupen el ancho completo */
+        min-width: auto;
+        /* Permitir que los botones se ajusten automáticamente */
     }
 }
 
 /* Extra Small Devices */
 @media screen and (max-width: 400px) {
     .device-card {
-        padding: 8px; /* Reducir padding */
+        padding: 8px;
+        /* Reducir padding */
     }
 
     .device-name {
-        font-size: 14px; /* Reducir tamaño de fuente */
+        font-size: 14px;
+        /* Reducir tamaño de fuente */
     }
 
     .action-buttons button {
-        padding: 6px 8px; /* Reducir padding de los botones */
-        font-size: 12px; /* Reducir tamaño de fuente de los botones */
+        padding: 6px 8px;
+        /* Reducir padding de los botones */
+        font-size: 12px;
+        /* Reducir tamaño de fuente de los botones */
     }
 
     .device-status {
-        flex-direction: column; /* Cambiar a columna */
-        align-items: flex-start; /* Alinear al inicio */
+        flex-direction: column;
+        /* Cambiar a columna */
+        align-items: flex-start;
+        /* Alinear al inicio */
     }
 }
+
 /* Fix for Safari and iOS devices */
 @supports (-webkit-touch-callout: none) {
+
     /* Prevent input zooming on iOS */
-    input, select, textarea {
+    input,
+    select,
+    textarea {
         font-size: 16px;
     }
 }
@@ -394,11 +570,13 @@ a {
         color: black;
         padding: 0;
     }
-    
-    .btn, .search-container, .action-buttons {
+
+    .btn,
+    .search-container,
+    .action-buttons {
         display: none;
     }
-    
+
     .device-card {
         break-inside: avoid;
         border: 1px solid #ddd;
@@ -415,11 +593,13 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.3s ease-in-out; /* Transición suave */
+    transition: all 0.3s ease-in-out;
+    /* Transición suave */
 }
 
 .device-card.hidden {
-    display: none; /* Ocultar completamente las tarjetas que no coincidan */
+    display: none;
+    /* Ocultar completamente las tarjetas que no coincidan */
 }
 
 .device-info {
@@ -489,71 +669,93 @@ a {
 /* Tablet Styles */
 @media screen and (max-width: 768px) {
     .device-card {
-        flex-direction: column; /* Cambiar a columna */
-        align-items: flex-start; /* Alinear al inicio */
-        padding: 15px; /* Reducir padding */
+        flex-direction: column;
+        /* Cambiar a columna */
+        align-items: flex-start;
+        /* Alinear al inicio */
+        padding: 15px;
+        /* Reducir padding */
     }
 
     .device-status {
-        margin: 10px 0; /* Reducir margen */
+        margin: 10px 0;
+        /* Reducir margen */
     }
 
     .action-buttons {
-        justify-content: center; /* Centrar botones */
-        gap: 8px; /* Reducir espacio entre botones */
+        justify-content: center;
+        /* Centrar botones */
+        gap: 8px;
+        /* Reducir espacio entre botones */
     }
 
     .action-buttons button {
-        flex: 1; /* Hacer que los botones ocupen el ancho completo */
-        min-width: auto; /* Permitir que los botones se ajusten automáticamente */
+        flex: 1;
+        /* Hacer que los botones ocupen el ancho completo */
+        min-width: auto;
+        /* Permitir que los botones se ajusten automáticamente */
     }
 }
 
 /* Mobile Styles */
 @media screen and (max-width: 576px) {
     .device-card {
-        padding: 10px; /* Reducir padding aún más */
+        padding: 10px;
+        /* Reducir padding aún más */
     }
 
     .device-name {
-        font-size: 16px; /* Reducir tamaño de fuente */
+        font-size: 16px;
+        /* Reducir tamaño de fuente */
     }
 
     .device-location {
-        font-size: 12px; /* Reducir tamaño de fuente */
+        font-size: 12px;
+        /* Reducir tamaño de fuente */
     }
 
     .action-buttons button {
-        flex: 1; /* Hacer que los botones ocupen el ancho completo */
-        min-width: auto; /* Permitir que los botones se ajusten automáticamente */
+        flex: 1;
+        /* Hacer que los botones ocupen el ancho completo */
+        min-width: auto;
+        /* Permitir que los botones se ajusten automáticamente */
     }
 }
 
 /* Extra Small Devices */
 @media screen and (max-width: 400px) {
     .device-card {
-        padding: 8px; /* Reducir padding */
+        padding: 8px;
+        /* Reducir padding */
     }
 
     .device-name {
-        font-size: 14px; /* Reducir tamaño de fuente */
+        font-size: 14px;
+        /* Reducir tamaño de fuente */
     }
 
     .action-buttons button {
-        padding: 6px 8px; /* Reducir padding de los botones */
-        font-size: 12px; /* Reducir tamaño de fuente de los botones */
+        padding: 6px 8px;
+        /* Reducir padding de los botones */
+        font-size: 12px;
+        /* Reducir tamaño de fuente de los botones */
     }
 
     .device-status {
-        flex-direction: column; /* Cambiar a columna */
-        align-items: flex-start; /* Alinear al inicio */
+        flex-direction: column;
+        /* Cambiar a columna */
+        align-items: flex-start;
+        /* Alinear al inicio */
     }
 }
 
 /* Fix for Safari and iOS devices */
 @supports (-webkit-touch-callout: none) {
+
     /* Prevent input zooming on iOS */
-    input, select, textarea {
+    input,
+    select,
+    textarea {
         font-size: 16px;
     }
 }
@@ -565,11 +767,13 @@ a {
         color: black;
         padding: 0;
     }
-    
-    .btn, .search-container, .action-buttons {
+
+    .btn,
+    .search-container,
+    .action-buttons {
         display: none;
     }
-    
+
     .device-card {
         break-inside: avoid;
         border: 1px solid #ddd;
@@ -582,18 +786,18 @@ a {
     display: flex;
     align-items: center;
     gap: 10px;
-  }
-  
-  .filter-select {
+}
+
+.filter-select {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: var(--secondary-color);
     color: white;
     font-size: 14px;
-  }
-  
-  .modal-contenido {
+}
+
+.modal-contenido {
     background-color: #fff;
     margin: 5% auto;
     padding: 20px;
@@ -602,84 +806,83 @@ a {
     max-width: 800px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-header {
+}
+
+.modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
-  }
-  
-  .modal-header h2 {
+}
+
+.modal-header h2 {
     margin: 0;
     font-size: 20px;
-  }
-  
-  .cerrar-modal {
+}
+
+.cerrar-modal {
     cursor: pointer;
     font-size: 24px;
     font-weight: bold;
-  }
-  
-  .modal-body {
+}
+
+.modal-body {
     margin-top: 20px;
     overflow: hidden;
-  }
-  
-  .modal-body iframe {
+}
+
+.modal-body iframe {
     width: 100%;
     height: 300px;
     border: none;
     border-radius: 5px;
-  }
-  
-  /* Responsivo para tablets */
-  @media screen and (max-width: 768px) {
-    .modal-contenido {
-      width: 95%;
-      padding: 15px;
-    }
-  
-    .modal-header h2 {
-      font-size: 18px;
-    }
-  
-    .modal-body iframe {
-      height: 250px;
-    }
-  }
-  
-  /* Responsivo para móviles */
-  @media screen and (max-width: 576px) {
-    .modal-contenido {
-      width: 100%;
-      margin: 0;
-      height: 100%;
-      border-radius: 0;
-      padding: 10px;
-    }
-  
-    .modal-header {
-      padding-bottom: 5px;
-    }
-  
-    .modal-header h2 {
-      font-size: 16px;
-    }
-  
-    .cerrar-modal {
-      font-size: 20px;
-    }
-  
-    .modal-body iframe {
-      height: 200px;
-    }
-  }
+}
 
-  .location-modal {
+/* Responsivo para tablets */
+@media screen and (max-width: 768px) {
+    .modal-contenido {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .modal-header h2 {
+        font-size: 18px;
+    }
+
+    .modal-body iframe {
+        height: 250px;
+    }
+}
+
+/* Responsivo para móviles */
+@media screen and (max-width: 576px) {
+    .modal-contenido {
+        width: 100%;
+        margin: 0;
+        height: 100%;
+        border-radius: 0;
+        padding: 10px;
+    }
+
+    .modal-header {
+        padding-bottom: 5px;
+    }
+
+    .modal-header h2 {
+        font-size: 16px;
+    }
+
+    .cerrar-modal {
+        font-size: 20px;
+    }
+
+    .modal-body iframe {
+        height: 200px;
+    }
+}
+
+.location-modal {
     width: 90%;
     max-width: 800px;
-  }
-  
+}

@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_logged_in'] = true;
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['user_type'] = $user['type_users'];
+              
                 header("Location: Tienda.php");
             } else {
                 header("Location: login-form.php?error=invalid_type");
