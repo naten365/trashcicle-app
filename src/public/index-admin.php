@@ -124,8 +124,8 @@ function totalZafaconesActivos(){
       <h1 class="text-2xl font-bold text-700" style="color: rgb(240, 240, 240);">Panel de Administrador</h1>
       <div class="user-menu" style="background:rgb(240, 240, 240); position: relative; cursor: pointer; padding: 10px; display: flex; align-items: center; gap: 5px;">
         <img src="assets/images/logo-trashcicle-desplex.png" alt="User">
-        <span class="mr-2">Cuenta</span>
-        <i class="fas fa-chevron-down"></i>
+        <span class="mr-2" style="color:black;">Cuenta</span>
+        <i class="fas fa-chevron-down" style="color:black;"></i>
         
         <div class="submenu" style="display: none; position: absolute; top: 100%; right: 0; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); min-width: 150px; z-index: 100; border-radius: 4px;">
           <a href="#configuracion" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; border-bottom: 1px solid #eee;">Configuración</a>
