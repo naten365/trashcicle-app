@@ -60,10 +60,10 @@ function createUserCard(user) {
         <div class="user-actions">
             <button class="button button-history" onclick="showHistory(${user.user_id})">Historial</button>
             <button class="button button-info" onclick="showInfo(${user.user_id})">Información</button>
-            ${user.is_restricted ?
-            `<button class="button button-enable" onclick="removeRestriction(${user.user_id})">Habilitar</button>` :
-            `<button class="button button-restrict" onclick="restrictUser(${user.user_id})">Restringir usuario</button>`
-        }
+            ${user.is_restricted == 1 ?
+                `<button class="button button-enable" onclick="removeRestriction(${user.user_id})">Habilitar</button>` :
+                `<button class="button button-restrict" onclick="restrictUser(${user.user_id})">Restringir usuario</button>`
+            }
         </div>
     `;
     return card;
@@ -163,26 +163,21 @@ function restrictUser(userId) {
 
     const reason = prompt('Por favor, ingrese el motivo de la restricción:');
     if (reason) {
-        // Actualizar en la base de datos
         fetch('restrict-user.php', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 userId: userId,
-                is_restricted: true,
+                is_restricted: 1, // <-- Usa 1, no true
                 restrictionReason: reason
             })
         })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Actualizar el usuario en el array local
-                user.is_restricted = true;
+                user.is_restricted = 1;
                 user.restrictionReason = reason;
-                // Recargar la lista de usuarios
-                location.reload();
+                filterUsers(); // Refresca la lista sin recargar
             } else {
                 alert('Error al restringir el usuario: ' + (data.message || 'Error desconocido'));
             }
@@ -195,46 +190,24 @@ function restrictUser(userId) {
 }
 
 async function removeRestriction(userId) {
+    const user = users.find(u => u.user_id === userId);
+    if (!user) return;
     try {
         const response = await fetch('restrict-user.php', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 userId: userId,
-                is_restricted: false
+                is_restricted: 0 // <-- Usa 0, no false
             })
         });
 
         const data = await response.json();
-        
         if (data.success) {
-            // Actualizar el estado del usuario en el array local
-            const userIndex = users.findIndex(u => u.user_id === userId);
-            if (userIndex !== -1) {
-                users[userIndex].is_restricted = 0;
-                users[userIndex].restrictionReason = null;
-            }
-
-            // Actualizar la UI directamente
-            const userCard = document.querySelector('.user-card:has(.button-enable[onclick*="' + userId + '"])');
-            if (userCard) {
-                const actionsDiv = userCard.querySelector('.user-actions');
-                // Reemplazar el botón "Habilitar" por "Restringir usuario"
-                actionsDiv.innerHTML = actionsDiv.innerHTML.replace(
-                    `<button class="button button-enable" onclick="removeRestriction(${userId})">Habilitar</button>`,
-                    `<button class="button button-restrict" onclick="restrictUser(${userId})">Restringir usuario</button>`
-                );
-            }
-            
-            // Mostrar mensaje de éxito
+            user.is_restricted = 0;
+            user.restrictionReason = null;
+            filterUsers(); // Refresca la lista sin recargar
             alert('Usuario habilitado correctamente');
-            
-            // Actualizar la lista filtrada si es necesario
-            if (currentFilter === 'restringidos') {
-                filterUsers();
-            }
         } else {
             throw new Error(data.message || 'Error al habilitar usuario');
         }
@@ -295,7 +268,7 @@ window.addEventListener('click', (e) => {
 filterUsers();
 
 function updateUsersStatus() {
-    fetch('update_online_status.php')
+    fetch('update_user_status.php')
         .then(response => response.json())
         .then(() => {
             // Recargar la lista de usuarios

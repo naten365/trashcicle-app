@@ -67,10 +67,6 @@ $totalPuntos = $resultado['total_puntos'] ?? 0; // Si no hay resultados, se devu
         </div>
 
         <div class="nav-menu">
-            <div class="nav-trashpoints">
-                <img src="assets/images/logo-trashcicle-desplex.png" alt="TrashPoints Icon">
-                <span><span class="span-title-trashpoints">TrashPoints:</span> <?php echo $usuarios['user_points'] ?></span>
-            </div>
             <a href="home-user.php">Inicio</a>
             <a href="Tienda.php">Tienda</a>
             <a href="#" class="active">Mi Perfil</a>
