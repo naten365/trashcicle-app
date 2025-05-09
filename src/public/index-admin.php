@@ -79,14 +79,14 @@ function totalZafaconesActivos(){
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <div class="logo-container">
-     <a href="prueva.php">
+     <a href="#">
       <img src="assets/images/logo-trashcicle-new.png" alt="TrashCicle Logo" class="w-full trashcicle-logo">
      </a>
     </div>
     
     <div class="mt-8">
       <div class="menu-item active" data-page="inicio">
-       <a href="prueva.php">
+       <a href="#">
           <i class="fas fa-home"></i>
           <span id="span-elements">Inicio</span>
        </a>
