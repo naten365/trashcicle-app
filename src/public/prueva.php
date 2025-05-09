@@ -13,6 +13,8 @@
             <div class="energy-chart-container">
                 <canvas id="energyChart"></canvas>
             </div>
+
+            <div></div>/>
             
             <div class="energy-highlights">
                 <div class="highlight-card">
