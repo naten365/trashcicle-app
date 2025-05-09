@@ -43,9 +43,10 @@ $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
 $stmt->execute();
 $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
 // Acceder al total de puntos
 $totalPuntos = $resultado['total_puntos'] ?? 0; // Si no hay resultados, se devuelve 0
+
+
 ?>
 
 <!DOCTYPE html>
@@ -59,22 +60,22 @@ $totalPuntos = $resultado['total_puntos'] ?? 0; // Si no hay resultados, se devu
 </head>
 
 <body>
-    
-     <nav class="navbar">
+    <!-- Navbar -->
+    <nav class="navbar">
         <div class="logo">
             <img src="assets/images/logo-trashcicle-new.png" alt="TrashCycle Logo" width="150px" style="object-fit: cover;">
         </div>
 
         <div class="nav-menu">
-            <div class="trash-points">
+            <div class="nav-trashpoints">
                 <img src="assets/images/logo-trashcicle-desplex.png" alt="TrashPoints Icon">
-                <span>TrashPoints: <?php echo $usuarios['user_points'] ?></span>
+                <span><span class="span-title-trashpoints">TrashPoints:</span> <?php echo $usuarios['user_points'] ?></span>
             </div>
             <a href="home-user.php">Inicio</a>
             <a href="Tienda.php">Tienda</a>
             <a href="#" class="active">Mi Perfil</a>
         </div>
-    </nav> 
+    </nav>
 
     <!-- Main Container -->
     <div class="container">
