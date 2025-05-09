@@ -10,9 +10,7 @@
             <h2>Tu Producción Energética</h2>
             <p>Visualiza tu contribución a la energía renovable a través del tiempo</p>
             
-            <div class="energy-chart-container">
-                <canvas id="energyChart"></canvas>
-            </div>
+            
 
             <div></div>/>
             
